@@ -10,10 +10,12 @@ const routes = require('./routes');
 const isProduction = environment === 'production';
 
 const app = express();
-//app.use(morgan('dev'));
+app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
 const { ValidationError } = require('sequelize');
+
+
 
 // Security Middleware
 if (!isProduction) {
@@ -38,6 +40,8 @@ if (!isProduction) {
       }
     })
   );
+
+  app.use(routes); // Connect all the routes
 
 // Catch unhandled requests and forward to error handler.
 app.use((_req, _res, next) => {
@@ -74,7 +78,5 @@ app.use((err, _req, res, _next) => {
   });
 });
 
-
-app.use(routes); // Connect all the routes
 
 module.exports = app;
