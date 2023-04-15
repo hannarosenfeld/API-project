@@ -16,7 +16,6 @@ app.use(express.json());
 const { ValidationError } = require('sequelize');
 
 
-
 // Security Middleware
 if (!isProduction) {
     // enable cors only in development
@@ -41,7 +40,8 @@ if (!isProduction) {
     })
   );
 
-  app.use(routes); // Connect all the routes
+// needs to be here because everything above will be used by "routes"
+app.use(routes); // Connect all the routes
 
 // Catch unhandled requests and forward to error handler.
 app.use((_req, _res, next) => {
