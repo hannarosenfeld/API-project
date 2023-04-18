@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
         models.SpotImage,
           { foreignKey: 'spotId' }
       );
+      Spot.hasMany(
+          models.Review,
+          { foreignKey: 'spotId' }
+      );
     }
   }
   Spot.init({

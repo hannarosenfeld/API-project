@@ -8,26 +8,22 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    options.tableName = 'SpotImages';
+    options.tableName = 'Reviews';
     return queryInterface.bulkInsert(options, [
       {
-        spotId: 1,
-        url: "https://thirdeyetraveller.com/wp-content/uploads/CRAIGIEVARCASTLE-13-of-17.jpg",
-        preview: true
-      },
-      {
         spotId: 2,
-        url: "https://blog.norwegianreward.com/wp-content/uploads/2019/11/norwegian-stave-churches-Borgund-flickr-Stevan-Nicholas-872x872.jpg",
-        preview: true
+        userId: 1,
+        review: "cute",
+        stars: 3
       },
     ], {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    options.tableName = 'SpotImages';
+    options.tableName = 'Reviews';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      spotId: { [Op.eq]: [1, 2] }
+      spotId: { [Op.eq]: 1 }
     }, {});
   }
 };
