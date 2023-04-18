@@ -11,33 +11,23 @@ const { SpotImage } = require('../../db/models')
 
 // Get all Spots
 router.get('/', async (req, res, next) => {
-    const spots = await Spot.findAll({
-        include: [
-            {
-                model: SpotImage,
-            },
-        ]
-    })
+    const spots = await Spot.findAll()
 
-    const spotsList = [];
+    const arr = []
 
-    spots.forEach(spot => {
-        spotsList.push(spot.toJSON())
-    })
+    for (let spot of spots) {
+       const previewImage = await spot.getSpotImages({
+        where: {
+            preview: true
+        }
+       });
 
-    spotsList.forEach(spot => {
-        spot.SpotImages.forEach(image => {
-            if (image.preview === true) {
-                spot.previewImage = image.url
-            }
-            if (spot.preview === 'false') {
-                spot.previewImage = "couldn't find a image for this spot."
-            }
-            delete spot.SpotImages
-        })
-    })
+       spot = spot.toJSON()
+       spot.previewImage = previewImage[0].url
+       arr.push(spot)
+    }
 
-    res.json(spotsList)
+    res.json(arr)
 })
 
 module.exports = router;
