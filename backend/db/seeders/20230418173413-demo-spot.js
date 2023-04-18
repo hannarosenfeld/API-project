@@ -18,9 +18,21 @@ module.exports = {
         country: "USA",
         lat: 39.97352483939225,
         lng: -75.13082652682759,
-        name: "name",
+        name: "Hanna's Place",
         description: "This is my description.",
         price: 233
+      },
+      {
+        ownerId: 2,
+        address: "262 Bundy Rd",
+        city: "Ithaca",
+        state: "NY",
+        country: "USA",
+        lat: 42.45988484015986,
+        lng: -76.56026989999796,
+        name: "Ian's Place",
+        description: "This is a description.",
+        price: 322
       },
     ], {});
   },

@@ -15,6 +15,11 @@ module.exports = {
         url: "https://thirdeyetraveller.com/wp-content/uploads/CRAIGIEVARCASTLE-13-of-17.jpg",
         preview: true
       },
+      {
+        spotId: 2,
+        url: "https://blog.norwegianreward.com/wp-content/uploads/2019/11/norwegian-stave-churches-Borgund-flickr-Stevan-Nicholas-872x872.jpg",
+        preview: true
+      },
     ], {});
   },
 
