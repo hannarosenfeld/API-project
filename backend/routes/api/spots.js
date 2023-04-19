@@ -25,22 +25,31 @@ router.get('/', async (req, res, next) => {
        });
 
        // get average star rating...
+       const reviews = await Review.findAll()
        const avgRating = await Review.count({
-        where: {
-            spotId: {
-                [Op.eq]: spot.id
+            where: {
+                spotId: {
+                    [Op.eq]: spot.id
+                }
             }
-        }
        })
+       let counter = 0
+       for (let review of reviews) {
+        review = review.toJSON()
+        counter = counter + review.stars
+       }
 
        spot = spot.toJSON()
        spot.previewImage = previewImage[0].url
-       spot.avgRating = avgRating
+       spot.avgRating = counter / avgRating
 
        arr.push(spot)
     }
 
     res.json(arr)
 })
+
+
+
 
 module.exports = router;
