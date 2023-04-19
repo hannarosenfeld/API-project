@@ -9,7 +9,100 @@ const router = express.Router();
 
 const { User, Spot, SpotImage, Review } = require('../../db/models')
 
+const validateSpot = [
+    check('address')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Please provide a address.'),
+      check('city')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Please provide a city.'),
+      check('state')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Please provide a state.'),
+      check('country')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Please provide a country.'),
+      check('lat')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Please provide a latitude.'),
+      check('lng')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Please provide a longitude.'),
+      check('name')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Please provide a name.'),
+      check('description')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Please provide a description.'),
+      check('price')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Please provide a price.'),
+    handleValidationErrors
+  ];
 
+// Create a Spot
+router.post("/", validateSpot, async (req, res, next) => {
+    const { user } = req;
+    const {
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+    } = req.body;
+
+    if (!user) res.json({error: "You must be logged in before you can create a new spot."})
+
+    if (user ) {
+    const spotUser = await User.findByPk(user.id)
+    const newSpot = await Spot.create({
+        ownerId: spotUser.id,
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+      })
+
+      res.statusCode = 201
+      res.json(newSpot)
+
+     }
+    // else {
+    //     res.status = 400,
+    //     res.json({
+    //         "message": "Bad Request",
+    //         "errors": {
+    //           "address": "Street address is required",
+    //           "city": "City is required",
+    //           "state": "State is required",
+    //           "country": "Country is required",
+    //           "lat": "Latitude is not valid",
+    //           "lng": "Longitude is not valid",
+    //           "name": "Name must be less than 50 characters",
+    //           "description": "Description is required",
+    //           "price": "Price per day is required"
+    //         }
+    //       })
+    // }
+})
 
 // Get all Spots by owned by current User
 router.get('/current', async (req, res, next) => {
