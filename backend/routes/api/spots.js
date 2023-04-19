@@ -242,8 +242,9 @@ router.post('/:spotId/images', async (req, res, next) => {
     const { spotId } = req.params
     const spot = await Spot.findByPk(spotId)
     console.log(spot)
-    if (spot.ownerId !== user.id) res.json({ "message": "You must be the owner of the spot in order to upload a picture." })
+
     if (spot) {
+        if (spot.ownerId !== user.id) res.json({ "message": "You must be the owner of the spot in order to upload a picture." })
         if (url, preview) {
         const newImage = await SpotImage.create({
             spotId: spot.id,
