@@ -81,7 +81,7 @@ router.post(
   }
 );
 
-  // Log out
+// Log out
 router.delete(
     '/',
     (_req, res) => {
