@@ -10,6 +10,7 @@ const router = express.Router();
 const { User, Spot, SpotImage, Review } = require('../../db/models')
 
 
+
 // Get all Spots by owned by current User
 router.get('/current', async (req, res, next) => {
     const { user } = req;
@@ -53,7 +54,8 @@ router.get('/current', async (req, res, next) => {
          }
 
          spot = spot.toJSON()
-         spot.previewImage = previewImage[0].url
+         if (previewImage.length) spot.previewImage = previewImage[0].url
+         else spot.previewImage = null
          spot.avgRating = counter / avgRating
 
          arr.push(spot)
@@ -62,7 +64,48 @@ router.get('/current', async (req, res, next) => {
       return res.json({
         spotsOwnedByCurrentUser: arr
       });
-    } else return res.json({ error: "An authenticated user is required for a successful response. Please log in." });
+    } // else return res.json({ error: "An authenticated user is required for a successful response. Please log in." });
+})
+
+// Get details for a Spot from an id
+router.get('/:spotId', async (req, res, next) => {
+    const { spotId } = req.params
+    let spot = await Spot.findOne({
+        where: { id: spotId },
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+    })
+
+    if (spot) {
+        const previewImage = await spot.getSpotImages({
+            where: {
+                preview: true
+            }
+           });
+           const reviews = await Review.findAll()
+           const avgRating = await Review.count({
+                where: {
+                    spotId: {
+                        [Op.eq]: spot.id
+                    }
+                }
+           })
+           let counter = 0
+           for (let review of reviews) {
+            review = review.toJSON()
+            counter = counter + review.stars
+           }
+
+           spot = spot.toJSON()
+
+           if (previewImage.length) spot.previewImage = previewImage[0].url
+           else spot.previewImage = null
+           spot.avgRating = counter / avgRating
+        res.json(spot)
+    } else {
+        res.status = 404
+        res.json({error: "Couldn't find a Spot with the specified id."})
+    }
+
 })
 
 // Get all Spots
@@ -94,7 +137,8 @@ router.get('/', async (req, res, next) => {
        }
 
        spot = spot.toJSON()
-       spot.previewImage = previewImage[0].url
+       if (previewImage.length) spot.previewImage = previewImage[0].url
+       else spot.previewImage = null
        spot.avgRating = counter / avgRating
 
        arr.push(spot)
@@ -102,9 +146,6 @@ router.get('/', async (req, res, next) => {
 
     res.json(arr)
 })
-
-// Returns all the spots owned (created) by the current user
-
 
 
 module.exports = router;
