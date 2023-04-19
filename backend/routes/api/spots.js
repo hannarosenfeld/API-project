@@ -159,7 +159,7 @@ router.get('/:spotId', async (req, res, next) => {
                 spotId: spot.id
             }
            })
-           
+
            const numReviews = await Review.count({
                 where: {
                     spotId: {
@@ -187,8 +187,8 @@ router.get('/:spotId', async (req, res, next) => {
 
         res.json(spot)
     } else {
-        res.status = 404
-        res.json({error: "Couldn't find a Spot with the specified id."})
+        res.statusCode = 404
+        res.json({ message: "Spot couldn't be found" })
     }
 
 })
