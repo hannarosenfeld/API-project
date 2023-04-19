@@ -50,8 +50,9 @@ const validateSpot = [
     handleValidationErrors
   ];
 
+
 // Create a Spot
-router.post("/", validateSpot, async (req, res, next) => {
+router.post("/", validateSpot, requireAuth, async (req, res, next) => {
     const { user } = req;
     const {
         address,
@@ -65,7 +66,7 @@ router.post("/", validateSpot, async (req, res, next) => {
         price
     } = req.body;
 
-    if (!user) res.json({error: "You must be logged in before you can create a new spot."})
+//    if (!user) res.json({error: "You must be logged in before you can create a new spot."})
 
     if (user ) {
     const spotUser = await User.findByPk(user.id)
@@ -89,7 +90,7 @@ router.post("/", validateSpot, async (req, res, next) => {
 })
 
 // Get all Spots by owned by current User
-router.get('/current', async (req, res, next) => {
+router.get('/current', requireAuth, async (req, res, next) => {
     const { user } = req;
     if (user) {
       const safeUser = {
@@ -139,7 +140,7 @@ router.get('/current', async (req, res, next) => {
       }
 
       return res.json({
-        spotsOwnedByCurrentUser: arr
+        Spots: arr
       });
     } // else return res.json({ error: "An authenticated user is required for a successful response. Please log in." });
 })
@@ -268,7 +269,10 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     }
 })
 
-
+// Edit a Spot
+router.put('/:spotId', requireAuth, (req, res, next) => {
+    
+})
 
 
 module.exports = router;
