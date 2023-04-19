@@ -233,9 +233,8 @@ router.get('/', async (req, res, next) => {
 })
 
 // Add an Image to a Spot based on the Spot's id
-router.post('/:spotId/images', async (req, res, next) => {
+router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     const { user } = req
-    if (!user) res.json({error: "You must be logged in."})
 
     const { url , preview } = req.body
 
@@ -244,7 +243,11 @@ router.post('/:spotId/images', async (req, res, next) => {
     console.log(spot)
 
     if (spot) {
-        if (spot.ownerId !== user.id) res.json({ "message": "You must be the owner of the spot in order to upload a picture." })
+        if (spot.ownerId !== user.id) {
+            res.statusCode = 403
+            res.json({ "message": "You must be the owner of the spot in order to upload a picture." })
+        }
+
         if (url, preview) {
         const newImage = await SpotImage.create({
             spotId: spot.id,
@@ -264,6 +267,8 @@ router.post('/:spotId/images', async (req, res, next) => {
         res.json({ message: "Spot couldn't be found" })
     }
 })
+
+
 
 
 module.exports = router;
