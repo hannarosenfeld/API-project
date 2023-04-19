@@ -49,6 +49,7 @@ router.get('/', async (req, res, next) => {
     res.json(arr)
 })
 
+// Returns all the spots owned (created) by the current user
 
 
 
