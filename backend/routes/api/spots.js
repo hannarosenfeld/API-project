@@ -148,34 +148,43 @@ router.get('/:spotId', async (req, res, next) => {
     const { spotId } = req.params
     let spot = await Spot.findOne({
         where: { id: spotId },
-        attributes: { exclude: ["createdAt", "updatedAt"] },
     })
 
     if (spot) {
-        const previewImage = await spot.getSpotImages({
-            where: {
-                preview: true
-            }
+        const spotImages = await spot.getSpotImages({
+            attributes: { exclude: ["createdAt", "updatedAt", "spotId"] },
            });
-           const reviews = await Review.findAll()
-           const avgRating = await Review.count({
+           const reviews = await Review.findAll({
+            where: {
+                spotId: spot.id
+            }
+           })
+           
+           const numReviews = await Review.count({
                 where: {
                     spotId: {
                         [Op.eq]: spot.id
-                    }
-                }
+                    },
+                },
            })
+
            let counter = 0
            for (let review of reviews) {
             review = review.toJSON()
             counter = counter + review.stars
            }
 
-           spot = spot.toJSON()
+           const owner = await spot.getUser({
+            attributes: { exclude: ["username"] },
+           })
 
-           if (previewImage.length) spot.previewImage = previewImage[0].url
-           else spot.previewImage = null
-           spot.avgRating = counter / avgRating
+           spot = spot.toJSON()
+           spot.numReviews = numReviews
+           spot.avgStarRating = counter / numReviews
+           if (spotImages.length) spot.spotImages = spotImages
+           else spot.spotImages = null
+           spot.Owner = owner
+
         res.json(spot)
     } else {
         res.status = 404
