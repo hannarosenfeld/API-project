@@ -9,6 +9,7 @@ const router = express.Router();
 
 const { User, Spot, SpotImage, Review } = require('../../db/models')
 
+
 const validateSpot = [
     check('address')
       .exists({ checkFalsy: true })
@@ -190,7 +191,6 @@ router.get('/:spotId', async (req, res, next) => {
         res.statusCode = 404
         res.json({ message: "Spot couldn't be found" })
     }
-
 })
 
 // Get all Spots
@@ -230,6 +230,36 @@ router.get('/', async (req, res, next) => {
     }
 
     res.json(arr)
+})
+
+// Add an Image to a Spot based on the Spot's id
+router.post('/:spotId/images', async (req, res, next) => {
+    const { user } = req
+    if (!user) res.json({error: "You must be logged in."})
+
+    const { url , preview } = req.body
+
+    const { spotId } = req.params
+    const spot = await Spot.findByPk(spotId)
+    if (spot) {
+        if (url, preview) {
+        const newImage = await SpotImage.create({
+            spotId: spot.id,
+            url,
+            preview
+        })
+
+        const responseObj = {}
+        responseObj.id = newImage.id
+        responseObj.url = newImage.url
+        responseObj.preview = newImage.preview
+
+        res.json({ responseObj })
+    } else res.json({ error: "Please provide url and preview values." })
+} else {
+        res.statusCode = 404
+        res.json({ message: "Spot couldn't be found" })
+    }
 })
 
 
