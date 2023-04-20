@@ -236,12 +236,9 @@ router.get('/', async (req, res, next) => {
 // Add an Image to a Spot based on the Spot's id
 router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     const { user } = req
-
     const { url , preview } = req.body
-
     const { spotId } = req.params
     const spot = await Spot.findByPk(spotId)
-    console.log(spot)
 
     if (spot) {
         if (spot.ownerId !== user.id) {
@@ -270,8 +267,48 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 })
 
 // Edit a Spot
-router.put('/:spotId', requireAuth, (req, res, next) => {
-    
+router.put('/:spotId', requireAuth, async (req, res, next) => {
+    const { user } = req
+    const { spotId } = req.params
+    const spot = await Spot.findByPk(spotId)
+
+    if (spot) {
+        if (spot.ownerId !== user.id) {
+            res.statusCode = 403
+            res.json({ "message": "You must be the owner of this spot in order to update it." })
+        }
+
+        const {
+            address,
+            city,
+            state,
+            country,
+            lat,
+            lng,
+            name,
+            description,
+            price
+        } = req.body
+
+        if (address) spot.address = address
+        if (city) spot.city = city
+        if (state) spot.state = state
+        if (country) spot.country
+        if (lat) spot.lat
+        if (lng) spot.lng
+        if (name) spot.name = name
+        if (description) spot.description = description
+        if (price) spot.price = price
+
+        try {
+           await spot.validate()
+        } catch(err) {
+            next(err)
+        }
+
+        await spot.save()
+        res.json(spot)
+}
 })
 
 
