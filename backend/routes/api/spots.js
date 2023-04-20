@@ -7,7 +7,7 @@ const { Op } = require("sequelize");
 
 const router = express.Router();
 
-const { User, Spot, SpotImage, Review } = require('../../db/models')
+const { User, Spot, SpotImage, Review, ReviewImage } = require('../../db/models')
 
 
 const validateSpot = [
@@ -87,6 +87,56 @@ router.post("/", validateSpot, requireAuth, async (req, res, next) => {
       res.json(newSpot)
 
      }
+})
+
+router.get('/:spotId/reviews', async (req, res, next) => {
+    const { spotId } = req.params
+
+    const spot = await Spot.findByPk(spotId)
+
+    if (spot){
+        const reviews = await Review.findAll({
+            where: {
+                spotId: spot.id
+            },
+            include: ["User", "ReviewImages"]
+        })
+
+        const response = []
+
+        for (let review of reviews) {
+            review = review.toJSON()
+            console.log(review.User.username)
+            delete review.User.username
+
+            const reviewImagesArr = []
+            const reviewImages = await ReviewImage.findAll({
+                where: {
+                    reviewId: review.id
+                }
+            })
+
+            for (let image of reviewImages) {
+                image = image.toJSON()
+                delete image.createdAt
+                delete image.updatedAt
+                delete image.reviewId
+
+                reviewImagesArr.push(image)
+            }
+
+            review.ReviewImages = reviewImagesArr
+
+            response.push(review)
+        }
+
+        res.json({
+            Reviews: response
+        })
+    } else {
+        res.statusCode = 404
+        res.json({ message : "Spot couldn't be found" })
+    }
 })
 
 // Get all Spots by owned by current User
