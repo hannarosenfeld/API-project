@@ -20,6 +20,11 @@ module.exports = {
         url: "https://blog.norwegianreward.com/wp-content/uploads/2019/11/norwegian-stave-churches-Borgund-flickr-Stevan-Nicholas-872x872.jpg",
         preview: true
       },
+      {
+        spotId: 3,
+        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_pb_VAg5ZpeubyHUj-ysCOAEjNWM4TIb-g8ckmT2j9jvp9phgkiE3jbMPRxPjG11FfSI&usqp=CAU",
+        preview: true
+      },
     ], {});
   },
 
