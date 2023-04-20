@@ -303,12 +303,36 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
         try {
            await spot.validate()
         } catch(err) {
+            err.status = 400
             next(err)
         }
 
         await spot.save()
         res.json(spot)
-}
+    } else {
+        statusCode = 404
+        res.json({ message: "Spot does not exist"})
+    }
+})
+
+// Delete spot based on id
+router.delete('/:spotId', requireAuth, async (req, res, next) => {
+    const { user } = req
+    const { spotId } = req.params
+    const spot = await Spot.findByPk(spotId)
+
+    if (spot) {
+        if (spot.ownerId !== user.id) {
+            res.statusCode = 403
+            res.json({ "message": "You must be the owner of this spot in order to delete it." })
+        }
+
+        spot.destroy()
+        res.json({ message : "Successfully deleted" })
+    } else {
+        statusCode = 404
+        res.json({ message: "Spot couldn't be found" })
+    }
 })
 
 
