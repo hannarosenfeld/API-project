@@ -1,4 +1,5 @@
 'use strict';
+const { Op } = require("sequelize");
 const {
   Model
 } = require('sequelize');
@@ -29,10 +30,31 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Review.init({
-    spotId: DataTypes.INTEGER,
+    spotId: {
+      type: DataTypes.INTEGER,
+    },
     userId: DataTypes.INTEGER,
-    review: DataTypes.STRING,
-    stars: DataTypes.INTEGER
+    review: {
+      type: DataTypes.STRING,
+      validate: {
+        minLength(review) {
+          if (!review.length) {
+            throw new Error("Review text is required")
+          }
+        }
+      }
+    },
+    stars: {
+      type: DataTypes.INTEGER,
+      validate: {
+        [Op.between]: [1, 5],
+        betweenOneAndFive(star) {
+          if (star < 1 || star > 5) {
+            throw new Error("Stars must be an integer from 1 to 5")
+          }
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Review',

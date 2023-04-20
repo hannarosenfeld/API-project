@@ -139,6 +139,43 @@ router.get('/:spotId/reviews', async (req, res, next) => {
     }
 })
 
+// Create a Review for a Spot based on the Spot's id
+router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
+    const { user } = req
+    const { spotId } = req.params
+    const { review, stars } = req.body
+    console.log("REVIEW: ", review, "STARS: ", stars)
+
+    const spot = await Spot.findByPk(spotId)
+    const sessionUser = await User.findByPk(user.id)
+
+
+    if (spot) {
+        if (spot.userId = user.id) {
+            res.statusCode = 500
+            res.json({ message: "User already has a review for this spot"})
+        }
+
+        try {
+            const newReview = await Review.create({
+                spotId: spot.id,
+                userId: sessionUser.id,
+                review,
+                stars
+            })
+            res.statusCode = 201
+            res.json(newReview)
+        } catch(err) {
+            err.status = 400
+            next(err)
+        }
+    } else {
+        res.statusCode = 404
+        res.json({ message: "Spot couldn't be found" })
+    }
+})
+
+
 // Get all Spots by owned by current User
 router.get('/current', requireAuth, async (req, res, next) => {
     const { user } = req;

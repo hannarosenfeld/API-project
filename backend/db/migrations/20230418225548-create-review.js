@@ -16,7 +16,9 @@ module.exports = {
         onDelete: 'CASCADE',
       },
       userId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'Users' },
       },
       review: {
         type: Sequelize.STRING
