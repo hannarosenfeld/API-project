@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         models.ReviewImage,
         {
           foreignKey: 'reviewId',
-          // onDelete: 'CASCADE',
+          onDelete: 'CASCADE',
         },
       );
     }
@@ -38,7 +38,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       validate: {
         minLength(review) {
-          if (!review.length) {
+          console.log("review in validation, before if", review)
+          if (review.length < 1) {
+            console.log("review validation, this is review", review)
             throw new Error("Review text is required")
           }
         }

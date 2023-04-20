@@ -144,7 +144,6 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
     const { user } = req
     const { spotId } = req.params
     const { review, stars } = req.body
-    console.log("REVIEW: ", review, "STARS: ", stars)
 
     const spot = await Spot.findByPk(spotId)
     const sessionUser = await User.findByPk(user.id)

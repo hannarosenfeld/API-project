@@ -113,7 +113,53 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
       res.statusCode = 404
       res.json({ message: "Review couldn't be found" })
     }
+})
 
+// Edit a Review
+router.put('/:reviewId', requireAuth, async (req, res, next) => {
+    const { reviewId } = req.params
+    const { review, stars } = req.body
+
+    const reviewToEdit = await Review.findByPk(reviewId)
+
+
+
+    if (reviewToEdit) {
+      reviewToEdit.review = review
+      reviewToEdit.stars = stars
+
+      try {
+         await reviewToEdit.validate()
+         console.log("after edit: ", review)
+      } catch(err) {
+        console.log("in the catch", review)
+          err.status = 400
+          next(err)
+      }
+
+      await reviewToEdit.save()
+      console.log("before re.json", review)
+
+      res.json(reviewToEdit)
+    } else {
+      res.statusCode = 404
+      res.json({ message: "Review couldn't be found" })
+    }
+})
+
+// Delete a Review
+router.delete('/:reviewId', requireAuth, async (req, res, next) => {
+    const { reviewId } = req.params
+
+    const review = await Review.findByPk(reviewId)
+
+    if (review) {
+      review.destroy()
+      res.json({ message: "Successfully deleted" })
+    } else {
+      res.statusCode = 404
+      res.json({ message: "Review couldn't be found" })
+    }
 })
 
 
