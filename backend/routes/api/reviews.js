@@ -72,4 +72,49 @@ router.get('/current', requireAuth, async (req, res, next) => {
     }
 })
 
+// Add an Image to a Review based on the Review's id
+router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
+    const { reviewId } = req.params
+    const { url } = req.body
+
+    const review = await Review.findOne({
+      where: {
+        id: reviewId
+      }
+    })
+
+    const reviewImages = await ReviewImage.findAll({
+      where: {
+        reviewId: review.id
+      }
+    })
+
+    if (reviewImages.length >= 10) {
+      res.statusCode = 403
+      return res.json({ message: "Maximum number of images for this resource was reached" })
+    }
+
+    if (review) {
+      const newImage = await ReviewImage.create({
+        reviewId: review.id,
+        url
+      })
+
+      newImage.save()
+
+      const response = {
+        id: newImage.id,
+        url: newImage.url
+      }
+
+      res.statusCode = 200
+      res.json(response)
+    } else {
+      res.statusCode = 404
+      res.json({ message: "Review couldn't be found" })
+    }
+
+})
+
+
 module.exports = router;
