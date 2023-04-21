@@ -1,4 +1,5 @@
 'use strict';
+const { Op } = require("sequelize");
 const {
   Model
 } = require('sequelize');
@@ -15,13 +16,47 @@ module.exports = (sequelize, DataTypes) => {
         models.Spot,
           { foreignKey: 'spotId' }
       );
+      Review.belongsTo(
+        models.User,
+          { foreignKey: 'userId' }
+      );
+      Review.hasMany(
+        models.ReviewImage,
+        {
+          foreignKey: 'reviewId',
+          onDelete: 'CASCADE',
+        },
+      );
     }
   }
   Review.init({
-    spotId: DataTypes.INTEGER,
+    spotId: {
+      type: DataTypes.INTEGER,
+    },
     userId: DataTypes.INTEGER,
-    review: DataTypes.STRING,
-    stars: DataTypes.INTEGER
+    review: {
+      type: DataTypes.STRING,
+      validate: {
+        minLength(review) {
+          console.log("review in validation, before if", review)
+          if (review.length < 1) {
+            console.log("review validation, this is review", review)
+            throw new Error("Review text is required")
+          }
+        }
+      }
+    },
+    stars: {
+      type: DataTypes.INTEGER,
+      validate: {
+        [Op.between]: [1, 5],
+        betweenOneAndFive(star) {
+          if (star < 1 || star > 5) {
+            throw new Error("Stars must be an integer from 1 to 5")
+          }
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Review',

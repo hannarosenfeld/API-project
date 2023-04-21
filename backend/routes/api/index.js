@@ -5,13 +5,17 @@ const { restoreUser } = require('../../utils/auth.js');
 
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
-spotsRouter = require('./spots.js')
+const spotsRouter = require('./spots.js')
+const reviewsRouter = require('./reviews.js')
+const bookingsRouter = require('./bookings.js')
 
 router.use(handleValidationErrors);
 router.use(restoreUser);
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 router.use('/spots', spotsRouter);
+router.use('/reviews', reviewsRouter);
+router.use('/bookings', bookingsRouter);
 
 
 module.exports = router;

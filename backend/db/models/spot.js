@@ -16,10 +16,20 @@ module.exports = (sequelize, DataTypes) => {
       );
       Spot.hasMany(
         models.SpotImage,
-          { foreignKey: 'spotId' }
+        {
+          foreignKey: 'spotId',
+          onDelete: 'CASCADE',
+        },
       );
       Spot.hasMany(
-          models.Review,
+        models.Review,
+        {
+          foreignKey: 'spotId',
+          onDelete: 'CASCADE',
+        },
+      ),
+      Spot.hasMany(
+        models.Booking,
           { foreignKey: 'spotId' }
       );
     }
@@ -32,7 +42,16 @@ module.exports = (sequelize, DataTypes) => {
     country: DataTypes.STRING,
     lat: DataTypes.DECIMAL,
     lng: DataTypes.DECIMAL,
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING(50),
+      validate: {
+        isOver50Chars(name) {
+          if (name.length > 50) {
+            throw new Error('Name must be less than 50 characters');
+          }
+        }
+      }
+    },
     description: DataTypes.STRING,
     price: DataTypes.DECIMAL
   }, {
