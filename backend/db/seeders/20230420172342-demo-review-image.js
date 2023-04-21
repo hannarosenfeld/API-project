@@ -14,6 +14,10 @@ module.exports = {
         reviewId: 1,
         url: "a-link"
       },
+      {
+        reviewId: 2,
+        url: "another-link"
+      },
     ], {});
   },
 
@@ -21,7 +25,7 @@ module.exports = {
     options.tableName = 'ReviewImages';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      reviewId: { [Op.eq]: [1] }
+      reviewId: { [Op.eq]: [1,2] }
     }, {});
   }
 };
