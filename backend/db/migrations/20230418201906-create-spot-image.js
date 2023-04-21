@@ -1,4 +1,5 @@
 'use strict';
+// test
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -14,7 +15,7 @@ module.exports = {
         allowNull: false,
         references: { model: 'Spots' },
         onDelete: 'CASCADE',
-        
+
       },
       url: {
         type: Sequelize.STRING
