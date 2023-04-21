@@ -19,8 +19,14 @@ module.exports = {
       {
         spotId: 3,
         userId: 1,
-        startDate: new Date('July 20, 24 20:17:40 GMT+00:00'),
-        endDate: new Date('July 25, 24 20:17:40 GMT+00:00'),
+        startDate: new Date('2021-11-19'),
+        endDate: new Date('2021-11-20'),
+      },
+      {
+        spotId: 2,
+        userId: 3,
+        startDate: new Date('July 1, 24 20:17:40 GMT+00:00'),
+        endDate: new Date('July 3, 24 20:17:40 GMT+00:00'),
       },
     ], {});
   },

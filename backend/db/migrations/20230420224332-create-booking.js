@@ -18,10 +18,12 @@ module.exports = {
         references: { model: 'Spots' },
       },
       startDate: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        unique: true,
       },
       endDate: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        unique: true,
       },
       createdAt: {
         allowNull: false,
