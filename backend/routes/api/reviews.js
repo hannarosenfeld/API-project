@@ -28,7 +28,6 @@ router.get('/current', requireAuth, async (req, res, next) => {
         include: ['User','Spot']
       })
 
-
       const response = []
 
       for (let review of reviews){

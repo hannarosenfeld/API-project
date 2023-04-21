@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
         models.Review,
           { foreignKey: 'userId' }
       );
+      User.hasMany(
+        models.Booking,
+          { foreignKey: 'userId' }
+      );
     }
   };
 

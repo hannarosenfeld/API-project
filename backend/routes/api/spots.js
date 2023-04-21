@@ -7,7 +7,7 @@ const { Op } = require("sequelize");
 
 const router = express.Router();
 
-const { User, Spot, SpotImage, Review, ReviewImage } = require('../../db/models')
+const { User, Spot, SpotImage, Review, ReviewImage, Booking } = require('../../db/models')
 
 
 const validateSpot = [
@@ -106,7 +106,6 @@ router.get('/:spotId/reviews', async (req, res, next) => {
 
         for (let review of reviews) {
             review = review.toJSON()
-            console.log(review.User.username)
             delete review.User.username
 
             const reviewImagesArr = []
@@ -420,6 +419,48 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
         res.json({ message: "Spot couldn't be found" })
     }
 })
+
+// Get all Bookings for a Spot based on the Spot's id
+router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
+    const { spotId } = req.params
+
+    const spot = await Spot.findByPk(spotId)
+
+    if (spot) {
+        const { user } = req
+        const sessionUser = await User.findByPk(user.id)
+
+        const bookings = await Booking.findAll({
+            where: {
+                spotId: spot.id
+            },
+            include: ['User']
+        })
+
+        const response = []
+        for (let booking of bookings) {
+            if (spot.ownerId === user.id) {
+                booking = booking.toJSON()
+                delete booking.User.username
+                response.push(booking)
+                res.json({ Bookings : response })
+            } else {
+                booking = booking.toJSON()
+                delete booking.User
+                delete booking.createdAt
+                delete booking.updatedAt
+                delete booking.id
+                delete booking.userId
+                response.push(booking)
+                res.json({ Bookings : response})
+            }
+        }
+    } else {
+        res.statusCode = 404
+        res.json({ message: "Spot couldn't be found" })
+    }
+})
+
 
 
 module.exports = router;
