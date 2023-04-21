@@ -1,3 +1,4 @@
+// test
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const { check } = require('express-validator');
@@ -279,9 +280,56 @@ router.get('/:spotId', async (req, res, next) => {
     }
 })
 
+
 // Get all Spots
 router.get('/', async (req, res, next) => {
-    const spots = await Spot.findAll()
+    // Query Filters
+    let {
+        page,
+        size,
+        minLat,
+        maxLat,
+        minLng,
+        maxLng,
+        minPrice,
+        maxPrice
+    } = req.query
+
+    page = parseInt(page)
+    size = parseInt(size)
+    minLat = parseInt(minLat)
+    maxLat = parseInt(maxLat)
+    minLng = parseInt(minLng)
+    maxLng = parseInt(maxLng)
+    minPrice = parseInt(minPrice)
+    maxPrice = parseInt(maxPrice)
+
+    if (!page || page < 0 || page > 10) page = 1;
+    if (!size || size < 0 || size > 20) size = 20;
+
+    const pagination = {}
+    if (page >= 1 && size >= 1) {
+      pagination.limit = size;
+      pagination.offset = size * (page - 1)
+    }
+
+    if (size > 20) {
+       pagination.limit = 20
+    }
+
+    const where = {}
+    if (minLat) where.lat = {[Op.min]: minLat}
+    if (maxLat) where.lat = {[Op.min]: maxLat}
+    if (minLng) where.lng = {[Op.min]: minLng}
+    if (maxLng) where.lng = {[Op.min]: minLng}
+    if (minPrice > 0) where.price = {[Op.min]: minPrice}
+    if (maxPrice > 0) where.price = {[Op.max]: maxPrice}
+
+    const spots = await Spot.findAll({
+        where,
+        ...pagination
+    })
+
 
     const arr = []
 
@@ -315,7 +363,11 @@ router.get('/', async (req, res, next) => {
        arr.push(spot)
     }
 
-    res.json(arr)
+    res.json({
+        arr,
+        page,
+        size
+    })
 })
 
 // Add an Image to a Spot based on the Spot's id
