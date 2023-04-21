@@ -150,7 +150,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
 
 
     if (spot) {
-        if (spot.userId = user.id) {
+        if (spot.userId === user.id) {
             res.statusCode = 500
             res.json({ message: "User already has a review for this spot"})
         }
@@ -280,56 +280,65 @@ router.get('/:spotId', async (req, res, next) => {
     }
 })
 
+// Query Filters
+// router.get('/', async (req, res, next) => {
+//     let {
+//         page,
+//         size,
+//         minLat,
+//         maxLat,
+//         minLng,
+//         maxLng,
+//         minPrice,
+//         maxPrice
+//     } = req.query
+
+//     page = parseInt(page)
+//     size = parseInt(size)
+//     minLat = parseInt(minLat)
+//     maxLat = parseInt(maxLat)
+//     minLng = parseInt(minLng)
+//     maxLng = parseInt(maxLng)
+//     minPrice = parseInt(minPrice)
+//     maxPrice = parseInt(maxPrice)
+
+//     if (!page || page < 0 || page > 10) page = 1;
+//     if (!size || size < 0 || size > 20) size = 20;
+
+//     const pagination = {}
+//     if (page >= 1 && size >= 1) {
+//       pagination.limit = size;
+//       pagination.offset = size * (page - 1)
+//     }
+
+//     if (size > 20) {
+//        pagination.limit = 20
+//     }
+
+//     const where = {}
+//     if (minLat) where.lat = {[Op.min]: minLat}
+//     if (maxLat) where.lat = {[Op.min]: maxLat}
+//     if (minLng) where.lng = {[Op.min]: minLng}
+//     if (maxLng) where.lng = {[Op.min]: minLng}
+//     if (minPrice > 0) where.price = {[Op.min]: minPrice}
+//     if (maxPrice > 0) where.price = {[Op.max]: maxPrice}
+
+//     const spots = await Spot.findAll({
+//         where,
+//         ...pagination
+//     })
+
+//     res.json({
+//         spots,
+//         page,
+//         size
+//     })
+// })
 
 // Get all Spots
 router.get('/', async (req, res, next) => {
-    // Query Filters
-    let {
-        page,
-        size,
-        minLat,
-        maxLat,
-        minLng,
-        maxLng,
-        minPrice,
-        maxPrice
-    } = req.query
 
-    page = parseInt(page)
-    size = parseInt(size)
-    minLat = parseInt(minLat)
-    maxLat = parseInt(maxLat)
-    minLng = parseInt(minLng)
-    maxLng = parseInt(maxLng)
-    minPrice = parseInt(minPrice)
-    maxPrice = parseInt(maxPrice)
-
-    if (!page || page < 0 || page > 10) page = 1;
-    if (!size || size < 0 || size > 20) size = 20;
-
-    const pagination = {}
-    if (page >= 1 && size >= 1) {
-      pagination.limit = size;
-      pagination.offset = size * (page - 1)
-    }
-
-    if (size > 20) {
-       pagination.limit = 20
-    }
-
-    const where = {}
-    if (minLat) where.lat = {[Op.min]: minLat}
-    if (maxLat) where.lat = {[Op.min]: maxLat}
-    if (minLng) where.lng = {[Op.min]: minLng}
-    if (maxLng) where.lng = {[Op.min]: minLng}
-    if (minPrice > 0) where.price = {[Op.min]: minPrice}
-    if (maxPrice > 0) where.price = {[Op.max]: maxPrice}
-
-    const spots = await Spot.findAll({
-        where,
-        ...pagination
-    })
-
+    const spots = await Spot.findAll()
 
     const arr = []
 
@@ -364,9 +373,7 @@ router.get('/', async (req, res, next) => {
     }
 
     res.json({
-        arr,
-        page,
-        size
+        Spots: arr
     })
 })
 
@@ -395,7 +402,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
         responseObj.url = newImage.url
         responseObj.preview = newImage.preview
 
-        res.json({ responseObj })
+        res.json(responseObj)
     } else res.json({ error: "Please provide url and preview values." })
 } else {
         res.statusCode = 404
@@ -530,11 +537,23 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
                 spotId: spot.id
             }
         })
+
         for (let booking of bookings) {
             const err = {}
+
+            var e1start = booking.startDate.getTime();
+            var e1end = booking.endDate.getTime();
+            var e2start = startDate
+            var e2end = endDate
+            if (e1start > e2start && e1start < e2end || e2start > e1start && e2start < e1end) {
+                res.statusCode = 403
+                res.json({ message: "Dates overlap with another booking."})
+            }
+
             if (booking.startDate.getTime() === startDate) {
                 err.startDate = "Start date conflicts with an existing booking"
                 res.statusCode = 403
+
             } if(booking.endDate.getTime() === endDate) {
                 err.endDate = "End date conflicts with an existing booking"
                 res.statusCode = 403
@@ -552,7 +571,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
                 res.json(newBooking)
             }
-            // throw booking conflict error
 
             res.json(err)
         }
