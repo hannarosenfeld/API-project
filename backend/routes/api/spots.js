@@ -228,7 +228,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
       return res.json({
         Spots: arr
       });
-    } // else return res.json({ error: "An authenticated user is required for a successful response. Please log in." });
+    }
 })
 
 // Get details for a Spot from an id
@@ -280,65 +280,61 @@ router.get('/:spotId', async (req, res, next) => {
     }
 })
 
-// Query Filters
-// router.get('/', async (req, res, next) => {
-//     let {
-//         page,
-//         size,
-//         minLat,
-//         maxLat,
-//         minLng,
-//         maxLng,
-//         minPrice,
-//         maxPrice
-//     } = req.query
 
-//     page = parseInt(page)
-//     size = parseInt(size)
-//     minLat = parseInt(minLat)
-//     maxLat = parseInt(maxLat)
-//     minLng = parseInt(minLng)
-//     maxLng = parseInt(maxLng)
-//     minPrice = parseInt(minPrice)
-//     maxPrice = parseInt(maxPrice)
-
-//     if (!page || page < 0 || page > 10) page = 1;
-//     if (!size || size < 0 || size > 20) size = 20;
-
-//     const pagination = {}
-//     if (page >= 1 && size >= 1) {
-//       pagination.limit = size;
-//       pagination.offset = size * (page - 1)
-//     }
-
-//     if (size > 20) {
-//        pagination.limit = 20
-//     }
-
-//     const where = {}
-//     if (minLat) where.lat = {[Op.min]: minLat}
-//     if (maxLat) where.lat = {[Op.min]: maxLat}
-//     if (minLng) where.lng = {[Op.min]: minLng}
-//     if (maxLng) where.lng = {[Op.min]: minLng}
-//     if (minPrice > 0) where.price = {[Op.min]: minPrice}
-//     if (maxPrice > 0) where.price = {[Op.max]: maxPrice}
-
-//     const spots = await Spot.findAll({
-//         where,
-//         ...pagination
-//     })
-
-//     res.json({
-//         spots,
-//         page,
-//         size
-//     })
-// })
 
 // Get all Spots
 router.get('/', async (req, res, next) => {
+    let {
+        page,
+        size,
+        minLat,
+        maxLat,
+        minLng,
+        maxLng,
+        minPrice,
+        maxPrice
+    } = req.query
 
-    const spots = await Spot.findAll()
+//    console.log(req.query)
+
+    page = parseInt(page)
+    size = parseInt(size)
+    minLat = parseInt(minLat)
+    maxLat = parseInt(maxLat)
+    minLng = parseInt(minLng)
+    maxLng = parseInt(maxLng)
+    minPrice = parseFloat(minPrice)
+    maxPrice = parseFloat(maxPrice)
+
+ //  console.log(maxLng)
+
+    if (!page || page < 0 || page > 10) page = 1;
+    if (!size || size < 0 || size > 20) size = 20;
+
+    const pagination = {}
+    if (page >= 1 && size >= 1) {
+        pagination.limit = size;
+        pagination.offset = size * (page - 1)
+    }
+
+    if (size > 20) {
+        pagination.limit = 20
+    }
+
+    const where = {}
+    if (minLat) where.lat = {[Op.gte]: minLat}
+    if (maxLat) where.lat = {[Op.lte]: maxLat}
+    if (minLng) where.lng = {[Op.gta]: minLng}
+    if (maxLng) where.lng = {[Op.lte]: maxLng}
+    if (minPrice > 0) where.price = {[Op.gte]: minPrice}
+    if (maxPrice > 0) where.price = {[Op.lte]: maxPrice}
+
+    console.log(where)
+
+    const spots = await Spot.findAll({
+        where,
+        ...pagination
+    })
 
     const arr = []
 
@@ -373,9 +369,12 @@ router.get('/', async (req, res, next) => {
     }
 
     res.json({
-        Spots: arr
+        Spots: spots,
+        page,
+        size
     })
 })
+
 
 // Add an Image to a Spot based on the Spot's id
 router.post('/:spotId/images', requireAuth, async (req, res, next) => {
