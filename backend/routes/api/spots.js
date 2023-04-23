@@ -147,10 +147,16 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
 
     const spot = await Spot.findByPk(spotId)
     const sessionUser = await User.findByPk(user.id)
+    const existingReview = await Review.findOne({
+        where: {
+            userId: user.id,
+            spotId: spot.id
+        }
+    })
 
 
     if (spot) {
-        if (spot.userId === user.id) {
+        if (existingReview) {
             res.statusCode = 500
             res.json({ message: "User already has a review for this spot"})
         }
