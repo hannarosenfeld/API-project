@@ -3,14 +3,13 @@
 }
 
 .nav {
-    border: 2px solid red;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 5%;
 }
 
 .home-button {
-    border: 2px solid hotpink;
     font-size: 2em;
 }
 
@@ -18,7 +17,6 @@
     color: var(--airbnb);
 }
 .profile-button {
-    border: 2px solid blue;
     background: transparent;
     cursor: pointer;
     display: flex;
