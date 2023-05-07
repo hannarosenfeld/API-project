@@ -34,9 +34,10 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
-    <div className="profile-button">
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+    <div>
+      <button onClick={openMenu} className="profile-button">
+        <i className="fa-solid fa-bars"></i>
+        <img src="https://a0.muscache.com/defaults/user_pic-50x50.png?v=3&im_w=240"/>
       </button>
       <ul className={ulClassName} ref={ulRef}>
         <li>{user.username}</li>

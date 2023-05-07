@@ -1,7 +1,7 @@
 /* TODO Add site wide styles */
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
 
-html, body {
+body {
     font-family: 'Manrope', sans-serif;
 }
 
@@ -17,7 +17,6 @@ html, body {
 li {
     list-style: none;
     margin-left: -1em;
-    border: 2px solid green;
 }
 
 a {
