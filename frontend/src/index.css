@@ -5,6 +5,10 @@ html, body {
     font-family: 'Manrope', sans-serif;
 }
 
+:root {
+    --airbnb: #FF385C;
+}
+
 * {
     padding: none;
     border: none;

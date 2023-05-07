@@ -34,9 +34,9 @@ function Navigation({ isLoaded }) {
 
   return (
     <ul className="nav">
-      <li>
+      <li className="home-button">
         <NavLink exact to="/">
-          Home
+          <span><i class="fa-brands fa-airbnb"></i>airbnb</span>
         </NavLink>
       </li>
       {isLoaded && sessionLinks}
