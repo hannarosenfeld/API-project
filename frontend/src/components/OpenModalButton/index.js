@@ -1,18 +1,6 @@
 import React from "react";
 import { useModal } from "../../context/Modal";
 
-//test
-
-// const Greeting = () => {
-//     return (
-//       <OpenModalButton
-//         buttonText="Greeting"
-//         modalComponent={<h2>Hello World!</h2>}
-//         onButtonClick={() => console.log("Greeting initiated")}
-//         onModalClose={() => console.log("Greeting completed")}
-//       />
-//     );
-//   };
 
 function OpenModalButton({
   modalComponent, // component to render inside the modal
@@ -28,7 +16,7 @@ function OpenModalButton({
     setModalContent(modalComponent);
   };
 
-  return <button onClick={onClick} >{buttonText}</button>;
+  return <button onClick={onClick}>{buttonText}</button>;
 }
 
 export default OpenModalButton;
