@@ -1,3 +1,49 @@
 .hidden {
     display: none;
 }
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-wrapper {
+    display: relative;
+}
+
+.nav ul {
+    align-self: start;
+}
+
+.home-button {
+    font-size: 2em;
+}
+
+.home-button span {
+    color: var(--airbnb);
+}
+.profile-button {
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 21px;
+    transition: box-shadow 0.2s ease;
+    display: flex;
+    width: 77px;
+    height: 42px;
+    position: relative;
+    padding: 5px 5px 5px 12px;
+    align-items: center;
+}
+
+.profile-button .fa-bars {
+    font-size: 1em;
+}
+
+.profile-button img {
+    width: 30px;
+    height: 30px;
+    border-radius: 21px;
+}

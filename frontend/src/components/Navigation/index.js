@@ -33,14 +33,16 @@ function Navigation({ isLoaded }) {
   }
 
   return (
-    <ul>
-      <li>
+    <div className="nav-wrapper">
+    <ul className="nav">
+      <li className="home-button">
         <NavLink exact to="/">
-          Home
+          <span><i class="fa-brands fa-airbnb"></i>airbnb</span>
         </NavLink>
       </li>
       {isLoaded && sessionLinks}
     </ul>
+    </div>
   );
 }
 
