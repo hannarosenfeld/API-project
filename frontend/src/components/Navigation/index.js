@@ -33,6 +33,7 @@ function Navigation({ isLoaded }) {
   }
 
   return (
+    <div className="nav-wrapper">
     <ul className="nav">
       <li className="home-button">
         <NavLink exact to="/">
@@ -41,6 +42,7 @@ function Navigation({ isLoaded }) {
       </li>
       {isLoaded && sessionLinks}
     </ul>
+    </div>
   );
 }
 
