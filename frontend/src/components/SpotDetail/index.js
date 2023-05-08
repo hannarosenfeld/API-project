@@ -5,21 +5,27 @@ import { getOneSpot } from "../../store/spots";
 
 export default function SpotDetail() {
     const dispatch = useDispatch();
-    let spotId = useParams();
-    const spotsObj = useSelector(state => state.spots)
-    const spot = Object.values(spotsObj)
+    let { spotId } = useParams();
+    spotId = parseInt(spotId)
+    const spot = useSelector(state => state.spots[spotId])
 
-    spotId = parseInt(spotId.spotId)
+    useEffect(() => {
+        dispatch(getOneSpot(spotId))
+    }, [dispatch,spotId])
+
+    if (!spot) {
+        return(
+            <>
+            spot does not exist
+            </>
+        )
+    }
 
     console.log("spot!", spot)
 
-    useEffect(() => {
-        dispatch(getOneSpot(parseInt(spotId)))
-      },[])
-
     return (
         <h2>
-            {spot[0].name}
+            {spot.name}
         </h2>
     )
 }
