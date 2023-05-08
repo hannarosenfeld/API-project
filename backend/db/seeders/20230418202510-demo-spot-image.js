@@ -25,6 +25,11 @@ module.exports = {
         url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_pb_VAg5ZpeubyHUj-ysCOAEjNWM4TIb-g8ckmT2j9jvp9phgkiE3jbMPRxPjG11FfSI&usqp=CAU",
         preview: true
       },
+      {
+        spotId: 4,
+        url: "https://a0.muscache.com/im/pictures/9b1dac05-b810-46ea-8d35-f57072af1fe1.jpg",
+        preview: true
+      },
     ], {});
   },
 

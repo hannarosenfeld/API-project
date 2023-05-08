@@ -16,29 +16,35 @@ export default function SpotListItem({ spots }) {
             flexWrap: "wrap"
         }}>
             {spots.map(spot => (
-                <div key={spot.id} style={{display: "flex", flexDirection: "column"}}>
+                <div key={spot.id}
+                title={spot.name}
+                >
                 <Link to={`/spots/${spot.id}`}>
                     <div style={{
-                        border: "2px solid red",
-                        width: "20em",
-                        height: "20em",
-                        cursor: "pointer"
+                        display: "flex",
+                        flexDirection: "column"
                     }}>
-                        <img
-                            src={images[spot.id]}
-                            style={{
-                                objectFit: "contain",
-                                verticalAlign: "middle",
-                                objectFit: "cover",
-                                width: "100%",
-                                height: "100%"
-                            }}
-                        />
+                        <div style={{
+                            width: "20em",
+                            height: "20em",
+                            cursor: "pointer"
+                        }}>
+                            <img
+                                src={images[spot.id]}
+                                style={{
+                                    objectFit: "contain",
+                                    verticalAlign: "middle",
+                                    objectFit: "cover",
+                                    width: "100%",
+                                    height: "100%"
+                                }}
+                            />
+                        </div>
+                        <span>{spot.name}</span>
+                        <span>{spot.city}, {spot.state}</span>
+                        <span>{spot.price}</span>
                     </div>
                 </Link>
-                <span>{spot.name}</span>
-                <span>{spot.city}, {spot.state}</span>
-                <span>{spot.price}</span>
                 </div>
             ))}
         </div>
