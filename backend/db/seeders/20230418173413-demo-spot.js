@@ -46,6 +46,18 @@ module.exports = {
         description: "This is a description.",
         price: 322
       },
+      {
+        ownerId: 1,
+        address: "111 Oi Rd",
+        city: "Detroit",
+        state: "MI",
+        country: "USA",
+        lat: 42.32893691888589,
+        lng: -83.07740481801518,
+        name: "Michigan Central",
+        description: "This is a description.",
+        price: 322
+      },
     ], {});
   },
 
