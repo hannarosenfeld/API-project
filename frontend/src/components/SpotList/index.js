@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SpotListItem from "../SpotListItem"
-import spotsReducer from "../../store/spots";
+import { getAllSpots } from "../../store/spots.js"
+
 
 export default function SpotList() {
     const dispatch = useDispatch();
@@ -8,6 +10,9 @@ export default function SpotList() {
 
     const spots = Object.values(spotsObj)
 
+    useEffect(() => {
+        dispatch(getAllSpots(spots))
+      },[])
 
     return (
         <>
