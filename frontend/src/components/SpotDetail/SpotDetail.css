@@ -9,6 +9,7 @@ body {
 .spot-images {
     justify-content: space-between;
     gap: 0.25em;
+    margin-bottom: 2em;
 }
 
 .four-squares {
@@ -29,4 +30,8 @@ body {
     object-fit: cover;
     width: 100%;
     height: 100%;
+}
+
+.spot-details {
+    margin-right: 1.25em;
 }

@@ -56,7 +56,12 @@ export default function SpotDetail() {
                     <div>{spot.spotImages[4].url ? <img src={spot.spotImages[4].url}/> : ""}</div>
                 </div>
             </div>
-            <div style={{display: "flex", justifyContent: "space-between"}}>
+            <div
+                className="spot-details"
+                style={{
+                    display: "flex",
+                    justifyContent: "space-between"
+                }}>
                 <div style={{width: "75%"}}>
                     <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
                     <p>{spot.description}</p>
@@ -65,13 +70,17 @@ export default function SpotDetail() {
                     display: "flex",
                     flexDirection: "column",
                     border: "2px solid black",
-                    width: "20%",
+                    width: "30%",
                     borderRadius: "1em",
                     alignSelf: "center",
                     padding: "1em"
                     }}>
 
-                    <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center"
+                        }}>
                         <h2>${spot.price} night</h2>
                         <span> star #.# . # reviews</span>
                     </div>
