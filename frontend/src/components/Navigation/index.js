@@ -74,7 +74,7 @@ function Navigation({ isLoaded }) {
     <ul className="nav">
       <li className="home-button">
         <NavLink exact to="/">
-          <span><i class="fa-regular fa-heart"></i> oibnb</span>
+          <span style={{marginLeft: "1.2em"}}><i class="fa-regular fa-heart"></i> oibnb</span>
         </NavLink>
       </li>
       {isLoaded && sessionLinks}
