@@ -91,9 +91,30 @@ module.exports = {
 
       {
         spotId: 4,
-        url: "https://a0.muscache.com/im/pictures/9b1dac05-b810-46ea-8d35-f57072af1fe1.jpg",
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-53509299/original/e07ac9a7-a45f-474e-bbef-39abdf795e32.jpeg",
         preview: true
       },
+      {
+        spotId: 4,
+        url: "https://a0.muscache.com/im/pictures/a312bd99-9705-4987-8293-44ba04319b46.jpg",
+        preview: true
+      },
+      {
+        spotId: 4,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-53509299/original/ad2f0047-f965-450e-bf05-0f159b74f558.png",
+        preview: true
+      },
+            {
+        spotId: 4,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-53509299/original/89cd95e7-8c2f-42ae-9d83-b74cb09cf212.jpeg",
+        preview: true
+      },
+            {
+        spotId: 4,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-53509299/original/a893754a-c0b5-4e69-b77b-80e9bb16ae9c.jpeg",
+        preview: true
+      },
+
     ], {});
   },
 
