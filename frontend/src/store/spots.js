@@ -2,7 +2,7 @@ import { csrfFetch } from "./csrf";
 
 export const LOAD_SPOTS = 'spots/LOAD_SPOTS';
 export const RECEIVE_SPOT = 'spots/RECEIVE_SPOT';
-const ADD_ONE = 'spots/ADD_ONE';
+export const ADD_ONE = 'spots/ADD_ONE';
 
 const loadSpots = (spots) => ({
     type: LOAD_SPOTS,

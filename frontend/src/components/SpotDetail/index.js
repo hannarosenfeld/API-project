@@ -18,10 +18,11 @@ export default function SpotDetail() {
     if (!spot || !spot.Owner || !spot.spotImages) {
         return(
             <>
-
             </>
         )
     }
+
+    console.log(spot)
 
     return (
         <div className="spot-detail-wrapper">

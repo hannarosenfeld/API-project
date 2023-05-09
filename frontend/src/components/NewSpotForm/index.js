@@ -42,13 +42,18 @@ export default function NewSpotForm() {
             description,
             price,
             previewImage,
-            photos,
+            spotImages: photos,
+            avgStarRating: 0,
             lat: 5,
             lng: 5
-        };
+        }
 
         let createdSpot = payload;
         const response = await dispatch(createSpot(createdSpot))
+
+        console.log(createdSpot)
+        history.push(`/spots/${response.id}`);
+
     }
 
     console.log("title", title)
