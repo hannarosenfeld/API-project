@@ -375,7 +375,7 @@ router.get('/', async (req, res, next) => {
     }
 
     res.json({
-        Spots: spots,
+        Spots: arr,
         page,
         size
     })

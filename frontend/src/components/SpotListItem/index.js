@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 
 export default function SpotListItem({ spots }) {
+    console.log("spots",spots)
     return(
         <div style={{
             display: "flex",
@@ -24,7 +25,7 @@ export default function SpotListItem({ spots }) {
 
                         }}>
                             <img
-                                // src={spot.spotImages[0].url}
+                                src={spot.previewImage}
                                 style={{
                                     objectFit: "contain",
                                     verticalAlign: "middle",
