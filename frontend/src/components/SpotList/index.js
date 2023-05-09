@@ -15,8 +15,12 @@ export default function SpotList() {
       },[])
 
     return (
-        <>
-        <SpotListItem spots={spots} />
-        </>
+        <div
+            style={{
+                width: "75vw"
+            }}
+        >
+            <SpotListItem spots={spots} />
+        </div>
     )
 }
