@@ -34,8 +34,8 @@ export default function SpotDetail() {
                 }}
             >
                 <div style={{
-                    width: "47em",
-                    height: "35em",
+                    width: "40em",
+                    height: "30em",
                 }}>
                     <img
                     src={spot.spotImages[0].url}
@@ -45,15 +45,14 @@ export default function SpotDetail() {
                         objectFit: "cover",
                         width: "100%",
                         height: "100%",
-                        borderRadius: "3% 0 0 0 3%"
                     }}
                     />
                 </div>
                 <div className="four-squares">
-                    <div>{spot.spotImages[1].url ? <img src={spot.spotImages[1].url}/> : ""}</div>
-                    <div>{spot.spotImages[2].url ? <img src={spot.spotImages[2].url}/> : ""}</div>
-                    <div>{spot.spotImages[3].url ? <img src={spot.spotImages[3].url}/> : ""}</div>
-                    <div>{spot.spotImages[4].url ? <img src={spot.spotImages[4].url}/> : ""}</div>
+                    <div>{spot.spotImages[1].url != undefined ? <img src={spot.spotImages[1].url}/> : ""}</div>
+                    <div>{spot.spotImages[2].url != undefined ? <img src={spot.spotImages[2].url}/> : ""}</div>
+                    <div>{spot.spotImages[3].url != undefined ? <img src={spot.spotImages[3].url}/> : ""}</div>
+                    <div>{spot.spotImages[4].url != undefined ? <img src={spot.spotImages[4].url}/> : ""}</div>
                 </div>
             </div>
             <div

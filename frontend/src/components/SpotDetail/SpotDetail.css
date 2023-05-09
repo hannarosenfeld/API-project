@@ -15,14 +15,15 @@ body {
 .four-squares {
     display: flex;
     flex-wrap: wrap;
-    width: 55em;
-    gap: 0.25em;
+    justify-content: space-between;
+    width: 30em;
     float: right;
+    gap: 0.2em;
 }
 
 .four-squares div {
-    width: 18em;
-    gap: 1em;
+    width: 14.8em;
+    height:14.9em;
 }
 
 .four-squares div img {
@@ -33,5 +34,5 @@ body {
 }
 
 .spot-details {
-    margin-right: 1.25em;
+
 }

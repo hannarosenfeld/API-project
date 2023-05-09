@@ -38,14 +38,57 @@ module.exports = {
 
       {
         spotId: 2,
-        url: "https://blog.norwegianreward.com/wp-content/uploads/2019/11/norwegian-stave-churches-Borgund-flickr-Stevan-Nicholas-872x872.jpg",
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-21947777/original/88b0decc-4045-4869-be82-0c858b8478d2.jpeg",
+        preview: true
+      },
+      {
+        spotId: 2,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-21947777/original/00050b16-294e-4563-ba7b-e861046e2390.jpeg",
+        preview: true
+      },
+      {
+        spotId: 2,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-21947777/original/41995620-0048-417e-b6b6-d761c5fdf9df.jpeg",
+        preview: true
+      },
+      {
+        spotId: 2,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-21947777/original/e4f6e012-4e07-4570-89e0-183ca5b3374e.jpeg",
+        preview: true
+      },
+      {
+        spotId: 2,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-21947777/original/d7473b35-6eed-4cab-9efb-3853dddac62f.jpeg",
+        preview: true
+      },
+
+      {
+        spotId: 3,
+        url: "https://a0.muscache.com/im/pictures/18986897-702f-416d-958e-9627e6c9f72b.jpg",
         preview: true
       },
       {
         spotId: 3,
-        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_pb_VAg5ZpeubyHUj-ysCOAEjNWM4TIb-g8ckmT2j9jvp9phgkiE3jbMPRxPjG11FfSI&usqp=CAU",
+        url: "https://a0.muscache.com/im/pictures/10c0b70b-6617-4ec5-bc1a-3065e35b3f16.jpg",
         preview: true
       },
+      {
+        spotId: 3,
+        url: "https://a0.muscache.com/im/pictures/10c0b70b-6617-4ec5-bc1a-3065e35b3f16.jpg",
+        preview: true
+      },
+      {
+        spotId: 3,
+        url: "https://a0.muscache.com/im/pictures/75c4c8dd-cf23-43b4-8778-10172a01af39.jpg",
+        preview: true
+      },
+      {
+        spotId: 3,
+        url: "https://a0.muscache.com/im/pictures/c7b0d18d-60bc-401a-8eb8-e2814f97416d.jpg",
+        preview: true
+      },
+
+
       {
         spotId: 4,
         url: "https://a0.muscache.com/im/pictures/9b1dac05-b810-46ea-8d35-f57072af1fe1.jpg",
