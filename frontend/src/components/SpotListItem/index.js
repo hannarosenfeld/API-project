@@ -1,13 +1,5 @@
 import { Link } from "react-router-dom"
 
-const images = [
-    "https://a0.muscache.com/im/pictures/9b1dac05-b810-46ea-8d35-f57072af1fe1.jpg",
-    "https://a0.muscache.com/im/pictures/miso/Hosting-39441496/original/8cf45f0a-7fa3-4fca-b530-6f959e03ae3d.jpeg",
-    "https://a0.muscache.com/im/pictures/miso/Hosting-51401668/original/bb244db7-d56a-40f3-b5f1-9940565cbff7.jpeg",
-    "https://a0.muscache.com/im/pictures/miso/Hosting-36935661/original/b3e3bb0b-4727-460a-9d60-9a79f65a9f35.jpeg",
-    "https://a0.muscache.com/im/pictures/9b1dac05-b810-46ea-8d35-f57072af1fe1.jpg"
-]
-
 export default function SpotListItem({ spots }) {
     return(
         <div style={{
@@ -27,10 +19,12 @@ export default function SpotListItem({ spots }) {
                         <div style={{
                             width: "20em",
                             height: "20em",
-                            cursor: "pointer"
+                            cursor: "pointer",
+                            borderRadius: "3%"
+
                         }}>
                             <img
-                                src={images[spot.id]}
+                                // src={spot.spotImages[0].url}
                                 style={{
                                     objectFit: "contain",
                                     verticalAlign: "middle",

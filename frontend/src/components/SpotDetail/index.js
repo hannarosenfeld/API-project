@@ -35,7 +35,7 @@ export default function SpotDetail() {
             >
                 <div style={{
                     width: "40em",
-                    height: "30em",
+                    height: "27em",
                 }}>
                     <img
                     src={spot.spotImages[0].url}

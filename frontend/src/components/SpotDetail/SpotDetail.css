@@ -4,6 +4,7 @@ body {
 
 .spot-detail-wrapper {
     width: 70em;
+    max-width: 1000px;
 }
 
 .spot-images {
@@ -22,8 +23,8 @@ body {
 }
 
 .four-squares div {
-    width: 14.8em;
-    height:14.9em;
+    width: 13.2em;
+    height:13.4em;
 }
 
 .four-squares div img {
