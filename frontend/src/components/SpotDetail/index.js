@@ -29,7 +29,7 @@ export default function SpotDetail() {
             <h3>{spot.city}, {spot.state}, {spot.country}</h3>
             <div className="spot-images">
                 <div style={{
-                    width: "35em",
+                    width: "40em",
                     height: "35em",
                 }}>
                     <img
@@ -44,6 +44,8 @@ export default function SpotDetail() {
                     }}
                     />
                 </div>
+                <div style={{width: "55em"}}
+                ></div>
             </div>
             <div style={{display: "flex", justifyContent: "space-between"}}>
                 <div style={{width: "75%"}}>
