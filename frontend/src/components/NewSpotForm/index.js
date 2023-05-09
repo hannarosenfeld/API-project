@@ -1,7 +1,66 @@
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { createSpot } from '../../store/spots';
+
 import "./NewSpotForm.css"
 
 
 export default function NewSpotForm() {
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const [title, setTitle] = useState('')
+    const [country, setCountry] = useState('')
+    const [street, setStreet] = useState('')
+    const [city, setCity] = useState('')
+    const [state, setState] = useState('')
+    const [description, setDescription] = useState('')
+    const [price, setPrice] = useState(0)
+    const [previewImage, setPreviewImage] = useState('')
+    const [photos, setPhotos] = useState([])
+
+
+    const updateTitle = (e) => setTitle(e.target.value);
+    const updateCountry= (e) => setCountry(e.target.value);
+    const updateStreet = (e) => setStreet(e.target.value);
+    const updateCity = (e) => setCity(e.target.value);
+    const updateState = (e) => setState(e.target.value);
+    const updateDescription = (e) => setDescription(e.target.value);
+    const updatePrice = (e) => setPrice(e.target.value);
+    const updatePreviewImage = (e) => setPreviewImage(e.target.value);
+    const updatePhotos = (e) => setPhotos(e.target.value);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const payload = {
+            name: title,
+            country,
+            address: street,
+            city,
+            state,
+            description,
+            price,
+            previewImage,
+            photos,
+            lat: 5,
+            lng: 5
+        };
+
+        let createdSpot = payload;
+        const response = await dispatch(createSpot(createdSpot))
+    }
+
+    console.log("title", title)
+    console.log("country", country)
+    console.log("street", street)
+    console.log("city", city)
+    console.log("state", state)
+    console.log("description", description)
+    console.log("price", price)
+    console.log("previewImage", previewImage)
+    console.log("photos", photos)
+
 
     return (
         <div className="new-spot-form-wrapper">
@@ -9,12 +68,7 @@ export default function NewSpotForm() {
                 <h2>Create a new Spot</h2>
                 <h3>Where's your place located?</h3>
                 <p>Guests will only get your exact address once they booked a reservation</p>
-                <form
-                    style={{
-                        display: "flex",
-                        flexDirection: "column",
-                    }}
-                >
+                <form onSubmit={handleSubmit}>
                     <label
                         style={{
                             display: "flex",
@@ -26,6 +80,8 @@ export default function NewSpotForm() {
                         <input
                             type="text"
                             placeholder="Country"
+                            value={country}
+                            onChange={updateCountry}
                         ></input>
                     </label>
                     <label
@@ -39,6 +95,8 @@ export default function NewSpotForm() {
                         <input
                             type="text"
                             placeholder="Street Address"
+                            value={street}
+                            onChange={updateStreet}
                         ></input>
                     </label>
                     <div
@@ -58,6 +116,8 @@ export default function NewSpotForm() {
                         <input
                             type="text"
                             placeholder="City"
+                            value={city}
+                            onChange={updateCity}
                         ></input>
                     </label>
                     <label
@@ -71,6 +131,8 @@ export default function NewSpotForm() {
                         <input
                             type="text"
                             placeholder="STATE"
+                            value={state}
+                            onChange={updateState}
                         ></input>
                     </label>
                     </div>
@@ -83,6 +145,8 @@ export default function NewSpotForm() {
 fast wif or parking, and what you love about the neighborhood.</p>
                         <textarea
                         placeholder="Please write at least 30 characters"
+                        value={description}
+                        onChange={updateDescription}
                         >
                         </textarea>
                     </div>
@@ -96,6 +160,8 @@ your place special.</p>
                         <input
                         type="text"
                         placeholder="Name of your spot"
+                        value={title}
+                        onChange={updateTitle}
                         ></input>
                     </div>
                     <div style={{
@@ -105,9 +171,13 @@ your place special.</p>
                         <h3>Set a base price for your spot</h3>
                         <p>Competitive pricing can help your listing stand out and rank higher
 in search results.</p>
-                        <span style={{display: "flex", alignItems: "center", gap: "0.5em"}}>$<input
-                        type="text"
+                        <span style={{display: "flex", alignItems: "center", gap: "0.5em"}}>
+                        $
+                        <input
+                        type="number"
                         placeholder="Price per night (USD)"
+                        value={price}
+                        onChange={updatePrice}
                         ></input></span>
                     </div>
                     <div style={{
@@ -122,22 +192,32 @@ in search results.</p>
                             <input
                                 type="text"
                                 placeholder="Preview Image URL"
+                                value={previewImage}
+                                onChange={updatePreviewImage}
                             ></input>
                             <input
                                 type="text"
                                 placeholder="Image URL"
+                                value={photos}
+                                onChange={updatePhotos}
                             ></input>
                             <input
                                 type="text"
                                 placeholder="Image URL"
+                                value={photos}
+                                onChange={updatePhotos}
                             ></input>
                             <input
                                 type="text"
                                 placeholder="Image URL"
+                                value={photos}
+                                onChange={updatePhotos}
                             ></input>
                             <input
                                 type="text"
                                 placeholder="Image URL"
+                                value={photos}
+                                onChange={updatePhotos}
                             ></input>
                         </div>
                     </div>
