@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch, useSelector } from "react-redux";
 import { getOneSpot } from "../../store/spots";
 
+import "./SpotDetail.css"
 
 export default function SpotDetail() {
     const dispatch = useDispatch();
@@ -23,16 +24,29 @@ export default function SpotDetail() {
     }
 
     return (
-        <div style={{padding: "0 2.5%"}}>
+        <div className="spot-detail-wrapper">
             <h2>{spot.name}</h2>
             <h3>{spot.city}, {spot.state}, {spot.country}</h3>
-            <div className="spotImages">
-                {spot.spotImages.map(image => (
-                    <img src={image.url} />
-                ))}
+            <div className="spot-images">
+                <div style={{
+                    width: "35em",
+                    height: "35em",
+                }}>
+                    <img
+                    src={spot.spotImages[0].url}
+                    style={{
+                        objectFit: "contain",
+                        verticalAlign: "middle",
+                        objectFit: "cover",
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: "3%"
+                    }}
+                    />
+                </div>
             </div>
             <div style={{display: "flex", justifyContent: "space-between"}}>
-                <div style={{width: "75%", border: "2px solid pink"}}>
+                <div style={{width: "75%"}}>
                     <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
                     <p>{spot.description}</p>
                 </div>

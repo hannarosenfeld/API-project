@@ -12,9 +12,30 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         spotId: 1,
-        url: "https://thirdeyetraveller.com/wp-content/uploads/CRAIGIEVARCASTLE-13-of-17.jpg",
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-39441496/original/8cf45f0a-7fa3-4fca-b530-6f959e03ae3d.jpeg",
         preview: true
       },
+      {
+        spotId: 1,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-39441496/original/4b085f5f-0bd8-4782-90e7-9922d55c3ee7.jpeg",
+        preview: true
+      },
+      {
+        spotId: 1,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-39441496/original/1f828058-88c6-4c05-82c0-f3dc1fdd1697.jpeg",
+        preview: true
+      },
+      {
+        spotId: 1,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-39441496/original/22394b65-8a8f-44c6-9e6c-dce35bd8af9f.jpeg",
+        preview: true
+      },
+      {
+        spotId: 1,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-39441496/original/f7b9b5c3-78b1-4866-b4d8-b5274f228c93.jpeg",
+        preview: true
+      },
+
       {
         spotId: 2,
         url: "https://blog.norwegianreward.com/wp-content/uploads/2019/11/norwegian-stave-churches-Borgund-flickr-Stevan-Nicholas-872x872.jpg",
