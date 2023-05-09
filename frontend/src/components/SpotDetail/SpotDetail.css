@@ -5,3 +5,28 @@ body {
 .spot-detail-wrapper {
     width: 70em;
 }
+
+.spot-images {
+    justify-content: space-between;
+    gap: 0.25em;
+}
+
+.four-squares {
+    display: flex;
+    flex-wrap: wrap;
+    width: 55em;
+    gap: 0.25em;
+    float: right;
+}
+
+.four-squares div {
+    width: 18em;
+    gap: 1em;
+}
+
+.four-squares div img {
+    vertical-align: middle;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}

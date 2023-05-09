@@ -27,9 +27,14 @@ export default function SpotDetail() {
         <div className="spot-detail-wrapper">
             <h2>{spot.name}</h2>
             <h3>{spot.city}, {spot.state}, {spot.country}</h3>
-            <div className="spot-images">
+            <div className="spot-images"
+                style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                }}
+            >
                 <div style={{
-                    width: "40em",
+                    width: "47em",
                     height: "35em",
                 }}>
                     <img
@@ -40,12 +45,16 @@ export default function SpotDetail() {
                         objectFit: "cover",
                         width: "100%",
                         height: "100%",
-                        borderRadius: "3%"
+                        borderRadius: "3% 0 0 0 3%"
                     }}
                     />
                 </div>
-                <div style={{width: "55em"}}
-                ></div>
+                <div className="four-squares">
+                    <div>{spot.spotImages[1].url ? <img src={spot.spotImages[1].url}/> : ""}</div>
+                    <div>{spot.spotImages[2].url ? <img src={spot.spotImages[2].url}/> : ""}</div>
+                    <div>{spot.spotImages[3].url ? <img src={spot.spotImages[3].url}/> : ""}</div>
+                    <div>{spot.spotImages[4].url ? <img src={spot.spotImages[4].url}/> : ""}</div>
+                </div>
             </div>
             <div style={{display: "flex", justifyContent: "space-between"}}>
                 <div style={{width: "75%"}}>
