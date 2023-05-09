@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 export const LOAD_SPOTS = 'spots/LOAD_SPOTS';
 export const RECEIVE_SPOT = 'spots/RECEIVE_SPOT';
 export const ADD_ONE = 'spots/ADD_ONE';
+export const ADD_SPOT_IMAGE = 'spots/ADD_SPOT_IMAGE'
 
 const loadSpots = (spots) => ({
     type: LOAD_SPOTS,
@@ -18,6 +19,12 @@ const loadSpots = (spots) => ({
     type: ADD_ONE,
     spot
   });
+
+  const addSpotImage = spotImages => ({
+    type: ADD_SPOT_IMAGE,
+    spotImages
+  });
+
 
 const initialState = {};
 
@@ -56,6 +63,27 @@ export const getAllSpots = () => async dispatch => {
   }
 }
 
+export const createSpotImage = (spotId, spot) => async (dispatch) => {
+  for (let image of spot) {
+    console.log("thunk image: ", image)
+
+    const res = await csrfFetch(`/api/spots/${spotId}/images`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(image)
+    })
+    // if (res.ok) {
+    //   const newSpotImage = await res.json();
+    //   // dispatch(addSpotImage(newSpotImage))
+    //   return newSpotImage;
+    // } else {
+    //   const err = res.json();
+    //   console.log("WE ARE HITTING AN ERROR", err)
+    //   return err;
+    // }
+  }
+}
+
 const spotsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_SPOTS:
@@ -82,6 +110,9 @@ const spotsReducer = (state = initialState, action) => {
             ...action.spot
           }
         };
+        case ADD_SPOT_IMAGE: {
+          // ?
+        }
     default:
       return state;
   }

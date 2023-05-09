@@ -386,10 +386,12 @@ router.get('/', async (req, res, next) => {
 router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     const { user } = req
     const { url , preview } = req.body
+    console.log("****************************", req.body)
     const { spotId } = req.params
+    console.log("##################", spotId)
     const spot = await Spot.findByPk(spotId)
-
     if (spot) {
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", spot)
         if (spot.ownerId !== user.id) {
             res.statusCode = 403
             res.json({ "message": "You must be the owner of the spot in order to upload a picture." })
@@ -401,7 +403,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
             url,
             preview
         })
-
+        console.log("**************", newImage)
         const responseObj = {}
         responseObj.id = newImage.id
         responseObj.url = newImage.url

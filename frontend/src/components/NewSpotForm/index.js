@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { createSpot } from '../../store/spots';
+import { createSpot, createSpotImage } from '../../store/spots';
+
 
 import "./NewSpotForm.css"
 
@@ -19,6 +20,7 @@ export default function NewSpotForm() {
     const [previewImage, setPreviewImage] = useState('')
     const [photos, setPhotos] = useState([])
 
+    const [photoOne, setPhotoOne] = useState("")
 
     const updateTitle = (e) => setTitle(e.target.value);
     const updateCountry= (e) => setCountry(e.target.value);
@@ -48,8 +50,18 @@ export default function NewSpotForm() {
             lng: 5
         }
 
+        const newSpotImages = {
+            url: previewImage,
+            preview: true
+        }
+
+        const images = [newSpotImages, { url: photoOne, preview: false }]
+
         let createdSpot = payload;
+
         const response = await dispatch(createSpot(createdSpot))
+
+        await dispatch(createSpotImage(response.id, images))
 
         console.log(createdSpot)
         history.push(`/spots/${response.id}`);
@@ -203,8 +215,8 @@ in search results.</p>
                             <input
                                 type="text"
                                 placeholder="Image URL"
-                                value={photos}
-                                onChange={updatePhotos}
+                                value={photoOne}
+                                onChange={(e) => setPhotoOne(e.target.value)}
                             ></input>
                             <input
                                 type="text"
