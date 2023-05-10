@@ -7,6 +7,10 @@
     color: rgb(179, 179, 179);
 }
 
-.checked {
+.filled {
     color: gold;
+}
+
+.rating-input {
+    display: flex;
 }

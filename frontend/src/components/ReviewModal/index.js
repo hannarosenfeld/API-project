@@ -1,38 +1,22 @@
-import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 
 import "./ReviewModal.css"
 
 
-function Stars() {
-    const [starOneRating, setStarOneRating] = useState(false)
-    const [starTwoRating, setStarTwoRating] = useState(false)
-    const [starThreeRating, setStarThreeRating] = useState(false)
-    const [starFourRating, setStarFourRating] = useState(false)
-    const [starFiveRating, setStarFiveRating] = useState(false)
+import { useEffect, useState } from 'react';
 
-    const starOne = <i class="fa-solid fa-star" onClick={()=> setStarOneRating(!starOneRating)}></i>
-    const starTwo = <i class="fa-solid fa-star" onClick={()=> setStarTwoRating(true)}></i>
-    const starThree = <i class="fa-solid fa-star" onClick={()=> setStarThreeRating(true)}></i>
-    const starFour = <i class="fa-solid fa-star" onClick={()=> setStarFourRating(true)}></i>
-    const starFive = <i class="fa-solid fa-star" onClick={()=> setStarFiveRating(true)}></i>
-
-    const stars = [starOne, starTwo, starThree, starFour, starFive]
-
-    if (starOneRating === true) {
-        console.log(starOne)
-        starOne.className += "checked"
-    }
-
-    return stars
-}
 
 
 export default function ReviewModal( ) {
     const { closeModal } = useModal();
     const [review, setReview] = useState("");
-    const [rating, setRating] = useState(0);
+    const [rating, setRating] = useState(1);
+    const [activeRating, setActiveRating] = useState(rating);
+
+    useEffect(() => {
+      setActiveRating(rating);
+    }, [rating]);
 
     return (
         <div className="review-form-wrapper">
@@ -43,7 +27,48 @@ export default function ReviewModal( ) {
                     style={{height: "17em", background: "aliceblue", marginBottom: "2em"}}
                 />
             <div className="stars" style={{margin: "0 auto"}}>
-            {/* <Stars/> */}
+            <div className="rating-input" >
+                <div
+                    className={activeRating >= 1 ? "filled" : "empty"}
+                    onMouseEnter={() => { setActiveRating(1)} }
+                    onMouseLeave={() => { setActiveRating(rating)} }
+                    onClick={() => setRating(1) }
+                >
+                    <i className="fa fa-star"></i>
+                </div>
+                <div
+                    className={activeRating >= 2 ? "filled" : "empty"}
+                    onMouseEnter={() => { setActiveRating(2)} }
+                    onMouseLeave={() => { setActiveRating(rating)} }
+                    onClick={() => setRating(2) }
+                >
+                    <i className="fa fa-star"></i>
+                </div>
+                <div
+                    className={activeRating >= 3 ? "filled" : "empty"}
+                    onMouseEnter={() => { setActiveRating(3)} }
+                    onMouseLeave={() => { setActiveRating(rating)} }
+                    onClick={() => setRating(3) }
+                >
+                    <i className="fa fa-star"></i>
+                </div>
+                <div
+                    className={activeRating >= 4 ? "filled" : "empty"}
+                    onMouseEnter={() => { setActiveRating(4)} }
+                    onMouseLeave={() => { setActiveRating(rating)} }
+                    onClick={() => setRating(4) }
+                >
+                    <i className="fa fa-star"></i>
+                </div>
+                <div
+                    className={activeRating >= 5 ? "filled" : "empty"}
+                    onMouseEnter={() => { setActiveRating(5) }}
+                    onMouseLeave={() => { setActiveRating(rating)} }
+                    onClick={() => setRating(5) }
+                >
+                    <i className="fa fa-star"></i>
+                </div>
+                </div>
             </div>
             <button style={{padding: "0.5em", height: "2em", margin: "1em"}}>Submit your Review</button>
             </form>
