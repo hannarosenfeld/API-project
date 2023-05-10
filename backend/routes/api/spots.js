@@ -397,7 +397,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
             res.json({ "message": "You must be the owner of the spot in order to upload a picture." })
         }
 
-        if (url, preview) {
+    // if (url, preview) {
         const newImage = await SpotImage.create({
             spotId: spot.id,
             url,
@@ -410,11 +410,13 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
         responseObj.preview = newImage.preview
 
         res.json(responseObj)
-    } else res.json({ error: "Please provide url and preview values." })
-} else {
-        res.statusCode = 404
-        res.json({ message: "Spot couldn't be found" })
+//    }
+    //else res.json({ error: "Please provide url and preview values." })
     }
+    else {
+       res.statusCode = 404
+       res.json({ message: "Spot couldn't be found" })
+   }
 })
 
 // Edit a Spot
