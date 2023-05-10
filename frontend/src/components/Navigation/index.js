@@ -65,7 +65,8 @@ function Navigation({ isLoaded }) {
         <i className="fa-solid fa-bars"></i>
         <img src="https://a0.muscache.com/defaults/user_pic-50x50.png?v=3&im_w=240"/>
       </button>
-      <ul className={ulClassName} ref={ulRef}>
+
+      <div className={ulClassName} ref={ulRef}>
       <OpenModalButton
           buttonText="Log In"
           modalComponent={<LoginFormModal />}
@@ -74,7 +75,7 @@ function Navigation({ isLoaded }) {
           buttonText="Sign Up"
           modalComponent={<SignupFormModal />}
         />
-      </ul>
+      </div>
     </div>
     );
   }

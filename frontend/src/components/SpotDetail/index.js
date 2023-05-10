@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch, useSelector } from "react-redux";
 import { getOneSpot } from "../../store/spots";
-import { restoreUser } from "../../store/session";
-
+import ReviewModal from "../ReviewModal";
+import OpenModalButton from "../OpenModalButton";
 import "./SpotDetail.css"
 
 export default function SpotDetail() {
@@ -28,8 +28,8 @@ export default function SpotDetail() {
 
     return (
         <div className="spot-detail-wrapper">
-            <h1>{spot.name}</h1>
-            <h3>{spot.city}, {spot.state}, {spot.country}</h3>
+            <h2>{spot.name}</h2>
+            <h4>{spot.city}, {spot.state}, {spot.country}</h4>
             <div className="spot-images"
                 style={{
                     display: "flex",
@@ -67,7 +67,7 @@ export default function SpotDetail() {
                     paddingBottom: "2em"
                 }}>
                 <div style={{width: "75%"}}>
-                    <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
+                    <h3>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h3>
                     <p>{spot.description}</p>
                 </div>
                  <div style={{
@@ -98,8 +98,8 @@ export default function SpotDetail() {
                 </div>
             </div>
             <div className="spot-reviews-section" style={{display: "flex", flexDirection: "column"}}>
-                <h3><i class="fa-solid fa-star"></i>{spot.avgStarRating ? `${spot.avgStarRating} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} reviews`}</h3>
-                {user.id !== spot.ownerId ? <button >Post Your Review</button> : ''}
+                <h4><i class="fa-solid fa-star"></i>{spot.avgStarRating ? `${spot.avgStarRating} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} reviews`}</h4>
+                {user.id !== spot.ownerId ? <OpenModalButton buttonText="Post Your Review" modalComponent={<ReviewModal />}/> : ''}
             <div className="spot-reviews-container">
 
             </div>

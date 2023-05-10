@@ -1,0 +1,12 @@
+.review-form-wrapper {
+    padding: 0 2em;
+    width: 25em;
+}
+
+.stars {
+    color: rgb(179, 179, 179);
+}
+
+.checked {
+    color: gold;
+}

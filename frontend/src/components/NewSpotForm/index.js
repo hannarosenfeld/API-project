@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createSpot, createSpotImage } from '../../store/spots';
 
+
 import "./NewSpotForm.css"
 
 
@@ -37,7 +38,6 @@ export default function NewSpotForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        setErrors({});
         if (!country.length) {errors.country = "Country is required"}
         if (!street.length) {errors.street = "Address is required"}
         if (!city.length) {errors.city = "City is required"}
@@ -49,8 +49,6 @@ export default function NewSpotForm() {
         if (!previewImage.endsWith(".jpg") || !previewImage.endsWith(".png") || !previewImage.endsWith(".jpeg")) {
             errors.previewImage = "Image URL must end in .png, .jpg, or .jpeg"
         }
-
-        console.log("********* errors",errors.country )
 
         const payload = {
             name: title,
@@ -110,6 +108,7 @@ export default function NewSpotForm() {
                             placeholder="Country"
                             value={country}
                             onChange={updateCountry}
+                            required
                         ></input>
                     </label>
                     <label
@@ -125,6 +124,7 @@ export default function NewSpotForm() {
                             placeholder="Street Address"
                             value={street}
                             onChange={updateStreet}
+                            required
                         ></input>
                     </label>
                     <div
@@ -146,6 +146,7 @@ export default function NewSpotForm() {
                             placeholder="City"
                             value={city}
                             onChange={updateCity}
+                            required
                         ></input>
                     </label>
                     <label
@@ -161,6 +162,7 @@ export default function NewSpotForm() {
                             placeholder="STATE"
                             value={state}
                             onChange={updateState}
+                            required
                         ></input>
                     </label>
                     </div>
@@ -172,9 +174,10 @@ export default function NewSpotForm() {
                         <p>Mention the best features of your space, any special amentities like
 fast wif or parking, and what you love about the neighborhood.</p>
                         <textarea
-                        placeholder="Please write at least 30 characters"
-                        value={description}
-                        onChange={updateDescription}
+                            placeholder="Please write at least 30 characters"
+                            value={description}
+                            onChange={updateDescription}
+                            minlength="30"
                         >
                         </textarea>
                     </div>
@@ -186,10 +189,11 @@ fast wif or parking, and what you love about the neighborhood.</p>
                         <p>Catch guests' attention with a spot title that highlights what makes
 your place special.</p>
                         <input
-                        type="text"
-                        placeholder="Name of your spot"
-                        value={title}
-                        onChange={updateTitle}
+                            type="text"
+                            placeholder="Name of your spot"
+                            value={title}
+                            onChange={updateTitle}
+                            required
                         ></input>
                     </div>
                     <div style={{
@@ -206,6 +210,7 @@ in search results.</p>
                         placeholder="Price per night (USD)"
                         value={price}
                         onChange={updatePrice}
+                        required
                         ></input></span>
                     </div>
                     <div style={{
@@ -222,30 +227,36 @@ in search results.</p>
                                 placeholder="Preview Image URL"
                                 value={previewImage}
                                 onChange={updatePreviewImage}
+                                accept="image/png, image/jpg, image/jpeg"
+                                required
                             ></input>
                             <input
                                 type="text"
                                 placeholder="Image URL"
                                 value={photoOne}
                                 onChange={(e) => setPhotoOne(e.target.value)}
+                                accept="image/png, image/jpg, image/jpeg"
                             ></input>
                             <input
                                 type="text"
                                 placeholder="Image URL"
                                 value={photoTwo}
                                 onChange={(e) => setPhotoTwo(e.target.value)}
+                                accept="image/png, image/jpg, image/jpeg"
                             ></input>
                             <input
                                 type="text"
                                 placeholder="Image URL"
                                 value={photoThree}
                                 onChange={(e) => setPhotoThree(e.target.value)}
+                                accept="image/png, image/jpg, image/jpeg"
                             ></input>
                             <input
                                 type="text"
                                 placeholder="Image URL"
                                 value={photoFour}
                                 onChange={(e) => setPhotoFour(e.target.value)}
+                                accept="image/png, image/jpg, image/jpeg"
                             ></input>
                         </div>
                     </div>
