@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createSpot, createSpotImage } from '../../store/spots';
 
-
 import "./NewSpotForm.css"
 
 
@@ -38,18 +37,6 @@ export default function NewSpotForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!country.length) {errors.country = "Country is required"}
-        if (!street.length) {errors.street = "Address is required"}
-        if (!city.length) {errors.city = "City is required"}
-        if (!state.length) {errors.state = "State is required"}
-        if (description.length < 30) {errors.description = "Description needs a minimum of 30 characters"}
-        if (!title.length) {errors.title = "Name is required"}
-        // TODO - how to go on about price??
-        if (!previewImage.length) {errors.previewImage = "Preview image is required."}
-        if (!previewImage.endsWith(".jpg") || !previewImage.endsWith(".png") || !previewImage.endsWith(".jpeg")) {
-            errors.previewImage = "Image URL must end in .png, .jpg, or .jpeg"
-        }
-
         const payload = {
             name: title,
             country,
@@ -80,13 +67,15 @@ export default function NewSpotForm() {
         let createdSpot = payload;
 
         const response = await dispatch(createSpot(createdSpot))
-
-        await dispatch(createSpotImage(response.id, images))
-
-        history.push(`/spots/${response.id}`);
-
+        if (!response.errors) {
+            await dispatch(createSpotImage(response.id, images))
+            history.push(`/spots/${response.id}`);
+        } else {
+            setErrors(response.errors)
+        }
     }
 
+    console.log("ERRORS: ", errors)
 
     return (
         <div className="new-spot-form-wrapper">
@@ -102,7 +91,7 @@ export default function NewSpotForm() {
                             marginBottom: "0.8em"
                         }}
                     >
-                        Country <span>{errors.country}</span>
+                        <span>Country <span>{errors.country ? errors.country : ""}</span></span>
                         <input
                             type="text"
                             placeholder="Country"
@@ -178,6 +167,7 @@ fast wif or parking, and what you love about the neighborhood.</p>
                             value={description}
                             onChange={updateDescription}
                             minlength="30"
+                            required
                         >
                         </textarea>
                     </div>
