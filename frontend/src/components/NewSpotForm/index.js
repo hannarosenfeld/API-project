@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createSpot, createSpotImage } from '../../store/spots';
 
-
 import "./NewSpotForm.css"
 
 
@@ -18,9 +17,13 @@ export default function NewSpotForm() {
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState(0)
     const [previewImage, setPreviewImage] = useState('')
-    const [photos, setPhotos] = useState([])
 
     const [photoOne, setPhotoOne] = useState("")
+    const [photoTwo, setPhotoTwo] = useState("")
+    const [photoThree, setPhotoThree] = useState("")
+    const [photoFour, setPhotoFour] = useState("")
+    const [errors, setErrors] = useState({})
+
 
     const updateTitle = (e) => setTitle(e.target.value);
     const updateCountry= (e) => setCountry(e.target.value);
@@ -30,10 +33,24 @@ export default function NewSpotForm() {
     const updateDescription = (e) => setDescription(e.target.value);
     const updatePrice = (e) => setPrice(e.target.value);
     const updatePreviewImage = (e) => setPreviewImage(e.target.value);
-    const updatePhotos = (e) => setPhotos(e.target.value);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        setErrors({});
+        if (!country.length) {errors.country = "Country is required"}
+        if (!street.length) {errors.street = "Address is required"}
+        if (!city.length) {errors.city = "City is required"}
+        if (!state.length) {errors.state = "State is required"}
+        if (description.length < 30) {errors.description = "Description needs a minimum of 30 characters"}
+        if (!title.length) {errors.title = "Name is required"}
+        // TODO - how to go on about price??
+        if (!previewImage.length) {errors.previewImage = "Preview image is required."}
+        if (!previewImage.endsWith(".jpg") || !previewImage.endsWith(".png") || !previewImage.endsWith(".jpeg")) {
+            errors.previewImage = "Image URL must end in .png, .jpg, or .jpeg"
+        }
+
+        console.log("********* errors",errors.country )
 
         const payload = {
             name: title,
@@ -44,7 +61,6 @@ export default function NewSpotForm() {
             description,
             price,
             previewImage,
-            spotImages: photos,
             avgStarRating: 0,
             lat: 5,
             lng: 5
@@ -55,7 +71,13 @@ export default function NewSpotForm() {
             preview: true
         }
 
-        const images = [newSpotImages, { url: photoOne, preview: false }]
+        const images = [
+            newSpotImages,
+            { url: photoOne, preview: false },
+            { url: photoTwo, preview: false },
+            { url: photoThree, preview: false },
+            { url: photoFour, preview: false }
+        ]
 
         let createdSpot = payload;
 
@@ -63,20 +85,9 @@ export default function NewSpotForm() {
 
         await dispatch(createSpotImage(response.id, images))
 
-        console.log(createdSpot)
         history.push(`/spots/${response.id}`);
 
     }
-
-    console.log("title", title)
-    console.log("country", country)
-    console.log("street", street)
-    console.log("city", city)
-    console.log("state", state)
-    console.log("description", description)
-    console.log("price", price)
-    console.log("previewImage", previewImage)
-    console.log("photos", photos)
 
 
     return (
@@ -93,7 +104,7 @@ export default function NewSpotForm() {
                             marginBottom: "0.8em"
                         }}
                     >
-                        Country
+                        Country <span>{errors.country}</span>
                         <input
                             type="text"
                             placeholder="Country"
@@ -221,20 +232,20 @@ in search results.</p>
                             <input
                                 type="text"
                                 placeholder="Image URL"
-                                value={photos}
-                                onChange={updatePhotos}
+                                value={photoTwo}
+                                onChange={(e) => setPhotoTwo(e.target.value)}
                             ></input>
                             <input
                                 type="text"
                                 placeholder="Image URL"
-                                value={photos}
-                                onChange={updatePhotos}
+                                value={photoThree}
+                                onChange={(e) => setPhotoThree(e.target.value)}
                             ></input>
                             <input
                                 type="text"
                                 placeholder="Image URL"
-                                value={photos}
-                                onChange={updatePhotos}
+                                value={photoFour}
+                                onChange={(e) => setPhotoFour(e.target.value)}
                             ></input>
                         </div>
                     </div>

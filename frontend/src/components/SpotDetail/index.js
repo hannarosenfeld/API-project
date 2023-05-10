@@ -51,9 +51,9 @@ export default function SpotDetail() {
                 </div>
                 <div className="four-squares">
                     <div>{spot.spotImages[1].url != undefined ? <img src={spot.spotImages[1].url}/> : ""}</div>
-                    {/* <div>{spot.spotImages[2].url != undefined ? <img src={spot.spotImages[2].url}/> : ""}</div>
+                    <div>{spot.spotImages[2].url != undefined ? <img src={spot.spotImages[2].url}/> : ""}</div>
                     <div>{spot.spotImages[3].url != undefined ? <img src={spot.spotImages[3].url}/> : ""}</div>
-                    <div>{spot.spotImages[4].url != undefined ? <img src={spot.spotImages[4].url}/> : ""}</div> */}
+                    <div>{spot.spotImages[4].url != undefined ? <img src={spot.spotImages[4].url}/> : ""}</div>
                 </div>
             </div>
             <div
@@ -82,7 +82,7 @@ export default function SpotDetail() {
                         alignItems: "center"
                         }}>
                         <h2>${spot.price} night</h2>
-                        <span> star #.# . # reviews</span>
+                        <span><i class="fa-solid fa-star"></i>{spot.avgStarRating ? `${spot.avgStarRating} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} reviews`}</span>
                     </div>
                     <button style={{
                         width: "100%",

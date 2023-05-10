@@ -15,14 +15,15 @@ export default function SpotListItem({ spots }) {
                 <Link to={`/spots/${spot.id}`}>
                     <div style={{
                         display: "flex",
-                        flexDirection: "column"
+                        flexDirection: "column",
+                        marginBottom: "2em"
                     }}>
                         <div style={{
                             width: "20em",
                             height: "20em",
                             cursor: "pointer",
-                            borderRadius: "3%"
-
+                            borderRadius: "3%",
+                            marginBottom: "0.6em"
                         }}>
                             <img
                                 src={spot.previewImage}
@@ -36,8 +37,7 @@ export default function SpotListItem({ spots }) {
                                 }}
                             />
                         </div>
-                        <span>{spot.name}</span>
-                        <span>{spot.city}, {spot.state}</span>
+                        <span style={{display: "flex", justifyContent: "space-between"}}>{spot.city}, {spot.state} <span><i class="fa-solid fa-star"></i>{spot.avgRating ? spot.avgRating : ' New'}</span></span>
                         <span>{spot.price}</span>
                     </div>
                 </Link>
