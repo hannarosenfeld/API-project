@@ -34,6 +34,12 @@ body {
     height: 100%;
 }
 
-.spot-details {
+.spot-reviews-section {
+    margin: 1em auto;
+}
 
+.spot-reviews-section button{
+    width: 12em;
+    margin: 1em 0;
+    padding: 0.5em;
 }

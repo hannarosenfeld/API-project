@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch, useSelector } from "react-redux";
 import { getOneSpot } from "../../store/spots";
+import { restoreUser } from "../../store/session";
 
 import "./SpotDetail.css"
 
@@ -10,10 +11,13 @@ export default function SpotDetail() {
     let { spotId } = useParams();
     spotId = parseInt(spotId)
     const spot = useSelector(state => state.spots[spotId])
+    const user = useSelector(state => state.session.user)
 
     useEffect(() => {
         dispatch(getOneSpot(spotId))
     }, [dispatch, spotId])
+
+    console.log("current user: ", user)
 
     if (!spot || !spot.Owner || !spot.spotImages) {
         return(
@@ -22,11 +26,9 @@ export default function SpotDetail() {
         )
     }
 
-    console.log(spot)
-
     return (
         <div className="spot-detail-wrapper">
-            <h2>{spot.name}</h2>
+            <h1>{spot.name}</h1>
             <h3>{spot.city}, {spot.state}, {spot.country}</h3>
             <div className="spot-images"
                 style={{
@@ -60,7 +62,9 @@ export default function SpotDetail() {
                 className="spot-details"
                 style={{
                     display: "flex",
-                    justifyContent: "space-between"
+                    justifyContent: "space-between",
+                    borderBottom: "1px solid grey",
+                    paddingBottom: "2em"
                 }}>
                 <div style={{width: "75%"}}>
                     <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
@@ -92,6 +96,13 @@ export default function SpotDetail() {
                         color: "var(--white)"
                         }}>Reserve</button>
                 </div>
+            </div>
+            <div className="spot-reviews-section" style={{display: "flex", flexDirection: "column"}}>
+                <h3><i class="fa-solid fa-star"></i>{spot.avgStarRating ? `${spot.avgStarRating} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} reviews`}</h3>
+                {user.id !== spot.ownerId ? <button >Post Your Review</button> : ''}
+            <div className="spot-reviews-container">
+
+            </div>
             </div>
         </div>
     )
