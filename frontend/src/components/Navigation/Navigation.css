@@ -10,6 +10,7 @@
 
 .nav-wrapper {
     display: relative;
+    min-width: 60em;
 }
 
 .nav ul {
@@ -55,4 +56,9 @@
     border: 2px solid red;
     width: 12em;
     background-color: var(--white);
+    margin-left: -7.5em;
+}
+
+.profile-dropdown li {
+    margin-left: 0;
 }
