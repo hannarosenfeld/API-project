@@ -4,6 +4,7 @@ export const LOAD_SPOTS = 'spots/LOAD_SPOTS';
 export const RECEIVE_SPOT = 'spots/RECEIVE_SPOT';
 export const ADD_ONE = 'spots/ADD_ONE';
 export const ADD_SPOT_IMAGE = 'spots/ADD_SPOT_IMAGE'
+export const ADD_REVIEW = 'spots/ADD_REVIEW'
 
 const loadSpots = (spots) => ({
     type: LOAD_SPOTS,
@@ -25,7 +26,10 @@ const loadSpots = (spots) => ({
     spotImages
   });
 
-
+  const addReview = review => ({
+    type: ADD_REVIEW,
+    review
+  })
 
 
 export const getAllSpots = () => async dispatch => {
@@ -72,6 +76,23 @@ export const getAllSpots = () => async dispatch => {
   }
 }
 
+export const createReview = (spotId, review) => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(review)
+  })
+  if (res.ok) {
+    const newReview = await res.json();
+    dispatch(addReview(newReview))
+    return newReview;
+  } else {
+    const err = res.json();
+    console.log("WE ARE HITTING AN ERROR", err)
+    return err;
+  }
+}
+
 export const createSpotImage = (spotId, spot) => async (dispatch) => {
   for (let image of spot) {
     console.log("thunk image: ", image)
@@ -92,6 +113,7 @@ export const createSpotImage = (spotId, spot) => async (dispatch) => {
     // }
   }
 }
+
 
 const initialState = {};
 
@@ -120,7 +142,7 @@ const spotsReducer = (state = initialState, action) => {
             ...action.spot
           }
         };
-        case ADD_SPOT_IMAGE: {
+        case ADD_REVIEW: {
           // ?
         }
     default:

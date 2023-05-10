@@ -2,12 +2,10 @@ import "./ReviewModal.css"
 import { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-
-
-
-
+import { createReview } from "../../store/spots";
 
 export default function ReviewModal() {
+    const dispatch = useDispatch();
     const { closeModal } = useModal();
     const [review, setReview] = useState("");
     const [rating, setRating] = useState(1);
@@ -17,10 +15,22 @@ export default function ReviewModal() {
       setActiveRating(rating);
     }, [rating]);
 
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        //TODO: add rating to spot
+        const payload = {
+            review,
+            rating
+        }
+       // await dispatch(createReview(payload))
+    }
     return (
         <div className="review-form-wrapper">
             <h2>How was your stay?</h2>
-            <form style={{display: "flex", flexDirection: "column", justifyContent: "center", margin: "0 auto"}}>
+            <form
+            onSubmit={handleSubmit}
+            style={{display: "flex", flexDirection: "column", justifyContent: "center", margin: "0 auto"}}>
                 <textarea
                     required
                     style={{height: "17em", background: "aliceblue", marginBottom: "2em"}}
