@@ -5,7 +5,6 @@ import "./ReviewModal.css"
 import { useEffect, useState } from 'react';
 
 
-
 export default function ReviewModal() {
     const { closeModal } = useModal();
     const [review, setReview] = useState("");
