@@ -10,6 +10,7 @@ export default function ReviewModal({ spotId }) {
     const [review, setReview] = useState("");
     const [rating, setRating] = useState(1);
     const [activeRating, setActiveRating] = useState(rating);
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
       setActiveRating(rating);
@@ -18,14 +19,22 @@ export default function ReviewModal({ spotId }) {
     console.log()
     const handleSubmit = async (e) => {
         e.preventDefault();
-        //TODO: add rating to spot
+
         const payload = {
             review,
             rating
         }
-       console.log("###### payload ",payload, "spotId: ", spotId)
-       await dispatch(createReview(spotId, payload))
-       closeModal()
+
+        setErrors({});
+        return await dispatch(createReview(spotId, payload))
+          .then(closeModal)
+          .catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) {
+              setErrors(data.errors);
+              console.log(errors)
+            }
+          });
     }
     return (
         <div className="review-form-wrapper">
