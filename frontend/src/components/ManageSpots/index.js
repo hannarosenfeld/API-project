@@ -18,7 +18,7 @@ export default function ManageSpots() {
       },[user.id])
 
     return (
-        <div>
+        <div style={{minWidth: "1000px"}}>
             <h2>Manage your Spots</h2>
             <button>Create A New Spot</button>
             <div style={{
@@ -62,7 +62,7 @@ export default function ManageSpots() {
                     </div>
                 </Link>
                 <div style={{display: "flex", gap: "1em"}}>
-                    <button style={{padding: "0.5em"}}>Update</button>
+                    <Link to={`/api/spots/${spot.id}/edit`} style={{padding: "0.5em"}}>Update</Link>
                     <button style={{padding: "0.5em"}}>Delete</button>
                 </div>
                 </div>

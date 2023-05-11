@@ -7,6 +7,7 @@ import SpotList from "./components/SpotList";
 import SpotDetail from "./components/SpotDetail";
 import NewSpotForm from "./components/NewSpotForm";
 import ManageSpots from "./components/ManageSpots";
+import UpdateSpotForm from "./components/UpdateSpotForm";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
       <Switch>
         <Route exact path="/spots/current" component={ManageSpots} />
         <Route exact path="/spots/new" component={NewSpotForm} />
+        <Route path="/spots/:spotId/edit" component={UpdateSpotForm} />
         <Route path="/spots/:spotId" component={SpotDetail} />
         <Route exact path="/" component={SpotList} />
       </Switch>}

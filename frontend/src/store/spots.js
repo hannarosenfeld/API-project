@@ -5,7 +5,12 @@ export const RECEIVE_SPOT = 'spots/RECEIVE_SPOT';
 export const ADD_ONE = 'spots/ADD_ONE';
 export const ADD_SPOT_IMAGE = 'spots/ADD_SPOT_IMAGE'
 export const ADD_REVIEW = 'spots/ADD_REVIEW'
+export const UPDATE_SPOT = 'spots/UPDATE_SPOT'
 
+const updateSpot = (spot) => ({
+  type: UPDATE_SPOT,
+  spot
+})
 
 const loadSpots = (spots) => ({
     type: LOAD_SPOTS,
@@ -32,6 +37,19 @@ const loadSpots = (spots) => ({
     review
   })
 
+  export const editSpot = (spot) => async (dispatch) => {
+    const res = await fetch(`/api/spots/${spot.id}`, {
+      method: "PUT",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(spot)
+    })
+
+    if (res.ok) {
+      const editedSpot = await res.json();
+      dispatch(updateSpot(editedSpot))
+      return editedSpot;
+    }
+  }
 
 export const getAllSpots = () => async dispatch => {
     const response = await csrfFetch(`/api/spots`);
@@ -148,6 +166,11 @@ const spotsReducer = (state = initialState, action) => {
         case ADD_REVIEW: {
           // ?
         }
+        case UPDATE_SPOT:
+          return {
+            ...state,
+            [action.spot.id]: action.spot
+          };
     default:
       return state;
   }
