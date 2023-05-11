@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllSpotsByCurrentUser } from "../../store/spots"
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import OpenModalButton from "../OpenModalButton";
+import DeleteSpotModal from "../DeleteSpotModal";
 
 
 export default function ManageSpots() {
@@ -61,7 +63,11 @@ export default function ManageSpots() {
                 </Link>
                 <div style={{display: "flex", gap: "1em"}}>
                     <Link to={`/spots/${spot.id}/edit`} style={{padding: "0.5em"}}>Update</Link>
-                    <button style={{padding: "0.5em"}}>Delete</button>
+                    <OpenModalButton
+                        buttonText="Delete"
+                        modalComponent={<DeleteSpotModal spotId={spot.id}/>}
+                    />
+
                 </div>
                 </div>
             ))}
