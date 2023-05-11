@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOneSpot } from "../../store/spots";
 import ReviewModal from "../ReviewModal";
 import OpenModalButton from "../OpenModalButton";
+import { getReviews } from "../../store/spots";
 import "./SpotDetail.css"
 
 export default function SpotDetail() {
@@ -12,12 +13,13 @@ export default function SpotDetail() {
     spotId = parseInt(spotId)
     const spot = useSelector(state => state.spots[spotId])
     const user = useSelector(state => state.session.user)
+    const reviews = dispatch(getReviews(spotId))
 
     useEffect(() => {
         dispatch(getOneSpot(spotId))
     }, [dispatch, spotId])
 
-    console.log("current user: ", user)
+    console.log(reviews)
 
     if (!spot || !spot.Owner || !spot.spotImages) {
         return(

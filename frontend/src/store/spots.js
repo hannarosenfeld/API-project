@@ -5,6 +5,12 @@ export const RECEIVE_SPOT = 'spots/RECEIVE_SPOT';
 export const ADD_ONE = 'spots/ADD_ONE';
 export const ADD_SPOT_IMAGE = 'spots/ADD_SPOT_IMAGE'
 export const ADD_REVIEW = 'spots/ADD_REVIEW'
+export const LOAD_REVIEWS = 'spots/LOAD_REVIEWS'
+
+const loadReviews = (reviews) => ({
+  type: LOAD_REVIEWS,
+  reviews
+})
 
 const loadSpots = (spots) => ({
     type: LOAD_SPOTS,
@@ -114,7 +120,20 @@ export const createSpotImage = (spotId, spot) => async (dispatch) => {
     // }
   }
 }
+export const getReviews = (spotId) => async (dispatch) => {
+  const res = csrfFetch(`/api/spots/${spotId}/reviews`)
 
+  if (res.ok) {
+    const allReviews = await res.json();
+    console.log("!!!!!!!!!! allReviews:", allReviews)
+    dispatch(loadReviews(allReviews))
+    return allReviews
+  } else {
+    const err = res.json();
+    console.log("WE ARE HITTING AN ERROR", err)
+    return err;
+  }
+}
 
 const initialState = {};
 
