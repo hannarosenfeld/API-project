@@ -94,13 +94,16 @@ export default function SpotDetail() {
                         <h2>${spot.price} night</h2>
                         <span><i class="fa-solid fa-star"></i>{spot.avgStarRating ? `${spot.avgStarRating.toFixed(2)} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} reviews`}</span>
                     </div>
-                    <button style={{
+                    <button
+                    style={{
                         width: "100%",
                         height: "3em",
                         borderRadius: "1em",
                         backgroundColor: "var(--airbnb)",
                         color: "var(--white)"
-                        }}>Reserve</button>
+                    }}
+                    onClick={() => alert("Feature coming soon!")}
+                        >Reserve</button>
                 </div>
             </div>
             <div className="spot-reviews-section" style={{display: "flex", flexDirection: "column"}}>

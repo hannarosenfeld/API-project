@@ -38,7 +38,7 @@ export default function SpotListItem({ spots }) {
                             />
                         </div>
                         <span style={{display: "flex", justifyContent: "space-between"}}>{spot.city}, {spot.state} <span><i class="fa-solid fa-star"></i> {spot.avgRating ? spot.avgRating.toFixed(2) : ' New'}</span></span>
-                        <span>{spot.price}</span>
+                        <span>{spot.price} night</span>
                     </div>
                 </Link>
                 </div>

@@ -3,17 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { editSpot, getOneSpot } from '../../store/spots';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-
-// import "../NewSpotForm/NewSpotForm.css"
+import { createSpotImage } from '../../store/spots';
 
 
 export default function UpdateSpotForm() {
     const { spotId } = useParams()
-    console.log(spotId)
-    const spot = useSelector(state => state.spots[spotId])
-    console.log(spot)
     const dispatch = useDispatch()
     const history = useHistory()
+    console.log(spotId)
+    const spot = useSelector(state => state.spots[spotId])
+
+    console.log(spot)
+
+    useEffect(() => {
+        dispatch(getOneSpot(spotId))
+    }, [dispatch, spotId])
 
     const [title, setTitle] = useState(spot.name)
     const [country, setCountry] = useState(spot.country)
@@ -40,9 +44,6 @@ export default function UpdateSpotForm() {
     const updatePrice = (e) => setPrice(e.target.value);
     const updatePreviewImage = (e) => setPreviewImage(e.target.value);
 
-    useEffect(() => {
-        dispatch(getOneSpot(spotId))
-    }, [dispatch, spotId])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -76,9 +77,10 @@ export default function UpdateSpotForm() {
 
         let updatedSpot = payload;
 
-        const response = await dispatch(editSpot(updatedSpot))
+        const response = await dispatch(editSpot(updatedSpot, spotId))
+
         if (!response.errors) {
-            //await dispatch(createSpotImage(response.id, images))
+            await dispatch(createSpotImage(response.id, images))
             history.push(`/spots/${response.id}`);
         } else {
             setErrors(response.errors)
