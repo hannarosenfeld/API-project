@@ -107,7 +107,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
 
         for (let review of reviews) {
             review = review.toJSON()
-            delete review.User.username
+//            delete review.User.username
 
             const reviewImagesArr = []
             const reviewImages = await ReviewImage.findAll({

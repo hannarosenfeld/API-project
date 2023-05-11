@@ -34,10 +34,7 @@ const reviewsReducer = (state = initialState, action) => {
       action.reviews.Reviews.forEach(review => {
         reviewsState[review.id] = review;
       });
-      return {
-        ...state,
-        ...reviewsState
-      }
+      return reviewsState;
       default:
         return state;
     }

@@ -109,12 +109,13 @@ export default function SpotDetail() {
                     {spot.avgStarRating ? `${spot.avgStarRating} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} reviews`}
                 </h4>
                 {user.id !== spot.ownerId ? <OpenModalButton buttonText="Post Your Review" modalComponent={ <ReviewModal spotId={spotId} /> }/> : ''}
-            <div className="spot-reviews-container">
+            <div className="spot-reviews-container" style={{margin: "2em 0",display: "flex", flexDirection: "column",gap: "3em"}}>
                         {reviews.map(review => (
-                            <>
-                                {/* I NEED THE USERNAME */}
+                            <div style={{display: "flex", flexDirection: "column"}}>
+                                <div>{review.User.username}</div>
+                                <div>{review.createdAt.slice(5,7)} {review.createdAt.slice(0,4)}</div>
                                 <div>{review.review}</div>
-                            </>
+                            </div>
                         ))}
             </div>
             </div>
