@@ -1,27 +1,33 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { editSpot, createSpotImage } from '../../store/spots';
+import { editSpot, getOneSpot } from '../../store/spots';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 // import "../NewSpotForm/NewSpotForm.css"
 
 
 export default function UpdateSpotForm() {
+    const { spotId } = useParams()
+    console.log(spotId)
+    const spot = useSelector(state => state.spots[spotId])
+    console.log(spot)
     const dispatch = useDispatch()
     const history = useHistory()
-    const [title, setTitle] = useState('')
-    const [country, setCountry] = useState('')
-    const [street, setStreet] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
-    const [description, setDescription] = useState('')
-    const [price, setPrice] = useState(0)
-    const [previewImage, setPreviewImage] = useState('')
 
-    const [photoOne, setPhotoOne] = useState("")
-    const [photoTwo, setPhotoTwo] = useState("")
-    const [photoThree, setPhotoThree] = useState("")
-    const [photoFour, setPhotoFour] = useState("")
+    const [title, setTitle] = useState(spot.name)
+    const [country, setCountry] = useState(spot.country)
+    const [street, setStreet] = useState(spot.street)
+    const [city, setCity] = useState(spot.city)
+    const [state, setState] = useState(spot.state)
+    const [description, setDescription] = useState(spot.description)
+    const [price, setPrice] = useState(spot.price)
+    const [previewImage, setPreviewImage] = useState(spot.previewImage)
+
+    const [photoOne, setPhotoOne] = useState(spot.photoOne)
+    const [photoTwo, setPhotoTwo] = useState(spot.photoTwo)
+    const [photoThree, setPhotoThree] = useState(spot.photoThree)
+    const [photoFour, setPhotoFour] = useState(spot.photoFour)
     const [errors, setErrors] = useState({})
 
 
@@ -33,6 +39,10 @@ export default function UpdateSpotForm() {
     const updateDescription = (e) => setDescription(e.target.value);
     const updatePrice = (e) => setPrice(e.target.value);
     const updatePreviewImage = (e) => setPreviewImage(e.target.value);
+
+    useEffect(() => {
+        dispatch(getOneSpot(spotId))
+    }, [dispatch, spotId])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -75,12 +85,10 @@ export default function UpdateSpotForm() {
         }
     }
 
-    console.log("ERRORS: ", errors)
-
     return (
         <div className="new-spot-form-wrapper">
             <div className="new-spot-form-inner-container">
-                <h2>Create a new Spot</h2>
+                <h2>Update your Spot</h2>
                 <h3>Where's your place located?</h3>
                 <p>Guests will only get your exact address once they booked a reservation</p>
                 <form onSubmit={handleSubmit}>

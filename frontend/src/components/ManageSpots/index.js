@@ -11,8 +11,6 @@ export default function ManageSpots() {
 
     const spotArr = Object.values(spots)
 
-    console.log("spots: ",spotArr)
-
     useEffect(() => {
         dispatch(getAllSpotsByCurrentUser(user.id))
       },[user.id])
@@ -62,7 +60,7 @@ export default function ManageSpots() {
                     </div>
                 </Link>
                 <div style={{display: "flex", gap: "1em"}}>
-                    <Link to={`/api/spots/${spot.id}/edit`} style={{padding: "0.5em"}}>Update</Link>
+                    <Link to={`/spots/${spot.id}/edit`} style={{padding: "0.5em"}}>Update</Link>
                     <button style={{padding: "0.5em"}}>Delete</button>
                 </div>
                 </div>
