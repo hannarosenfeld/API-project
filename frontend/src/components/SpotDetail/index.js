@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOneSpot } from "../../store/spots";
 import ReviewModal from "../ReviewModal";
 import OpenModalButton from "../OpenModalButton";
-import { getReviews } from "../../store/spots";
+import { getReviews } from "../../store/reviews";
 import "./SpotDetail.css"
+import { getOneUser } from "../../store/user";
 
 export default function SpotDetail() {
     const dispatch = useDispatch();
@@ -13,13 +14,16 @@ export default function SpotDetail() {
     spotId = parseInt(spotId)
     const spot = useSelector(state => state.spots[spotId])
     const user = useSelector(state => state.session.user)
-    const reviews = dispatch(getReviews(spotId))
+    const reviewsObj =  useSelector(state => state.reviews)
+
+    const reviews = Object.values(reviewsObj)
 
     useEffect(() => {
         dispatch(getOneSpot(spotId))
+        dispatch(getReviews(spotId))
     }, [dispatch, spotId])
 
-    console.log(reviews)
+    console.log("reviews: ", reviewsObj)
 
     if (!spot || !spot.Owner || !spot.spotImages) {
         return(
@@ -100,10 +104,18 @@ export default function SpotDetail() {
                 </div>
             </div>
             <div className="spot-reviews-section" style={{display: "flex", flexDirection: "column"}}>
-                <h4><i class="fa-solid fa-star"></i>{spot.avgStarRating ? `${spot.avgStarRating} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} reviews`}</h4>
+                <h4>
+                    <i class="fa-solid fa-star"></i>
+                    {spot.avgStarRating ? `${spot.avgStarRating} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} reviews`}
+                </h4>
                 {user.id !== spot.ownerId ? <OpenModalButton buttonText="Post Your Review" modalComponent={ <ReviewModal spotId={spotId} /> }/> : ''}
             <div className="spot-reviews-container">
-
+                        {reviews.map(review => (
+                            <>
+                                {/* I NEED THE USERNAME */}
+                                <div>{review.review}</div>
+                            </>
+                        ))}
             </div>
             </div>
         </div>

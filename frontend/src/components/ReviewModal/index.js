@@ -25,7 +25,7 @@ export default function ReviewModal({ spotId }) {
         }
        console.log("###### payload ",payload, "spotId: ", spotId)
        await dispatch(createReview(spotId, payload))
-
+       closeModal()
     }
     return (
         <div className="review-form-wrapper">
