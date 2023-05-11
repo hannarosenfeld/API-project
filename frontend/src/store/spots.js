@@ -77,6 +77,7 @@ export const getAllSpots = () => async dispatch => {
 }
 
 export const createReview = (spotId, review) => async (dispatch) => {
+  console.log("++++++++++=spotId and review:",spotId, review)
   const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
     method: "POST",
     headers: {"Content-Type": "application/json"},
@@ -125,6 +126,7 @@ const spotsReducer = (state = initialState, action) => {
         spotsState[spot.id] = spot;
       });
       return spotsState;
+
     case RECEIVE_SPOT:
       return { ...state, [action.spot.id]: action.spot };
       case ADD_ONE:

@@ -99,7 +99,7 @@ export default function SpotDetail() {
             </div>
             <div className="spot-reviews-section" style={{display: "flex", flexDirection: "column"}}>
                 <h4><i class="fa-solid fa-star"></i>{spot.avgStarRating ? `${spot.avgStarRating} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} reviews`}</h4>
-                {user.id !== spot.ownerId ? <OpenModalButton buttonText="Post Your Review" modalComponent={<ReviewModal />}/> : ''}
+                {user.id !== spot.ownerId ? <OpenModalButton buttonText="Post Your Review" modalComponent={ <ReviewModal spotId={spotId} /> }/> : ''}
             <div className="spot-reviews-container">
 
             </div>

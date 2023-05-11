@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createReview } from "../../store/spots";
 
-export default function ReviewModal() {
+export default function ReviewModal({ spotId }) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
     const [review, setReview] = useState("");
@@ -15,7 +15,7 @@ export default function ReviewModal() {
       setActiveRating(rating);
     }, [rating]);
 
-
+    console.log()
     const handleSubmit = async (e) => {
         e.preventDefault();
         //TODO: add rating to spot
@@ -23,7 +23,9 @@ export default function ReviewModal() {
             review,
             rating
         }
-       // await dispatch(createReview(payload))
+       console.log("###### payload ",payload, "spotId: ", spotId)
+       await dispatch(createReview(spotId, payload))
+
     }
     return (
         <div className="review-form-wrapper">
@@ -34,6 +36,7 @@ export default function ReviewModal() {
                 <textarea
                     required
                     style={{height: "17em", background: "aliceblue", marginBottom: "2em"}}
+                    onChange={(e) => setReview(e.target.value)}
                 />
             <div className="stars" style={{margin: "0 auto"}}>
                 <div className="rating-input" style={{display: "flex"}}>
