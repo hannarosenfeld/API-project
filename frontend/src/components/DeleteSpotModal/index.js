@@ -20,7 +20,7 @@ function DeleteSpotModal({ spotId }) {
         </button>
         <button
             style={{width: "80%", height: "2em"}}
-            onClick={() => closeModal}
+            onClick={() => closeModal()}
         >
             No (Keep Spot)
         </button>

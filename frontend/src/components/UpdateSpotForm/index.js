@@ -17,7 +17,7 @@ export default function UpdateSpotForm() {
 
     const [title, setTitle] = useState(spot.name)
     const [country, setCountry] = useState(spot.country)
-    const [street, setStreet] = useState(spot.street)
+    const [street, setStreet] = useState(spot.address)
     const [city, setCity] = useState(spot.city)
     const [state, setState] = useState(spot.state)
     const [description, setDescription] = useState(spot.description)
@@ -270,7 +270,7 @@ in search results.</p>
                                 height: "2em",
                                 width: "12em",
                                 margin: "1em 0"
-                                }}>Create Spot</button>
+                                }}>Update Spot</button>
                         </div>
                 </form>
             </div>
