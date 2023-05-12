@@ -72,15 +72,15 @@ export default function SpotDetail() {
                     borderBottom: "1px solid grey",
                     paddingBottom: "2em"
                 }}>
-                <div style={{width: "75%"}}>
+                <div style={{width: "70%"}}>
                     <h3>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h3>
-                    <p>{spot.description}</p>
+                    <p  style={{width: "90%"}}>{spot.description}</p>
                 </div>
                  <div style={{
                     display: "flex",
                     flexDirection: "column",
                     border: "2px solid black",
-                    width: "30%",
+                    width: "25%",
                     borderRadius: "1em",
                     alignSelf: "center",
                     padding: "1em"
@@ -92,7 +92,7 @@ export default function SpotDetail() {
                         alignItems: "center"
                         }}>
                         <h2>${spot.price} night</h2>
-                        <span><i class="fa-solid fa-star"></i>{spot.avgStarRating ? `${spot.avgStarRating.toFixed(2)} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} reviews`}</span>
+                        <span><i class="fa-solid fa-star"></i>{spot.avgStarRating ? `  ${spot.avgStarRating.toFixed(2)} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} reviews`}</span>
                     </div>
                     <button
                     style={{
@@ -108,8 +108,8 @@ export default function SpotDetail() {
             </div>
             <div className="spot-reviews-section" style={{display: "flex", flexDirection: "column"}}>
                 <h4>
-                    <i class="fa-solid fa-star"></i>
-                    {spot.avgStarRating ? `${spot.avgStarRating.toFixed(2)} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} reviews`}
+                    <i className="fa-solid fa-star"></i>
+                    {spot.avgStarRating ? `  ${spot.avgStarRating.toFixed(2)} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} reviews`}
                 </h4>
                 {user?.id !== spot.ownerId ? <OpenModalButton buttonText="Post Your Review" modalComponent={ <ReviewModal spotId={spotId} /> }/> : ''}
             <div className="spot-reviews-container" style={{margin: "2em 0",display: "flex", flexDirection: "column",gap: "3em"}}>

@@ -1,28 +1,57 @@
 import { csrfFetch } from "./csrf";
 
-export const LOAD_REVIEWS = 'spots/LOAD_REVIEWS'
+export const LOAD_REVIEWS = 'reviews/LOAD_REVIEWS'
+export const DELETE_REVIEW = 'reviews/DELETE_REVIEW'
 
-const loadReviews = (reviews, spotId) => ({
+
+const removeReview = (reviewId) => ({
+  type: DELETE_REVIEW,
+  reviewId,
+});
+
+const loadReviews = (reviews) => ({
   type: LOAD_REVIEWS,
   reviews,
-  spotId
+
 })
+
 
 export const getReviews = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
-    console.log("spotId in reducer:", spotId)
-    console.log(res)
+
     if (res.ok) {
         const reviews = await res.json();
-        console.log("reviews in thunk: ", reviews, spotId)
-        dispatch(loadReviews(reviews, spotId))
+
+        dispatch(loadReviews(reviews))
     }  else {
         const err = res.json();
-        console.log("WE ARE HITTING AN ERROR", err)
         return err;
       }
 
     return res;
+}
+
+export const getReviewsByUser = (userId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/reviews/current`);
+
+    if (res.ok) {
+      const reviews = await res.json()
+      dispatch(loadReviews(reviews))
+    } else {
+      const err = res.json();
+      return err;
+    }
+
+}
+
+export const deleteReview = (reviewId) => async dispatch => {
+  const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+    method: 'DELETE'
+  })
+
+  if (response.ok) {
+    dispatch(removeReview(reviewId))
+  }
 }
 
 const initialState = {};
@@ -35,6 +64,10 @@ const reviewsReducer = (state = initialState, action) => {
         reviewsState[review.id] = review;
       });
       return reviewsState;
+      case DELETE_REVIEW:
+        const newState = { ...state };
+        delete newState[action.reviewId];
+        return newState;
       default:
         return state;
     }
