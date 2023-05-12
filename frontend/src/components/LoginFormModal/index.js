@@ -57,7 +57,7 @@ function LoginFormModal() {
           />
         </div>
         {errors.credential && (
-          <p>{errors.credential}</p>
+          <p style={{fontSize:"0.8em"}}>{errors.credential}</p>
         )}
         <button
         type="submit"
