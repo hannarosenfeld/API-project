@@ -24,10 +24,9 @@ function LoginFormModal() {
       });
   };
 
-  function LoginAsDemoUser(){
-    setCredential("demo-User")
-    setPassword("passwort")
-    return dispatch(sessionActions.login({ credential, password }))
+  const LoginAsDemoUser = async () => {
+
+     return dispatch(sessionActions.login({ credential: "demo-User", password: "passwort" }))
     .then(closeModal())
   }
 
@@ -74,8 +73,9 @@ function LoginFormModal() {
           color: "var(--white)",
         }}
         >Log In</button>
-        <button style={{background: "transparent", margin: "1em"}} onClick={() => LoginAsDemoUser()}>Log in as Demo User</button>
       </form>
+
+      <button style={{background: "transparent", margin: "1em"}} onClick={() => LoginAsDemoUser()}>Log in as Demo User</button>
     </div>
   );
 }
