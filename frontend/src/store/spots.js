@@ -96,6 +96,7 @@ export const getAllSpots = () => async dispatch => {
   }
 
   export const createSpot = (spot) => async (dispatch) => {
+    try {
   const res = await csrfFetch("/api/spots", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
@@ -105,10 +106,10 @@ export const getAllSpots = () => async dispatch => {
     const newSpot = await res.json();
     dispatch(addOneSpot(newSpot))
     return newSpot;
-  } else {
-    const err = res.json();
-    console.log("WE ARE HITTING AN ERROR", err)
-    return err;
+  } } catch(err){
+    const error = err.json();
+    console.log("WE ARE HITTING AN ERROR", error)
+    return error;
   }
 }
 

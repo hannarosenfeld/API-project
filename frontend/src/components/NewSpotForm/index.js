@@ -71,6 +71,7 @@ export default function NewSpotForm() {
             await dispatch(createSpotImage(response.id, images))
             history.push(`/spots/${response.id}`);
         } else {
+            console.log("this is response: ",response)
             setErrors(response.errors)
         }
     }
