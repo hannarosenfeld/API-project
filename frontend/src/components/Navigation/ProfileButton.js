@@ -50,8 +50,8 @@ function ProfileButton({ user }) {
         <NavLink to="/spots/current">Manage Spots</NavLink>
         <NavLink to="/reviews/current">Manage Reviews</NavLink>
         </li>
-        <li style={{alignSelf: "center"}}>
-          <button onClick={logout}>Log Out</button>
+        <li style={{alignSelf: "center", cursor: "pointer"}}>
+          <button style={{alignSelf: "center", cursor: "pointer"}} onClick={logout}>Log Out</button>
         </li>
       </ul>
     </div>
