@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOneSpot } from "../../store/spots";
 import ReviewModal from "../ReviewModal";
 import OpenModalButton from "../OpenModalButton";
-import { getReviews } from "../../store/reviews";
+import { getReviews,  deleteReview } from "../../store/reviews";
 import "./SpotDetail.css"
 import { getOneUser } from "../../store/user";
+
 
 export default function SpotDetail() {
     const dispatch = useDispatch();
@@ -118,6 +119,11 @@ export default function SpotDetail() {
                                 <div>{review.User.username}</div>
                                 <div>{review.createdAt.slice(5,7)} {review.createdAt.slice(0,4)}</div>
                                 <div>{review.review}</div>
+                                <button
+                                    style={{width: "80%", height: "2em"}}
+                                    onClick={() => dispatch(deleteReview(review.id))}
+                                >Delete Spot
+                                </button>
                             </div>
                         ))}
             </div>
