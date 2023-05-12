@@ -15,7 +15,7 @@ function LoginFormModal() {
     e.preventDefault();
     setErrors({});
     return dispatch(sessionActions.login({ credential, password }))
-      .then(closeModal)
+      .then(closeModal())
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
@@ -23,6 +23,13 @@ function LoginFormModal() {
         }
       });
   };
+
+  function LoginAsDemoUser(){
+    setCredential("demo-User")
+    setPassword("passwort")
+    return dispatch(sessionActions.login({ credential, password }))
+    .then(closeModal())
+  }
 
   return (
     <div className="login-form-modal">
@@ -67,6 +74,7 @@ function LoginFormModal() {
           color: "var(--white)",
         }}
         >Log In</button>
+        <button style={{background: "transparent", margin: "1em"}} onClick={() => LoginAsDemoUser()}>Log in as Demo User</button>
       </form>
     </div>
   );

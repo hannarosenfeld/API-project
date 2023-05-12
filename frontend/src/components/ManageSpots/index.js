@@ -19,14 +19,14 @@ export default function ManageSpots() {
       },[user.id])
 
     return (
-        <div style={{minWidth: "1000px"}}>
+        <div style={{width: "1000px"}}>
             <h2>Manage your Spots</h2>
             <Link to="/spots/new">Create A New Spot</Link>
             <div style={{
                 display: "flex",
                 justifyContent: "space-between",
                 flexWrap: "wrap",
-                gap: "0.5em",
+                gap: "3em",
                 marginTop: "1em"
         }}>
             {spotArr.map(spot => (

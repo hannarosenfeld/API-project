@@ -109,10 +109,36 @@ module.exports = {
         url: "https://a0.muscache.com/im/pictures/miso/Hosting-53509299/original/89cd95e7-8c2f-42ae-9d83-b74cb09cf212.jpeg",
         preview: true
       },
-            {
+      {
         spotId: 4,
         url: "https://a0.muscache.com/im/pictures/miso/Hosting-53509299/original/a893754a-c0b5-4e69-b77b-80e9bb16ae9c.jpeg",
         preview: true
+      },
+
+      {
+        spotId: 5,
+        url: "https://a0.muscache.com/im/pictures/2f82929d-9cc9-421a-a964-6740a01b8960.jpg",
+        preview: true
+      },
+      {
+        spotId: 5,
+        url: "https://a0.muscache.com/im/pictures/d440eb2b-777c-4fd7-9532-e5a6f5681ea9.jpg",
+        preview: false
+      },
+      {
+        spotId: 5,
+        url: "https://a0.muscache.com/im/pictures/9cf39d24-8304-42d8-b95d-710e8cda4035.jpg",
+        preview: false
+      },
+      {
+        spotId: 5,
+        url: "https://a0.muscache.com/im/pictures/e9dd7c63-7290-46b2-85e1-ea90bd513ce3.jpg",
+        preview: false
+      },
+      {
+        spotId: 5,
+        url: "https://a0.muscache.com/im/pictures/94fc506a-a3a5-4222-b83f-d0342540e389.jpg",
+        preview: false
       },
 
     ], {});

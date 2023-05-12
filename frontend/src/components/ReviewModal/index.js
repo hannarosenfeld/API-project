@@ -21,7 +21,7 @@ export default function ReviewModal({ spotId }) {
 
         const payload = {
             review,
-            rating
+            activeRating
         }
 
         setErrors({});
