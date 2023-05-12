@@ -113,17 +113,13 @@ export default function SpotDetail() {
                     {spot.avgStarRating ? `  ${spot.avgStarRating.toFixed(2)} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} reviews`}
                 </h4>
                 {user?.id !== spot.ownerId ? <OpenModalButton buttonText="Post Your Review" modalComponent={ <ReviewModal spotId={spotId} /> }/> : ''}
-            <div className="spot-reviews-container" style={{margin: "2em 0",display: "flex", flexDirection: "column",gap: "3em"}}>
+            <div className="spot-reviews-container" style={{margin: "2em 0",display: "flex", flexDirection: "column-reverse",gap: "3em"}}>
                         {reviews.map(review => (
                             <div style={{display: "flex", flexDirection: "column"}}>
                                 <div>{review.User.username}</div>
                                 <div>{review.createdAt.slice(5,7)} {review.createdAt.slice(0,4)}</div>
                                 <div>{review.review}</div>
-                                <button
-                                    style={{width: "80%", height: "2em"}}
-                                    onClick={() => dispatch(deleteReview(review.id))}
-                                >Delete Spot
-                                </button>
+                                {user?.id === review.User.id ? <button style={{width: "5em", height: "2em"}} onClick={() => dispatch(deleteReview(review.id))}>Delete</button> : ""}
                             </div>
                         ))}
             </div>

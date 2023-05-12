@@ -27,7 +27,7 @@ export default function ReviewModal({ spotId }) {
 
         setErrors({});
         return await dispatch(createReview(spotId, payload))
-          .then(closeModal)
+          .then(closeModal())
           .catch(async (res) => {
             const data = await res.json();
             if (data && data.errors) {

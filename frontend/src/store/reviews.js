@@ -41,7 +41,6 @@ export const getReviewsByUser = (userId) => async (dispatch) => {
       const err = res.json();
       return err;
     }
-
 }
 
 export const deleteReview = (reviewId) => async dispatch => {
