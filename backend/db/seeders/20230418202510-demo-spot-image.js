@@ -38,19 +38,109 @@ module.exports = {
 
       {
         spotId: 2,
-        url: "https://blog.norwegianreward.com/wp-content/uploads/2019/11/norwegian-stave-churches-Borgund-flickr-Stevan-Nicholas-872x872.jpg",
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-53343429/original/5b2e650f-f818-42f7-9488-c36288e6c30a.jpeg",
+        preview: true
+      },
+      {
+        spotId: 2,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-53343429/original/b9eb1d6d-a44b-42dd-b12d-83795d8fdd1e.jpeg",
+        preview: true
+      },
+      {
+        spotId: 2,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-53343429/original/7747d027-350a-4f4b-bc3f-ff1d1b10266a.jpeg",
+        preview: true
+      },
+      {
+        spotId: 2,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-53343429/original/9fa3244f-9a89-4ed1-ab40-5bdd386149e4.jpeg",
+        preview: true
+      },
+      {
+        spotId: 2,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-53343429/original/387ea58b-f01a-4634-81d8-989c68354218.jpeg",
+        preview: true
+      },
+
+      {
+        spotId: 3,
+        url: "https://a0.muscache.com/im/pictures/18986897-702f-416d-958e-9627e6c9f72b.jpg",
         preview: true
       },
       {
         spotId: 3,
-        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_pb_VAg5ZpeubyHUj-ysCOAEjNWM4TIb-g8ckmT2j9jvp9phgkiE3jbMPRxPjG11FfSI&usqp=CAU",
+        url: "https://a0.muscache.com/im/pictures/e7153592-7584-4d94-a906-e993402bb996.jpg",
+        preview: true
+      },
+      {
+        spotId: 3,
+        url: "https://a0.muscache.com/im/pictures/10c0b70b-6617-4ec5-bc1a-3065e35b3f16.jpg",
+        preview: true
+      },
+      {
+        spotId: 3,
+        url: "https://a0.muscache.com/im/pictures/75c4c8dd-cf23-43b4-8778-10172a01af39.jpg",
+        preview: true
+      },
+      {
+        spotId: 3,
+        url: "https://a0.muscache.com/im/pictures/c7b0d18d-60bc-401a-8eb8-e2814f97416d.jpg",
+        preview: true
+      },
+
+
+      {
+        spotId: 4,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-53509299/original/e07ac9a7-a45f-474e-bbef-39abdf795e32.jpeg",
         preview: true
       },
       {
         spotId: 4,
-        url: "https://a0.muscache.com/im/pictures/9b1dac05-b810-46ea-8d35-f57072af1fe1.jpg",
+        url: "https://a0.muscache.com/im/pictures/a312bd99-9705-4987-8293-44ba04319b46.jpg",
         preview: true
       },
+      {
+        spotId: 4,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-53509299/original/ad2f0047-f965-450e-bf05-0f159b74f558.png",
+        preview: true
+      },
+            {
+        spotId: 4,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-53509299/original/89cd95e7-8c2f-42ae-9d83-b74cb09cf212.jpeg",
+        preview: true
+      },
+      {
+        spotId: 4,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-53509299/original/a893754a-c0b5-4e69-b77b-80e9bb16ae9c.jpeg",
+        preview: true
+      },
+
+      {
+        spotId: 5,
+        url: "https://a0.muscache.com/im/pictures/2f82929d-9cc9-421a-a964-6740a01b8960.jpg",
+        preview: true
+      },
+      {
+        spotId: 5,
+        url: "https://a0.muscache.com/im/pictures/d440eb2b-777c-4fd7-9532-e5a6f5681ea9.jpg",
+        preview: false
+      },
+      {
+        spotId: 5,
+        url: "https://a0.muscache.com/im/pictures/9cf39d24-8304-42d8-b95d-710e8cda4035.jpg",
+        preview: false
+      },
+      {
+        spotId: 5,
+        url: "https://a0.muscache.com/im/pictures/e9dd7c63-7290-46b2-85e1-ea90bd513ce3.jpg",
+        preview: false
+      },
+      {
+        spotId: 5,
+        url: "https://a0.muscache.com/im/pictures/94fc506a-a3a5-4222-b83f-d0342540e389.jpg",
+        preview: false
+      },
+
     ], {});
   },
 

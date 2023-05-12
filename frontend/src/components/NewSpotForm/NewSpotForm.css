@@ -1,0 +1,33 @@
+.new-spot-form-wrapper {
+    width: 70em;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+}
+
+.new-spot-form-wrapper .new-spot-form-inner-container {
+    margin: 0 auto;
+    width: 35em;
+    display: flex;
+    flex-direction: column;
+}
+
+.new-spot-form-wrapper form {
+    display: flex;
+    flex-direction: column;
+}
+
+.new-spot-form-wrapper input {
+    min-height: 2.5em;
+    width: 100%;
+    border: 1px solid grey;
+    padding: 0.2em;
+}
+
+.new-spot-form-wrapper textarea {
+    width: 100%;
+    border: 1px solid grey;
+    padding: 0.2em;
+    height: 12em;
+}
+

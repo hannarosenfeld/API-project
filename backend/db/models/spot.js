@@ -53,8 +53,27 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    description: DataTypes.STRING,
-    price: DataTypes.DECIMAL
+    description: {
+      type: DataTypes.STRING,
+      validate: {
+        isAtLeast30Chars(description){
+          if (description.length < 30) {
+            throw new Error("Description needs a minimum of 30 characters")
+          }
+        }
+      }
+    },
+    price: {
+      type: DataTypes.DECIMAL,
+      validate: {
+        min: 1,
+        isPositiveInt(price) {
+          if (price < 0) {
+            throw new Error("Price is required")
+          }
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Spot',

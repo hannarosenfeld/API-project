@@ -15,7 +15,7 @@ function LoginFormModal() {
     e.preventDefault();
     setErrors({});
     return dispatch(sessionActions.login({ credential, password }))
-      .then(closeModal)
+      .then(closeModal())
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
@@ -24,34 +24,59 @@ function LoginFormModal() {
       });
   };
 
+  const LoginAsDemoUser = async () => {
+
+     return dispatch(sessionActions.login({ credential: "demo-User", password: "passwort" }))
+    .then(closeModal())
+  }
+
   return (
-    <>
+    <div className="login-form-modal">
       <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username or Email
+      <form
+      onSubmit={handleSubmit}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        width: "80%",
+        justifyContent: "space-between",
+      }}
+      >
+        <div
+        style={{
+          border: "1px solid #717171",
+          marginBottom: "1em"
+        }}>
           <input
             type="text"
             value={credential}
+            placeholder="Username or Email"
             onChange={(e) => setCredential(e.target.value)}
             required
           />
-        </label>
-        <label>
-          Password
           <input
             type="password"
             value={password}
+            placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
+        </div>
         {errors.credential && (
-          <p>{errors.credential}</p>
+          <p style={{fontSize:"0.8em", color: "darkred"}}>{errors.credential}</p>
         )}
-        <button type="submit">Log In</button>
+        <button
+        type="submit"
+        style={{
+          height: "3em",
+          backgroundColor: "var(--airbnb)",
+          color: "var(--white)",
+        }}
+        >Log In</button>
       </form>
-    </>
+
+      <button style={{background: "transparent", margin: "1em"}} onClick={() => LoginAsDemoUser()}>Log in as Demo User</button>
+    </div>
   );
 }
 

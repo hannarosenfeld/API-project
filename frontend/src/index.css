@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
 
 * {
-    padding: none;
-    border: none;
+    padding: 0;
+    border: 0;
 }
 
 body {
@@ -27,4 +27,15 @@ li {
 a {
     text-decoration: none;
     color: #222222;
+    cursor: pointer
+}
+
+button {
+    cursor: pointer
+
+}
+
+.error {
+    font-size: 0.8em;
+    color: darkred;
 }

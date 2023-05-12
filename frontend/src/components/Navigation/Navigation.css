@@ -10,10 +10,12 @@
 
 .nav-wrapper {
     display: relative;
+    border-bottom: 0.2px solid rgb(189, 188, 188);
+    margin-bottom: 2em;
 }
 
 .nav ul {
-    align-self: start;
+
 }
 
 .home-button {
@@ -30,7 +32,7 @@
     justify-content: space-between;
     border-radius: 21px;
     transition: box-shadow 0.2s ease;
-    display: flex;
+    position: relative;
     width: 77px;
     height: 42px;
     position: relative;
@@ -47,4 +49,39 @@
     width: 30px;
     height: 30px;
     border-radius: 21px;
+}
+
+.profile-dropdown {
+    position: absolute;
+    margin-top: 3em;
+    background-color: var(--white);
+    margin-left: -7.5em;
+    padding: 1em 0.5em;
+    border: 1px solid grey;
+    border-radius: 10%;
+}
+
+.profile-dropdown li {
+    margin-left: 0;
+    font-size: 0.9em;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-dropdown button {
+    margin: 0 auto;
+    width: 100%;
+    align-self: center;
+    border-radius: 25%;
+    padding: 0.5em 1em;
+    margin-top: 0.5em;
+    align-self: center;
+    background-color: transparent;
+}
+
+.navlinks {
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    padding: 0.5em;
+    margin: 0.5em;
 }

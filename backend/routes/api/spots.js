@@ -107,7 +107,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
 
         for (let review of reviews) {
             review = review.toJSON()
-            delete review.User.username
+//            delete review.User.username
 
             const reviewImagesArr = []
             const reviewImages = await ReviewImage.findAll({
@@ -352,18 +352,20 @@ router.get('/', async (req, res, next) => {
        });
 
        // get average star rating...
-       const reviews = await Review.findAll()
-       const avgRating = await Review.count({
-            where: {
-                spotId: {
-                    [Op.eq]: spot.id
-                }
+       const reviews = await Review.findAll({
+        where: {
+            spotId: {
+                [Op.eq]: spot.id
             }
-       })
+        }
+    }
+       )
+       const avgRating = reviews.length
        let counter = 0
        for (let review of reviews) {
         review = review.toJSON()
-        counter = counter + review.stars
+        counter = counter + Number(review.stars)
+
        }
 
        spot = spot.toJSON()
@@ -375,7 +377,7 @@ router.get('/', async (req, res, next) => {
     }
 
     res.json({
-        Spots: spots,
+        Spots: arr,
         page,
         size
     })
@@ -388,31 +390,31 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     const { url , preview } = req.body
     const { spotId } = req.params
     const spot = await Spot.findByPk(spotId)
-
     if (spot) {
         if (spot.ownerId !== user.id) {
             res.statusCode = 403
             res.json({ "message": "You must be the owner of the spot in order to upload a picture." })
         }
 
-        if (url, preview) {
+    // if (url, preview) {
         const newImage = await SpotImage.create({
             spotId: spot.id,
             url,
             preview
         })
-
         const responseObj = {}
         responseObj.id = newImage.id
         responseObj.url = newImage.url
         responseObj.preview = newImage.preview
 
         res.json(responseObj)
-    } else res.json({ error: "Please provide url and preview values." })
-} else {
-        res.statusCode = 404
-        res.json({ message: "Spot couldn't be found" })
+//    }
+    //else res.json({ error: "Please provide url and preview values." })
     }
+    else {
+       res.statusCode = 404
+       res.json({ message: "Spot couldn't be found" })
+   }
 })
 
 // Edit a Spot

@@ -44,9 +44,19 @@ function Navigation({ isLoaded }) {
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <li>
+      <li style={{
+        display: "flex",
+        justifyContent: "space-between",
+        gap: "1.5em"
+        }}>
+        <NavLink
+        style={{
+          alignSelf: "center"
+        }}
+        to="/spots/new"
+        >Create a New Spot</NavLink>
         <ProfileButton user={sessionUser} />
-      </li>
+      </li >
     );
   } else {
     sessionLinks = (
@@ -55,7 +65,8 @@ function Navigation({ isLoaded }) {
         <i className="fa-solid fa-bars"></i>
         <img src="https://a0.muscache.com/defaults/user_pic-50x50.png?v=3&im_w=240"/>
       </button>
-      <ul className={ulClassName} ref={ulRef}>
+
+      <div className={ulClassName} ref={ulRef}>
       <OpenModalButton
           buttonText="Log In"
           modalComponent={<LoginFormModal />}
@@ -64,7 +75,7 @@ function Navigation({ isLoaded }) {
           buttonText="Sign Up"
           modalComponent={<SignupFormModal />}
         />
-      </ul>
+      </div>
     </div>
     );
   }
@@ -74,7 +85,7 @@ function Navigation({ isLoaded }) {
     <ul className="nav">
       <li className="home-button">
         <NavLink exact to="/">
-          <span><i class="fa-regular fa-heart"></i> oibnb</span>
+          <span style={{marginLeft: "1.2em"}}><i class="fa-regular fa-heart"></i> oibnb</span>
         </NavLink>
       </li>
       {isLoaded && sessionLinks}
