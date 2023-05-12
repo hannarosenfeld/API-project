@@ -80,7 +80,7 @@ export default function SpotDetail() {
                     display: "flex",
                     flexDirection: "column",
                     border: "2px solid black",
-                    width: "25%",
+                    width: "30%",
                     borderRadius: "1em",
                     alignSelf: "center",
                     padding: "1em"

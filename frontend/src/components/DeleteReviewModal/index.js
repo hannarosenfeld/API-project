@@ -8,13 +8,18 @@ function DeleteReviewModal({ reviewId }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
+  function handleDelete(){
+    dispatch(deleteReview(reviewId))
+    closeModal()
+  }
+
   return (
     <div style={{display: "flex", flexDirection: "column", gap:"1em", alignItems: "center", padding: "2em"}}>
         <h2>Confirm Delete</h2>
         <p>Are you sure you want to remove this spot from the listings?</p>
         <button
             style={{width: "80%", height: "2em"}}
-            onClick={() => dispatch(deleteReview(reviewId))}
+            onClick={() => handleDelete()}
         >
             Yes (Delete Review)
         </button>

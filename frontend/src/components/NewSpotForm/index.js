@@ -34,6 +34,59 @@ export default function NewSpotForm() {
     const updatePrice = (e) => setPrice(e.target.value);
     const updatePreviewImage = (e) => setPreviewImage(e.target.value);
 
+    useEffect(() => {
+		const errors = {};
+		if (!country.length) {
+			errors.country = "Country is required"
+		}
+        if (!street.length) {
+			errors.address = "Address is required"
+		}
+        if (!city.length) {
+			errors.city = "City is required"
+		}
+        if (!state.length) {
+			errors.state = "State is required"
+		}
+        if (!description.length) {
+			errors.description = "Description needs a minimum of 30 characters"
+		}
+        if (!title.length) {
+			errors.name = "Name is required"
+		}
+        if (!price || price < 1) {
+			errors.price = "Price is required"
+		}
+        if (!previewImage.length) {
+			errors.previewImageLength = "Preview image is required."
+		}
+        if (!previewImage.endsWith(".png") || !previewImage.endsWith(".jpg") || !previewImage.endsWith(".jpeg")) {
+			errors.previewImage = "Image URL must end in .png, .jpg, or .jpeg"
+		}
+        if (!photoOne.endsWith(".png") || !photoOne.endsWith(".jpg") || !photoOne.endsWith(".jpeg")) {
+			errors.photoOne = "Image URL must end in .png, .jpg, or .jpeg"
+		}
+        if (!photoTwo.endsWith(".png") || !photoTwo.endsWith(".jpg") || !photoTwo.endsWith(".jpeg")) {
+			errors.photoTwo = "Image URL must end in .png, .jpg, or .jpeg"
+		}
+        if (!photoThree.endsWith(".png") || !photoThree.endsWith(".jpg") || !photoThree.endsWith(".jpeg")) {
+			errors.photoThree = "Image URL must end in .png, .jpg, or .jpeg"
+		}
+        if (!photoFour.endsWith(".png") || !photoFour.endsWith(".jpg") || !photoFour.endsWith(".jpeg")) {
+			errors.photoFour = "Image URL must end in .png, .jpg, or .jpeg"
+		}
+		setErrors(errors);
+	}, [
+        title,
+        country,
+        street,
+        city,
+        state,
+        description,
+        price,
+        previewImage,
+    ]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -46,7 +99,7 @@ export default function NewSpotForm() {
             description,
             price,
             previewImage,
-            avgStarRating: 0,
+            avgStarRating: 1,
             lat: 5,
             lng: 5
         }
@@ -76,7 +129,6 @@ export default function NewSpotForm() {
         }
     }
 
-    console.log("ERRORS: ", errors)
 
     return (
         <div className="new-spot-form-wrapper">
@@ -92,7 +144,7 @@ export default function NewSpotForm() {
                             marginBottom: "0.8em"
                         }}
                     >
-                        <span>Country <span>{errors.country ? errors.country : ""}</span></span>
+                        <span>Country <span className="error">{errors.country ? errors.country : ""}</span></span>
                         <input
                             type="text"
                             placeholder="Country"
@@ -108,7 +160,7 @@ export default function NewSpotForm() {
                             marginBottom: "0.8em"
                         }}
                     >
-                        Street Address
+                        <span>Street Address <span className="error">{errors.address ? errors.address : ""}</span></span>
                         <input
                             type="text"
                             placeholder="Street Address"
@@ -130,7 +182,7 @@ export default function NewSpotForm() {
                             width: "55%"
                         }}
                     >
-                        City
+                        <span>City <span className="error">{errors.city ? errors.city : ""}</span></span>
                         <input
                             type="text"
                             placeholder="City"
@@ -146,7 +198,7 @@ export default function NewSpotForm() {
                             width: "35%"
                         }}
                     >
-                        State
+                        <span>State <span className="error">{errors.state ? errors.state : ""}</span></span>
                         <input
                             type="text"
                             placeholder="STATE"
@@ -171,6 +223,7 @@ fast wif or parking, and what you love about the neighborhood.</p>
                             required
                         >
                         </textarea>
+                        <span className="error">{errors.description ? errors.description : ""}</span>
                     </div>
                     <div style={{
                         borderTop: "1px solid grey",
@@ -186,6 +239,7 @@ your place special.</p>
                             onChange={updateTitle}
                             required
                         ></input>
+                        <span className="error">{errors.name ? errors.name : ""}</span>
                     </div>
                     <div style={{
                         borderTop: "1px solid grey",
@@ -202,7 +256,9 @@ in search results.</p>
                         value={price}
                         onChange={updatePrice}
                         required
-                        ></input></span>
+                        ></input>
+                        </span>
+                        <span className="error">{errors.price ? errors.price : ""}</span>
                     </div>
                     <div style={{
                         borderTop: "1px solid grey",
@@ -221,6 +277,8 @@ in search results.</p>
                                 accept="image/png, image/jpg, image/jpeg"
                                 required
                             ></input>
+                            <span className="error">{errors.previewImageLength ? errors.previewImageLength : ""}</span>
+                            <span className="error">{errors.previewImage ? errors.previewImage : ""}</span>
                             <input
                                 type="text"
                                 placeholder="Image URL"
@@ -228,6 +286,7 @@ in search results.</p>
                                 onChange={(e) => setPhotoOne(e.target.value)}
                                 accept="image/png, image/jpg, image/jpeg"
                             ></input>
+                            <span className="error">{errors.photoOne ? errors.photoOne : ""}</span>
                             <input
                                 type="text"
                                 placeholder="Image URL"
@@ -235,6 +294,7 @@ in search results.</p>
                                 onChange={(e) => setPhotoTwo(e.target.value)}
                                 accept="image/png, image/jpg, image/jpeg"
                             ></input>
+                            <span className="error">{errors.photoTwo ? errors.photoTwo : ""}</span>
                             <input
                                 type="text"
                                 placeholder="Image URL"
@@ -242,6 +302,7 @@ in search results.</p>
                                 onChange={(e) => setPhotoThree(e.target.value)}
                                 accept="image/png, image/jpg, image/jpeg"
                             ></input>
+                            <span className="error">{errors.photoThree ? errors.photoThree : ""}</span>
                             <input
                                 type="text"
                                 placeholder="Image URL"
@@ -249,6 +310,7 @@ in search results.</p>
                                 onChange={(e) => setPhotoFour(e.target.value)}
                                 accept="image/png, image/jpg, image/jpeg"
                             ></input>
+                            <span className="error">{errors.photoFour ? errors.photoFour : ""}</span>
                         </div>
                     </div>
                     <div style={{
