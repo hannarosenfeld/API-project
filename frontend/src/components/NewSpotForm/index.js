@@ -48,7 +48,7 @@ export default function NewSpotForm() {
         if (!state.length) {
 			errors.state = "State is required"
 		}
-        if (!description.length) {
+        if (description.length < 30) {
 			errors.description = "Description needs a minimum of 30 characters"
 		}
         if (!title.length) {
@@ -85,6 +85,10 @@ export default function NewSpotForm() {
         description,
         price,
         previewImage,
+        photoOne,
+        photoTwo,
+        photoThree,
+        photoFour
     ]);
 
     const handleSubmit = async (e) => {
