@@ -9,8 +9,8 @@ function DeleteReviewModal({ reviewId }) {
   const { closeModal } = useModal();
 
   function handleDelete(){
-    dispatch(deleteReview(reviewId))
     closeModal()
+    dispatch(deleteReview(reviewId))
   }
 
   return (

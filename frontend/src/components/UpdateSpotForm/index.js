@@ -10,10 +10,7 @@ export default function UpdateSpotForm() {
     const { spotId } = useParams()
     const dispatch = useDispatch()
     const history = useHistory()
-    console.log(spotId)
     const spot = useSelector(state => state.spots[spotId])
-
-    console.log(spot)
 
     useEffect(() => {
         dispatch(getOneSpot(spotId))
@@ -27,13 +24,11 @@ export default function UpdateSpotForm() {
     const [description, setDescription] = useState(spot.description)
     const [price, setPrice] = useState(spot.price)
     const [previewImage, setPreviewImage] = useState(spot.previewImage)
-
     const [photoOne, setPhotoOne] = useState(spot.photoOne)
     const [photoTwo, setPhotoTwo] = useState(spot.photoTwo)
     const [photoThree, setPhotoThree] = useState(spot.photoThree)
     const [photoFour, setPhotoFour] = useState(spot.photoFour)
     const [errors, setErrors] = useState({})
-
 
     const updateTitle = (e) => setTitle(e.target.value);
     const updateCountry= (e) => setCountry(e.target.value);
@@ -43,7 +38,6 @@ export default function UpdateSpotForm() {
     const updateDescription = (e) => setDescription(e.target.value);
     const updatePrice = (e) => setPrice(e.target.value);
     const updatePreviewImage = (e) => setPreviewImage(e.target.value);
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();

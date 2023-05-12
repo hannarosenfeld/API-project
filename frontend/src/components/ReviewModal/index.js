@@ -16,7 +16,6 @@ export default function ReviewModal({ spotId }) {
       setActiveRating(rating);
     }, [rating]);
 
-    console.log()
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -26,6 +25,7 @@ export default function ReviewModal({ spotId }) {
         }
 
         setErrors({});
+
         return await dispatch(createReview(spotId, payload))
           .then(closeModal())
           .catch(async (res) => {
@@ -46,6 +46,8 @@ export default function ReviewModal({ spotId }) {
                     required
                     style={{height: "17em", background: "aliceblue", marginBottom: "2em"}}
                     onChange={(e) => setReview(e.target.value)}
+                    placeholder="Leave your review here..."
+                    minlength="10"
                 />
             <div className="stars" style={{margin: "0 auto"}}>
                 <div className="rating-input" style={{display: "flex"}}>
