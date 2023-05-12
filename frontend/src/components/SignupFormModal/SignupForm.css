@@ -1,9 +1,9 @@
 .signup-form-wrapper {
-    height: 28em;
-    width: 24em;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 1em;
+    min-width: 23em;
 }
 
 .signup-form-wrapper input  {
@@ -16,4 +16,9 @@
     height: 3em;
     background-color: var(--airbnb);
     color: var(--white);
+}
+
+.signup-form-wrapper p {
+    color: darkred;
+    font-size: 0.8em;
 }
