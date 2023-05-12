@@ -1,0 +1,6 @@
+.manage-spots-buttons button {
+    padding: 0.5em 1em;
+    background-color: var(--airbnb);
+    border-radius: 10%;
+    cursor: pointer;
+}

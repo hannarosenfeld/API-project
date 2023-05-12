@@ -52,12 +52,29 @@
 .profile-dropdown {
     position: absolute;
     margin-top: 3em;
-    border: 2px solid red;
     width: 12em;
     background-color: var(--white);
     margin-left: -7.5em;
+    padding: 0.5em;
+    border: 2px solid grey;
+    display: flex;
+    flex-direction: column;
 }
 
 .profile-dropdown li {
     margin-left: 0;
+    font-size: 0.9em;
+}
+
+.profile-dropdown button {
+    margin: 0 auto;
+    align-self: center;
+    border-radius: 25%;
+    padding: 0.5em 1em;
+    margin-top: 0.5em;
+}
+
+.navlinks {
+    border-top: 2px solid grey;
+    border-bottom: 2px solid grey;
 }

@@ -46,10 +46,11 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         <li>Hello, {user.firstName}</li>
         <li>{user.email }</li>
-        <li>
+        <li className="navlinks" style={{display: "flex", flexDirection: "column"}}>
         <NavLink to="/spots/current">Manage Spots</NavLink>
+        <NavLink to="/reviews/current">Manage Reviews</NavLink>
         </li>
-        <li>
+        <li style={{alignSelf: "center"}}>
           <button onClick={logout}>Log Out</button>
         </li>
       </ul>

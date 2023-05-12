@@ -4,6 +4,7 @@ import { getAllSpotsByCurrentUser } from "../../store/spots"
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import OpenModalButton from "../OpenModalButton";
 import DeleteSpotModal from "../DeleteSpotModal";
+import "./ManageSpots.css"
 
 
 export default function ManageSpots() {
@@ -20,12 +21,13 @@ export default function ManageSpots() {
     return (
         <div style={{minWidth: "1000px"}}>
             <h2>Manage your Spots</h2>
-            <button>Create A New Spot</button>
+            <Link to="/spots/new">Create A New Spot</Link>
             <div style={{
-            display: "flex",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: "0.5em",
+                display: "flex",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+                gap: "0.5em",
+                marginTop: "1em"
         }}>
             {spotArr.map(spot => (
                 <div key={spot.id}
@@ -61,13 +63,12 @@ export default function ManageSpots() {
                         <span>{spot.price}</span>
                     </div>
                 </Link>
-                <div style={{display: "flex", gap: "1em"}}>
+                <div className="manage-spots-buttons" style={{display: "flex", gap: "1em"}}>
                     <Link to={`/spots/${spot.id}/edit`} style={{padding: "0.5em"}}>Update</Link>
                     <OpenModalButton
                         buttonText="Delete"
                         modalComponent={<DeleteSpotModal spotId={spot.id}/>}
                     />
-
                 </div>
                 </div>
             ))}
