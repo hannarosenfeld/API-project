@@ -24,8 +24,6 @@ export default function SpotDetail() {
         dispatch(getReviews(spotId))
     }, [dispatch, spotId])
 
-    console.log("filter",reviews.find(review => review.User.id === user.id ))
-
     if (!spot || !spot.Owner || !spot.spotImages) {
         return(
             <>
@@ -59,10 +57,10 @@ export default function SpotDetail() {
                     />
                 </div>
                 <div className="four-squares">
-                    <div>{spot.spotImages[1].url != undefined ? <img src={spot.spotImages[1].url}/> : ""}</div>
-                    <div>{spot.spotImages[2].url != undefined ? <img src={spot.spotImages[2].url}/> : ""}</div>
-                    <div>{spot.spotImages[3].url != undefined ? <img src={spot.spotImages[3].url}/> : ""}</div>
-                    <div>{spot.spotImages[4].url != undefined ? <img src={spot.spotImages[4].url}/> : ""}</div>
+                    <div>{spot.spotImages[1].url !== undefined ? <img src={spot.spotImages[1].url}/> : ""}</div>
+                    <div>{spot.spotImages[2].url !== undefined ? <img src={spot.spotImages[2].url}/> : ""}</div>
+                    <div>{spot.spotImages[3].url !== undefined ? <img src={spot.spotImages[3].url}/> : ""}</div>
+                    <div>{spot.spotImages[4].url !== undefined ? <img src={spot.spotImages[4].url}/> : ""}</div>
                 </div>
             </div>
             <div
@@ -112,7 +110,9 @@ export default function SpotDetail() {
                     <i className="fa-solid fa-star"></i>
                     {spot.avgStarRating ? `  ${spot.avgStarRating.toFixed(2)} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} reviews`}
                 </h4>
-                {user?.id !== spot.ownerId && reviews.find(review => review.User.id === user.id ) === undefined ? <OpenModalButton buttonText="Post Your Review" modalComponent={ <ReviewModal spotId={spotId} /> }/> : ''}
+                {user?.id !== spot.ownerId && reviews.find(review => review.User?.id === user?.id ) === undefined ? <OpenModalButton buttonText="Post Your Review" modalComponent={ <ReviewModal spotId={spotId} /> }/> : ''}
+                {user?.id !== spot.ownerId ? <OpenModalButton buttonText="Post Your Review" modalComponent={ <ReviewModal spotId={spotId} /> }/> : ''}
+
             <div className="spot-reviews-container" style={{margin: "2em 0",display: "flex", flexDirection: "column-reverse",gap: "3em"}}>
             {user && user?.id !== spot.ownerId && !reviews.length ? "Be the first to post a review!" : ''}
                         {reviews.map(review => (
