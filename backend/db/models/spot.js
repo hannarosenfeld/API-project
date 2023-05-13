@@ -54,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       validate: {
         isAtLeast30Chars(description){
           if (description.length < 30) {
