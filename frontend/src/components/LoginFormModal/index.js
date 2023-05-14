@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
@@ -10,12 +10,23 @@ function LoginFormModal() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
+//  const [hasSubmitted, setHasSubmitted] = useState(false);
+
+  // useEffect(() => {
+  //   if (hasSubmitted) {
+
+  //   }
+  // }, [credential, password])
+
+  console.log(errors)
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors({});
     return dispatch(sessionActions.login({ credential, password }))
-      .then(closeModal())
+   // setHasSubmitted(true)
+
+
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
@@ -65,13 +76,13 @@ function LoginFormModal() {
           <p style={{fontSize:"0.8em", color: "darkred"}}>{errors.credential}</p>
         )}
         <button
-        disabled={credential.length < 4 || password.length < 6 ? true : false}
-        type="submit"
-        style={{
-          height: "3em",
-          backgroundColor: "var(--airbnb)",
-          color: "var(--white)",
-        }}
+          disabled={credential.length < 4 || password.length < 6 ? true : false}
+          type="submit"
+          style={{
+            height: "3em",
+            backgroundColor: "var(--airbnb)",
+            color: "var(--white)",
+          }}
         >Log In</button>
       </form>
 
