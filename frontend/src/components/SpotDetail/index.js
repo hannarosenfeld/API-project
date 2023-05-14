@@ -25,7 +25,12 @@ export default function SpotDetail() {
     useEffect(() => {
         dispatch(getOneSpot(spotId))
         dispatch(getReviews(spotId))
-    }, [dispatch, spotId])
+    }, [])
+
+        useEffect(() => {
+        dispatch(getReviews(spotId))
+    }, [reviews])
+
 
     if (!spot || !spot.Owner || !spot.spotImages) {
         return(

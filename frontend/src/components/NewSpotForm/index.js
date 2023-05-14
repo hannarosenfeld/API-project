@@ -99,6 +99,8 @@ export default function NewSpotForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (errors.previewImage || errors.photoOne || errors.photoTwo || errors.photoThree || errors.photoFour) return;
+
         setHasSubmitted(true)
         const payload = {
             name: title,
