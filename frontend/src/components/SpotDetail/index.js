@@ -19,10 +19,12 @@ export default function SpotDetail() {
 
     const reviews = Object.values(reviewsObj)
 
+    console.log(reviews)
+
     useEffect(() => {
         dispatch(getOneSpot(spotId))
         dispatch(getReviews(spotId))
-    }, [dispatch, spotId])
+    }, [dispatch, spotId, spot.avgStarRating])
 
     if (!spot || !spot.Owner || !spot.spotImages) {
         return(
