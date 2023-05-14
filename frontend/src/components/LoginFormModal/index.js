@@ -10,29 +10,20 @@ function LoginFormModal() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
-//  const [hasSubmitted, setHasSubmitted] = useState(false);
-
-  // useEffect(() => {
-  //   if (hasSubmitted) {
-
-  //   }
-  // }, [credential, password])
-
-  console.log(errors)
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors({});
+    console.log(errors)
     return dispatch(sessionActions.login({ credential, password }))
-   // setHasSubmitted(true)
+    .then(closeModal)
 
-
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) {
-          setErrors(data.errors);
-        }
-      });
+    .catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) {
+        setErrors(data.errors);
+      }
+    });
   };
 
   const LoginAsDemoUser = async () => {
