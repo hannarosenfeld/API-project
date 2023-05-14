@@ -19,7 +19,7 @@ module.exports = {
         lat: 37.7645358,
         lng: -122.4730327,
         name: "App Academy",
-        description: "Place where web developers are created",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisi mi, tempor in ligula a, blandit pulvinar ligula. Vestibulum auctor ante id ante viverra convallis. Donec sapien nibh, porta non tincidunt ac, tincidunt congue lectus. Fusce orci sapien, viverra non aliquet vitae, ullamcorper id sapien. Proin euismod sem ante, vitae blandit ante mollis id. Donec blandit mi a nunc tincidunt ultrices. In in ligula eu turpis placerat consectetur eget nec tortor. In sed augue sit amet lorem eleifend pharetra. Sed in lorem sit amet lectus consequat efficitur nec a lacus. Donec vel libero non urna condimentum ullamcorper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam luctus dui non augue pretium tincidunt. Nulla auctor orci eu tempor auctor. Fusce fringilla facilisis risus. Sed bibendum non diam non pulvinar. Quisque posuere nibh id dui eleifend, et tincidunt eros congue.",
         price: 123,
       },
       {
@@ -31,7 +31,7 @@ module.exports = {
         lat: 39.97352483939225,
         lng: -75.13082652682759,
         name: "Hanna's Place",
-        description: "This is my description.",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisi mi, tempor in ligula a, blandit pulvinar ligula. Vestibulum auctor ante id ante viverra convallis. Donec sapien nibh, porta non tincidunt ac, tincidunt congue lectus. Fusce orci sapien, viverra non aliquet vitae, ullamcorper id sapien. Proin euismod sem ante, vitae blandit ante mollis id. Donec blandit mi a nunc tincidunt ultrices. In in ligula eu turpis placerat consectetur eget nec tortor. In sed augue sit amet lorem eleifend pharetra. Sed in lorem sit amet lectus consequat efficitur nec a lacus. Donec vel libero non urna condimentum ullamcorper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam luctus dui non augue pretium tincidunt. Nulla auctor orci eu tempor auctor. Fusce fringilla facilisis risus. Sed bibendum non diam non pulvinar. Quisque posuere nibh id dui eleifend, et tincidunt eros congue.",
         price: 233
       },
       {
@@ -43,7 +43,7 @@ module.exports = {
         lat: 42.45988484015986,
         lng: -76.56026989999796,
         name: "Ian's Place",
-        description: "This is a description.",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisi mi, tempor in ligula a, blandit pulvinar ligula. Vestibulum auctor ante id ante viverra convallis. Donec sapien nibh, porta non tincidunt ac, tincidunt congue lectus. Fusce orci sapien, viverra non aliquet vitae, ullamcorper id sapien. Proin euismod sem ante, vitae blandit ante mollis id. Donec blandit mi a nunc tincidunt ultrices. In in ligula eu turpis placerat consectetur eget nec tortor. In sed augue sit amet lorem eleifend pharetra. Sed in lorem sit amet lectus consequat efficitur nec a lacus. Donec vel libero non urna condimentum ullamcorper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam luctus dui non augue pretium tincidunt. Nulla auctor orci eu tempor auctor. Fusce fringilla facilisis risus. Sed bibendum non diam non pulvinar. Quisque posuere nibh id dui eleifend, et tincidunt eros congue.",
         price: 322
       },
       {
@@ -55,7 +55,7 @@ module.exports = {
         lat: 42.32893691888589,
         lng: -83.07740481801518,
         name: "Michigan Central",
-        description: "This is a description.",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisi mi, tempor in ligula a, blandit pulvinar ligula. Vestibulum auctor ante id ante viverra convallis. Donec sapien nibh, porta non tincidunt ac, tincidunt congue lectus. Fusce orci sapien, viverra non aliquet vitae, ullamcorper id sapien. Proin euismod sem ante, vitae blandit ante mollis id. Donec blandit mi a nunc tincidunt ultrices. In in ligula eu turpis placerat consectetur eget nec tortor. In sed augue sit amet lorem eleifend pharetra. Sed in lorem sit amet lectus consequat efficitur nec a lacus. Donec vel libero non urna condimentum ullamcorper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam luctus dui non augue pretium tincidunt. Nulla auctor orci eu tempor auctor. Fusce fringilla facilisis risus. Sed bibendum non diam non pulvinar. Quisque posuere nibh id dui eleifend, et tincidunt eros congue.",
         price: 322
       },
       {
@@ -67,9 +67,58 @@ module.exports = {
         lat: 42.32893691888589,
         lng: -83.07740481801518,
         name: "Joshua Tree Desert Home",
-        description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium...",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisi mi, tempor in ligula a, blandit pulvinar ligula. Vestibulum auctor ante id ante viverra convallis. Donec sapien nibh, porta non tincidunt ac, tincidunt congue lectus. Fusce orci sapien, viverra non aliquet vitae, ullamcorper id sapien. Proin euismod sem ante, vitae blandit ante mollis id. Donec blandit mi a nunc tincidunt ultrices. In in ligula eu turpis placerat consectetur eget nec tortor. In sed augue sit amet lorem eleifend pharetra. Sed in lorem sit amet lectus consequat efficitur nec a lacus. Donec vel libero non urna condimentum ullamcorper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam luctus dui non augue pretium tincidunt. Nulla auctor orci eu tempor auctor. Fusce fringilla facilisis risus. Sed bibendum non diam non pulvinar. Quisque posuere nibh id dui eleifend, et tincidunt eros congue.",
         price: 555
       },
+      {
+        ownerId: 3,
+        address: "Fugazi Rd",
+        city: "Elmira",
+        state: "NY",
+        country: "USA",
+        lat: 42.32893691888589,
+        lng: -83.07740481801518,
+        name: "Cute little spot in Elmira",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisi mi, tempor in ligula a, blandit pulvinar ligula. Vestibulum auctor ante id ante viverra convallis. Donec sapien nibh, porta non tincidunt ac, tincidunt congue lectus. Fusce orci sapien, viverra non aliquet vitae, ullamcorper id sapien. Proin euismod sem ante, vitae blandit ante mollis id. Donec blandit mi a nunc tincidunt ultrices. In in ligula eu turpis placerat consectetur eget nec tortor. In sed augue sit amet lorem eleifend pharetra. Sed in lorem sit amet lectus consequat efficitur nec a lacus. Donec vel libero non urna condimentum ullamcorper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam luctus dui non augue pretium tincidunt. Nulla auctor orci eu tempor auctor. Fusce fringilla facilisis risus. Sed bibendum non diam non pulvinar. Quisque posuere nibh id dui eleifend, et tincidunt eros congue.",
+        price: 555
+      },
+      {
+        ownerId: 5,
+        address: "Lifeboat Rd",
+        city: "Halifax",
+        state: "NS",
+        country: "Canada",
+        lat: 42.32893691888589,
+        lng: -83.07740481801518,
+        name: "Cute little spot in Halifax",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisi mi, tempor in ligula a, blandit pulvinar ligula. Vestibulum auctor ante id ante viverra convallis. Donec sapien nibh, porta non tincidunt ac, tincidunt congue lectus. Fusce orci sapien, viverra non aliquet vitae, ullamcorper id sapien. Proin euismod sem ante, vitae blandit ante mollis id. Donec blandit mi a nunc tincidunt ultrices. In in ligula eu turpis placerat consectetur eget nec tortor. In sed augue sit amet lorem eleifend pharetra. Sed in lorem sit amet lectus consequat efficitur nec a lacus. Donec vel libero non urna condimentum ullamcorper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam luctus dui non augue pretium tincidunt. Nulla auctor orci eu tempor auctor. Fusce fringilla facilisis risus. Sed bibendum non diam non pulvinar. Quisque posuere nibh id dui eleifend, et tincidunt eros congue.",
+        price: 555
+      },
+      {
+        ownerId: 1,
+        address: "Lifeboat Rd",
+        city: "San Francisco",
+        state: "CA",
+        country: "USA",
+        lat: 42.32893691888589,
+        lng: -83.07740481801518,
+        name: "Private suite in charming house close to lake/train station",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisi mi, tempor in ligula a, blandit pulvinar ligula. Vestibulum auctor ante id ante viverra convallis. Donec sapien nibh, porta non tincidunt ac, tincidunt congue lectus. Fusce orci sapien, viverra non aliquet vitae, ullamcorper id sapien. Proin euismod sem ante, vitae blandit ante mollis id. Donec blandit mi a nunc tincidunt ultrices. In in ligula eu turpis placerat consectetur eget nec tortor. In sed augue sit amet lorem eleifend pharetra. Sed in lorem sit amet lectus consequat efficitur nec a lacus. Donec vel libero non urna condimentum ullamcorper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam luctus dui non augue pretium tincidunt. Nulla auctor orci eu tempor auctor. Fusce fringilla facilisis risus. Sed bibendum non diam non pulvinar. Quisque posuere nibh id dui eleifend, et tincidunt eros congue.",
+        price: 555
+      },
+      // {
+      //   ownerId: 6,
+      //   address: "Lifeboat Rd",
+      //   city: "Margaritaville",
+      //   state: "OR",
+      //   country: "USA",
+      //   lat: 42.32893691888589,
+      //   lng: -83.07740481801518,
+      //   name: "This historic Margaritaville, OR home is perfect",
+      //   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisi mi, tempor in ligula a, blandit pulvinar ligula. Vestibulum auctor ante id ante viverra convallis. Donec sapien nibh, porta non tincidunt ac, tincidunt congue lectus. Fusce orci sapien, viverra non aliquet vitae, ullamcorper id sapien. Proin euismod sem ante, vitae blandit ante mollis id. Donec blandit mi a nunc tincidunt ultrices. In in ligula eu turpis placerat consectetur eget nec tortor. In sed augue sit amet lorem eleifend pharetra. Sed in lorem sit amet lectus consequat efficitur nec a lacus. Donec vel libero non urna condimentum ullamcorper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam luctus dui non augue pretium tincidunt. Nulla auctor orci eu tempor auctor. Fusce fringilla facilisis risus. Sed bibendum non diam non pulvinar. Quisque posuere nibh id dui eleifend, et tincidunt eros congue.",
+      //   price: 555
+      // },
+
     ], {});
   },
 
