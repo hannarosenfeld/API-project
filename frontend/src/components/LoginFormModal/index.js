@@ -25,7 +25,7 @@ function LoginFormModal() {
   };
 
   const LoginAsDemoUser = async () => {
-     await dispatch(sessionActions.login({ credential: "demo-User", password: "passwort" }))
+     await dispatch(sessionActions.login({ credential: "user", password: "passwort" }))
     .then(closeModal())
   }
 
