@@ -65,6 +65,7 @@ function LoginFormModal() {
           <p style={{fontSize:"0.8em", color: "darkred"}}>{errors.credential}</p>
         )}
         <button
+        disabled={credential.length < 4 || password.length < 6 ? true : false}
         type="submit"
         style={{
           height: "3em",
