@@ -6,7 +6,8 @@ export default function SpotListItem({ spots }) {
         <div style={{
             display: "flex",
             justifyContent: "space-between",
-            flexWrap: "wrap"
+            flexWrap: "wrap",
+
         }}>
             {spots.map(spot => (
                 <div key={spot.id}

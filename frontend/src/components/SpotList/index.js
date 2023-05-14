@@ -17,7 +17,7 @@ export default function SpotList() {
     return (
         <div
             style={{
-                width: "75vw"
+                width: "80vw"
             }}
         >
             <SpotListItem spots={spots} />
