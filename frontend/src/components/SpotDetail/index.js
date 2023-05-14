@@ -113,7 +113,7 @@ export default function SpotDetail() {
                     <i className="fa-solid fa-star"></i>
                     {spot.avgStarRating ? `  ${spot.avgStarRating.toFixed(2)} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} ${spot.numReviews === 1 ? "review" : "reviews"}`}
                 </h4>
-                {user?.id !== spot.ownerId && reviews.find(review => review.User?.id === user?.id ) === undefined ? <OpenModalButton buttonText="Post Your Review" modalComponent={ <ReviewModal spotId={spotId} /> }/> : ''}
+                {user && user?.id !== spot.ownerId && reviews.find(review => review.User?.id === user?.id ) === undefined ? <OpenModalButton buttonText="Post Your Review" modalComponent={ <ReviewModal spotId={spotId} /> }/> : ''}
 
             <div className="spot-reviews-container" style={{margin: "2em 0",display: "flex", flexDirection: "column-reverse",gap: "3em"}}>
             {user && user?.id !== spot.ownerId && !reviews.length ? "Be the first to post a review!" : ''}
