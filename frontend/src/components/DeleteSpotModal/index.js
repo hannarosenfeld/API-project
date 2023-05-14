@@ -18,7 +18,7 @@ function DeleteSpotModal({ spotId }) {
         <h2>Confirm Delete</h2>
         <p>Are you sure you want to remove this spot from the listings?</p>
         <button
-            style={{width: "80%", height: "2em"}}
+            style={{width: "80%", height: "2em", backgroundColor: "darkred"}}
             onClick={() => handleDelete()}
         >
             Yes (Delete Spot)
