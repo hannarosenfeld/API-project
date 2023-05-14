@@ -110,7 +110,7 @@ export default function SpotDetail() {
             <div className="spot-reviews-section" style={{display: "flex", flexDirection: "column"}}>
                 <h4>
                     <i className="fa-solid fa-star"></i>
-                    {spot.avgStarRating ? `  ${spot.avgStarRating.toFixed(2)} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} reviews`}
+                    {spot.avgStarRating ? `  ${spot.avgStarRating.toFixed(2)} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} ${spot.numReviews === 1 ? "review" : "reviews"}`}
                 </h4>
                 {user?.id !== spot.ownerId && reviews.find(review => review.User?.id === user?.id ) === undefined ? <OpenModalButton buttonText="Post Your Review" modalComponent={ <ReviewModal spotId={spotId} /> }/> : ''}
 
