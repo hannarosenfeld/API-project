@@ -106,19 +106,6 @@ module.exports = {
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisi mi, tempor in ligula a, blandit pulvinar ligula. Vestibulum auctor ante id ante viverra convallis. Donec sapien nibh, porta non tincidunt ac, tincidunt congue lectus. Fusce orci sapien, viverra non aliquet vitae, ullamcorper id sapien. Proin euismod sem ante, vitae blandit ante mollis id. Donec blandit mi a nunc tincidunt ultrices. In in ligula eu turpis placerat consectetur eget nec tortor. In sed augue sit amet lorem eleifend pharetra. Sed in lorem sit amet lectus consequat efficitur nec a lacus. Donec vel libero non urna condimentum ullamcorper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam luctus dui non augue pretium tincidunt. Nulla auctor orci eu tempor auctor. Fusce fringilla facilisis risus. Sed bibendum non diam non pulvinar. Quisque posuere nibh id dui eleifend, et tincidunt eros congue.",
         price: 555
       },
-      // {
-      //   ownerId: 6,
-      //   address: "Lifeboat Rd",
-      //   city: "Margaritaville",
-      //   state: "OR",
-      //   country: "USA",
-      //   lat: 42.32893691888589,
-      //   lng: -83.07740481801518,
-      //   name: "This historic Margaritaville, OR home is perfect",
-      //   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisi mi, tempor in ligula a, blandit pulvinar ligula. Vestibulum auctor ante id ante viverra convallis. Donec sapien nibh, porta non tincidunt ac, tincidunt congue lectus. Fusce orci sapien, viverra non aliquet vitae, ullamcorper id sapien. Proin euismod sem ante, vitae blandit ante mollis id. Donec blandit mi a nunc tincidunt ultrices. In in ligula eu turpis placerat consectetur eget nec tortor. In sed augue sit amet lorem eleifend pharetra. Sed in lorem sit amet lectus consequat efficitur nec a lacus. Donec vel libero non urna condimentum ullamcorper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam luctus dui non augue pretium tincidunt. Nulla auctor orci eu tempor auctor. Fusce fringilla facilisis risus. Sed bibendum non diam non pulvinar. Quisque posuere nibh id dui eleifend, et tincidunt eros congue.",
-      //   price: 555
-      // },
-
     ], {});
   },
 
