@@ -21,7 +21,7 @@ export default function ReviewModal({ spotId }) {
 
         const payload = {
             review,
-            activeRating
+            stars: activeRating
         }
 
         setErrors({});
@@ -93,7 +93,10 @@ export default function ReviewModal({ spotId }) {
                     </div>
                     </div>
             </div>
-            <button style={{padding: "0.5em", height: "2em", margin: "1em"}}>Submit your Review</button>
+            <button
+                style={{padding: "0.5em", height: "2em", margin: "1em"}}
+                disabled={review.length < 10 ? true : false}
+            >Submit your Review</button>
             </form>
         </div>
     )
