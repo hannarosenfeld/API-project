@@ -16,15 +16,15 @@ function DeleteReviewModal({ reviewId }) {
   return (
     <div style={{display: "flex", flexDirection: "column", gap:"1em", alignItems: "center", padding: "2em"}}>
         <h2>Confirm Delete</h2>
-        <p>Are you sure you want to remove this spot from the listings?</p>
+        <p>Are you sure you want to delete this review?</p>
         <button
-            style={{width: "80%", height: "2em"}}
+            style={{width: "80%", height: "2em", backgroundColor: "darkred", color: "var(--white)"}}
             onClick={() => handleDelete()}
         >
             Yes (Delete Review)
         </button>
         <button
-            style={{width: "80%", height: "2em"}}
+            style={{width: "80%", height: "2em", backgroundColor: "darkgray"}}
             onClick={() => closeModal()}
         >
             No (Keep Review)

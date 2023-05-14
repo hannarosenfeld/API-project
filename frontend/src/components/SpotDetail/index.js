@@ -7,6 +7,7 @@ import OpenModalButton from "../OpenModalButton";
 import { getReviews,  deleteReview } from "../../store/reviews";
 import "./SpotDetail.css"
 import { getOneUser } from "../../store/user";
+import DeleteReviewModal from "../DeleteReviewModal";
 
 
 export default function SpotDetail() {
@@ -121,7 +122,7 @@ export default function SpotDetail() {
                                 <div>{review.User.username}</div>
                                 <div>{review.createdAt.slice(5,7)} {review.createdAt.slice(0,4)}</div>
                                 <div>{review.review}</div>
-                                {user?.id === review.User.id ? <button style={{width: "5em", height: "2em"}} onClick={() => dispatch(deleteReview(review.id))}>Delete</button> : ""}
+                                {user?.id === review.User.id ? <OpenModalButton style={{width: "5em", height: "2em"}} buttonText="Delete" modalComponent={<DeleteReviewModal reviewId={review.id}/>}>Delete</OpenModalButton> : ""}
                             </div>
                         ))}
             </div>
