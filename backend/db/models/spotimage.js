@@ -22,13 +22,6 @@ module.exports = (sequelize, DataTypes) => {
     spotId: DataTypes.INTEGER,
     url:{
       type: DataTypes.STRING,
-       validate: {
-        isValidImageFormat(url) {
-          if (!url.endsWith(".png") || !url.endsWith(".jpeg") || !url.endsWith(".jpg") ) {
-            throw new Error("Image URL must end in .png, .jpg, or .jpeg")
-          }
-        }
-      }
     },
     preview: DataTypes.BOOLEAN
   }, {
