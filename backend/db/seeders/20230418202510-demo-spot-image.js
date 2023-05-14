@@ -218,36 +218,6 @@ module.exports = {
         url: "https://a0.muscache.com/im/pictures/miso/Hosting-1197834/original/64124018-b7b9-4d13-ae01-f16ed0112b2c.jpeg",
         preview: false
       },
-
-
-      // Stephs House
-      // {
-      //   spotId: 9,
-      //   url: "https://scontent-ord5-1.xx.fbcdn.net/v/t39.30808-6/345615188_1425120031594977_8985510951983231655_n.jpg",
-      //   preview: true
-      // },
-      // {
-      //   spotId: 9,
-      //   url: "https://scontent-ord5-2.xx.fbcdn.net/v/t39.30808-6/345618423_281527130993345_7760325795135431114_n.jpg",
-      //   preview: false
-      // },
-      // {
-      //   spotId: 9,
-      //   url: "https://scontent-ord5-1.xx.fbcdn.net/v/t39.30808-6/345469637_168235099231823_4275824232279880508_n.jpg",
-      //   preview: false
-      // },
-      // {
-      //   spotId: 9,
-      //   url: "https://scontent-ord5-2.xx.fbcdn.net/v/t39.30808-6/345630275_1598326970578291_5813293460876944142_n.jpg",
-      //   preview: false
-      // },
-      // {
-      //   spotId: 9,
-      //   url: "https://scontent-ord5-2.xx.fbcdn.net/v/t39.30808-6/345272453_222954250370159_5120235918828661230_n.jpg",
-      //   preview: false
-      // },
-
-
     ], {});
   },
 
