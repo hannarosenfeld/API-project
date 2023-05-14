@@ -24,7 +24,7 @@ export default function SpotDetail() {
     useEffect(() => {
         dispatch(getOneSpot(spotId))
         dispatch(getReviews(spotId))
-    }, [dispatch, spotId, spot.avgStarRating])
+    }, [dispatch, spotId])
 
     if (!spot || !spot.Owner || !spot.spotImages) {
         return(
