@@ -50,7 +50,7 @@ module.exports = {
         lastName: "Witch",
         email: 'witch@lifeboat.io',
         username: 'whichwitch',
-        hashedPassword: bcrypt.hashSync('passworttt')
+        hashedPassword: bcrypt.hashSync('passwortttt')
       }
     ], {});
   },
