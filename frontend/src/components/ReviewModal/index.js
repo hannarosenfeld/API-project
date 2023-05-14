@@ -14,7 +14,8 @@ export default function ReviewModal({ spotId }) {
 
     useEffect(() => {
       setActiveRating(rating);
-    }, [rating]);
+      setReview(review)
+    }, [rating, review, dispatch]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
