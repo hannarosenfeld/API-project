@@ -34,7 +34,11 @@ export default function NewSpotForm() {
     const updatePrice = (e) => setPrice(e.target.value);
     const updatePreviewImage = (e) => setPreviewImage(e.target.value);
 
+    const [hasSubmitted, setHasSubmitted] = useState(false);
+
+
     useEffect(() => {
+        if (hasSubmitted) {
 		const errors = {};
 		if (!country.length) {
 			errors.country = "Country is required"
@@ -76,6 +80,7 @@ export default function NewSpotForm() {
 			errors.photoFour = "Image URL must end in .png, .jpg, or .jpeg"
 		}
 		setErrors(errors);
+    }
 	}, [
         title,
         country,
@@ -94,6 +99,7 @@ export default function NewSpotForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        setHasSubmitted(true)
         const payload = {
             name: title,
             country,
@@ -124,6 +130,9 @@ export default function NewSpotForm() {
         let createdSpot = payload;
 
         const response = await dispatch(createSpot(createdSpot))
+
+        console.log(response.errors)
+
         if (!response.errors) {
             await dispatch(createSpotImage(response.id, images))
             history.push(`/spots/${response.id}`);
@@ -289,6 +298,7 @@ in search results.</p>
                                 value={photoOne}
                                 onChange={(e) => setPhotoOne(e.target.value)}
                                 accept="image/png, image/jpg, image/jpeg"
+                                required
                             ></input>
                             <span className="error">{errors.photoOne ? errors.photoOne : ""}</span>
                             <input
@@ -297,6 +307,7 @@ in search results.</p>
                                 value={photoTwo}
                                 onChange={(e) => setPhotoTwo(e.target.value)}
                                 accept="image/png, image/jpg, image/jpeg"
+                                required
                             ></input>
                             <span className="error">{errors.photoTwo ? errors.photoTwo : ""}</span>
                             <input
@@ -305,6 +316,7 @@ in search results.</p>
                                 value={photoThree}
                                 onChange={(e) => setPhotoThree(e.target.value)}
                                 accept="image/png, image/jpg, image/jpeg"
+                                required
                             ></input>
                             <span className="error">{errors.photoThree ? errors.photoThree : ""}</span>
                             <input
@@ -313,6 +325,7 @@ in search results.</p>
                                 value={photoFour}
                                 onChange={(e) => setPhotoFour(e.target.value)}
                                 accept="image/png, image/jpg, image/jpeg"
+                                required
                             ></input>
                             <span className="error">{errors.photoFour ? errors.photoFour : ""}</span>
                         </div>

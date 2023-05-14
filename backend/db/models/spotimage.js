@@ -20,7 +20,16 @@ module.exports = (sequelize, DataTypes) => {
   }
   SpotImage.init({
     spotId: DataTypes.INTEGER,
-    url: DataTypes.STRING,
+    url:{
+      type: DataTypes.STRING,
+       validate: {
+        isValidImageFormat(url) {
+          if (!url.endsWith(".png") || !url.endsWith(".jpeg") || !url.endsWith(".jpg") ) {
+            throw new Error("Image URL must end in .png, .jpg, or .jpeg")
+          }
+        }
+      }
+    },
     preview: DataTypes.BOOLEAN
   }, {
     sequelize,
