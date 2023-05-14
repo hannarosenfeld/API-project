@@ -13,19 +13,19 @@ module.exports = {
       {
         spotId: 3,
         userId: 1,
-        review: "cute",
+        review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         stars: 4
       },
       {
         spotId: 1,
         userId: 2,
-        review: "cute",
+        review: "Phasellus nisi mi, tempor in ligula a, blandit pulvinar ligula.",
         stars: 3
       },
       {
         spotId: 1,
         userId: 3,
-        review: "amazing",
+        review: "Vestibulum auctor ante id ante viverra convallis. Donec sapien nibh, porta non tincidunt ac, tincidunt congue lectus.",
         stars: 5
       },
     ], {});
