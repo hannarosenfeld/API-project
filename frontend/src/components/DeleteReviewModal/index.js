@@ -4,13 +4,13 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deleteReview } from "../../store/reviews";
 
-function DeleteReviewModal({ reviewId }) {
+function DeleteReviewModal({ reviewId, spotId }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
   function handleDelete(){
     closeModal()
-    dispatch(deleteReview(reviewId))
+    dispatch(deleteReview(reviewId, spotId))
   }
 
   return (
