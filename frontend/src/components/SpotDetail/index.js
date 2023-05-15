@@ -20,16 +20,10 @@ export default function SpotDetail() {
 
     const reviews = Object.values(reviewsObj)
 
-    console.log(reviews)
-
     useEffect(() => {
         dispatch(getOneSpot(spotId))
         dispatch(getReviews(spotId))
     }, [])
-
-        useEffect(() => {
-        dispatch(getReviews(spotId))
-    }, [reviews])
 
 
     if (!spot || !spot.Owner || !spot.spotImages) {
@@ -127,7 +121,7 @@ export default function SpotDetail() {
                                 <div>{review.User.username}</div>
                                 <div>{review.createdAt.slice(5,7)} {review.createdAt.slice(0,4)}</div>
                                 <div>{review.review}</div>
-                                {user?.id === review.User.id ? <OpenModalButton style={{width: "5em", height: "2em"}} buttonText="Delete" modalComponent={<DeleteReviewModal reviewId={review.id}/>}>Delete</OpenModalButton> : ""}
+                                {user?.id === review.User.id ? <OpenModalButton style={{width: "5em", height: "2em"}} buttonText="Delete" modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId}/>}>Delete</OpenModalButton> : ""}
                             </div>
                         ))}
             </div>

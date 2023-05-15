@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf";
+import { getReviews } from "./reviews";
 
 export const LOAD_SPOTS = 'spots/LOAD_SPOTS';
 export const RECEIVE_SPOT = 'spots/RECEIVE_SPOT';
@@ -114,15 +115,17 @@ export const getAllSpots = () => async dispatch => {
 }
 
 export const createReview = (spotId, review) => async (dispatch) => {
-  console.log("++++++++++=spotId and review:",spotId, review)
   const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(review)
   })
+  console.log(res)
   if (res.ok) {
     const newReview = await res.json();
     dispatch(addReview(newReview))
+    dispatch(getReviews(spotId))
+    dispatch(getOneSpot(spotId))
     return newReview;
   } else {
     const err = res.json();
@@ -176,15 +179,20 @@ const spotsReducer = (state = initialState, action) => {
         }
         return {
           ...state,
+
           [action.spot.id]: {
             ...state[action.spot.id],
             ...action.spot
           }
         };
         case ADD_REVIEW: {
-          // ?
+          return {
+            ...state,
+            [action.review.id]: action.review
+          };
         }
         case UPDATE_SPOT:
+          console.log("action",action)
           return {
             ...state,
             [action.spot.id]: action.spot

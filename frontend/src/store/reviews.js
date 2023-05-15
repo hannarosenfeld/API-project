@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf";
+import { getOneSpot } from "./spots";
 
 export const LOAD_REVIEWS = 'reviews/LOAD_REVIEWS'
 export const DELETE_REVIEW = 'reviews/DELETE_REVIEW'
@@ -43,13 +44,15 @@ export const getReviewsByUser = (userId) => async (dispatch) => {
     }
 }
 
-export const deleteReview = (reviewId) => async dispatch => {
+export const deleteReview = (reviewId, spotId) => async dispatch => {
   const response = await csrfFetch(`/api/reviews/${reviewId}`, {
     method: 'DELETE'
   })
 
   if (response.ok) {
     dispatch(removeReview(reviewId))
+    dispatch(getReviews(spotId))
+    dispatch(getOneSpot(spotId))
   }
 }
 
