@@ -47,9 +47,8 @@ export default function ReviewModal({ reviewToEdit, reviewId, user, spot }) {
                     required
                     style={{height: "17em", background: "aliceblue", marginBottom: "2em"}}
                     onChange={(e) => setReview(e.target.value)}
-                    placeholder={review}
                     minlength="10"
-                />
+                >{review}</textarea>
             <div className="stars" style={{margin: "0 auto"}}>
                 <div className="rating-input" style={{display: "flex"}}>
                     <div
