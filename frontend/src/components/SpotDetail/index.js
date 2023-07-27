@@ -8,7 +8,7 @@ import { getReviews,  deleteReview } from "../../store/reviews";
 import "./SpotDetail.css"
 import { getOneUser } from "../../store/user";
 import DeleteReviewModal from "../DeleteReviewModal";
-
+import UpdateReviewModal from "../UpdateReviewModal";
 
 export default function SpotDetail() {
     const dispatch = useDispatch();
@@ -116,14 +116,46 @@ export default function SpotDetail() {
 
             <div className="spot-reviews-container" style={{margin: "2em 0",display: "flex", flexDirection: "column-reverse",gap: "3em"}}>
             {user && user?.id !== spot.ownerId && !reviews.length ? "Be the first to post a review!" : ''}
-                        {reviews.map(review => (
-                            <div style={{display: "flex", flexDirection: "column"}}>
-                                <div>{review.User.username}</div>
-                                <div>{review.createdAt.slice(5,7)} {review.createdAt.slice(0,4)}</div>
-                                <div>{review.review}</div>
-                                {user?.id === review.User.id ? <OpenModalButton style={{width: "5em", height: "2em"}} buttonText="Delete" modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId}/>}>Delete</OpenModalButton> : ""}
-                            </div>
-                        ))}
+            {reviews.map((review) => (
+  <div style={{ display: "flex", flexDirection: "column" }}>
+    <div>{review?.User?.username}</div>
+    <div>
+      {review?.createdAt?.slice(5, 7)} {review.createdAt.slice(0, 4)}
+    </div>
+    <div>{review?.review}</div>
+    <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
+      <div>
+        {user?.id === review?.User?.id ? (
+          <OpenModalButton
+            style={{ width: "5em", height: "2em" }}
+            buttonText="Delete"
+            modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} />}
+          >
+            Delete
+          </OpenModalButton>
+        ) : (
+          ""
+        )}
+      </div>
+      <div>
+        {user?.id === review?.User?.id ? (
+          <OpenModalButton
+            style={{ width: "5em", height: "2em" }}
+            buttonText="Update"
+            modalComponent={
+              <UpdateReviewModal reviewToEdit={review} reviewId={review.id} user={user} spot={spot} />
+            }
+          >
+            Update
+          </OpenModalButton>
+        ) : (
+          ""
+        )}
+      </div>
+    </div>
+  </div>
+))}
+
             </div>
             </div>
         </div>
