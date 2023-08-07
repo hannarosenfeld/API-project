@@ -43,3 +43,24 @@ body {
     margin: 1em 0;
     padding: 0.5em;
 }
+
+.booking-section {
+    border: 1px solid rgb(168, 168, 168) !important;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 8px;
+    text-align: left !important;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.check-in, .checkout {
+    text-align: left !important;
+    float: left !important;
+    padding: 5px;
+}
+
+.checkout {
+    border-left: 1px solid rgb(168, 168, 168);
+    width: 49%;
+}

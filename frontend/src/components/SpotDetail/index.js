@@ -9,6 +9,7 @@ import "./SpotDetail.css"
 import { getOneUser } from "../../store/user";
 import DeleteReviewModal from "../DeleteReviewModal";
 import UpdateReviewModal from "../UpdateReviewModal";
+import Calendar from "../Calendar";
 
 export default function SpotDetail() {
     const dispatch = useDispatch();
@@ -80,7 +81,7 @@ export default function SpotDetail() {
                  <div style={{
                     display: "flex",
                     flexDirection: "column",
-                    border: "2px solid black",
+                    border: "1px solid rgb(168, 168, 168)",
                     width: "30%",
                     borderRadius: "1em",
                     alignSelf: "center",
@@ -95,11 +96,23 @@ export default function SpotDetail() {
                         <h2>${spot.price} night</h2>
                         <span><i class="fa-solid fa-star"></i>{spot.avgStarRating ? `  ${spot.avgStarRating.toFixed(2)} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} ${spot.numReviews === 1 ? "review" : "reviews"}`}</span>
                     </div>
+                    {/* Booking Section */}
+                    <div className="booking-section">
+                      <div className="check-in">
+                        <div style={{fontWeight: "bold", fontSize: "12px"}}>CHECK-IN</div>
+                        <div>9/17/2023</div>
+                      </div>
+                      <div className="checkout">
+                        <div style={{fontWeight: "bold", fontSize: "12px"}}>CHECKOUT</div>
+                        <div>9/23/2023</div>
+                      </div>
+                    </div>
+
                     <button
                     style={{
                         width: "100%",
                         height: "3em",
-                        borderRadius: "1em",
+                        borderRadius: "8px",
                         backgroundColor: "var(--airbnb)",
                         color: "var(--white)"
                     }}
