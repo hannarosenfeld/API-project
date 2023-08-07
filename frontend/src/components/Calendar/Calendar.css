@@ -1,0 +1,92 @@
+.cal-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.wrapper {
+    width: 100%;
+    border: 2px solid red;
+    border-radius: 8px;
+}
+
+.wrapper header {
+    display: flex;
+    align-items: center;
+    padding: 25px 30px 10px;
+    justify-content: space-between;
+}
+
+header .current-date {
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+header .icons i {
+    height: 38px;
+    width: 38px;
+    margin: 0 1px;
+    text-align: center;
+    line-height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+header .icons i:hover {
+    background: #f2f2f2;
+}
+
+header .icons i:last-child {
+    margin-right: -10px;
+}
+
+.calendar {
+    padding: 20px;
+}
+
+.calendar ul {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+.calendar .days {
+    margin-bottom: 20px;
+}
+
+.calendar .weeks li {
+    font-weight: bolder;
+}
+
+.calendar .days li {
+    z-index: 1;
+    cursor: pointer;
+    margin-top: 30px;
+}
+
+.calendar ul li {
+    position: relative;
+    width: calc(100% / 7);
+    margin-left: 0;
+}
+
+.calendar .days li::before {
+    position: absolute;
+    content: "";
+    height: 40px;
+    width: 40px;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.days li:hover::before {
+    background: #f2f2f2;
+}
+
+.days li.inactive {
+    color: #aaa;
+}
