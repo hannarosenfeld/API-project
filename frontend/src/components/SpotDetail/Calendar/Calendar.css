@@ -69,7 +69,8 @@ header .icons i:last-child {
 .calendar .days li {
     z-index: 1;
     cursor: pointer;
-    margin-top: 30px;
+    margin-top: 15px;
+    padding: 10px 0;
 }
 
 .calendar ul li {
@@ -96,6 +97,7 @@ header .icons i:last-child {
 
 .days li.inactive {
     color: #aaa;
+    cursor: auto;
 }
 
 .icons .inactive, .icons .inactive:hover {
@@ -127,12 +129,25 @@ header .icons i:last-child {
     transition: background 0.3s ease-in-out; /* Add transition effect */
 }
 
-.calendar .days li.checkin::before {
+.calendar .days li.checkin::before, .days li.checkout-date::before{
     background: black; /* Change the background color for the selected day */
     opacity: 1; /* Show the pseudo-element */
 }
-.calendar .days li.checkin {
+.calendar .days li.checkin, .days li.checkout-date {
     color: #FFFFFF!important; /* Set the text color to white for the selected day */
+    background-color: #e7e3e3d5 !important
+}
+.calendar .days li.checkin {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
 }
 
-/* ... (Your existing CSS rules) ... */
+.days li.checkout-date {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+.days li.stay-days {
+    background-color: #e7e3e3d5;
+}
+

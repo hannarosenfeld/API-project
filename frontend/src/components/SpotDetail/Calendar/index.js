@@ -10,27 +10,36 @@ export default function Calendar() {
     const [leftDays, setLeftDays] = useState([]);
     const [rightDays, setRightDays] = useState([]);
     const [checkinDate, setCheckinDate] = useState(null);
+    const [checkoutDate, setCheckoutDate] = useState(null);
+
+    console.log("🪺 checkin: ", checkinDate)
+    console.log("🪹 checkout: ", checkoutDate)
 
     const renderMonthDays = (year, month) => {
         const firstDayOfMonth = new Date(year, month, 1).getDay();
         const lastDateOfMonth = new Date(year, month + 1, 0).getDate();
-
+        
         const daysArray = [];
-
+        
         for (let i = 1; i <= lastDateOfMonth; i++) {
-            const isToday = i === currentDate.getDate() && month === currentDate.getMonth() && year === currentDate.getFullYear() ? "active" : "";
-            const isInactive = new Date(year, month, i) < currentDate && !isToday;
-
+            const dayDate = new Date(year, month, i);
+            const isToday = dayDate.toDateString() === currentDate.toDateString();
+            const isActive = dayDate >= currentDate || dayDate.toDateString() === currentDate.toDateString();
+            const isBetween = checkinDate && checkoutDate && dayDate > checkinDate && dayDate < checkoutDate;
+        
             daysArray.push({
                 day: i,
-                inactive: isInactive,
+                inactive: !isActive,
                 istoday: isToday,
-                isCheckin: checkinDate && checkinDate.getDate() === i && checkinDate.getMonth() === month && checkinDate.getFullYear() === year,
+                isCheckin: checkinDate && checkinDate.toDateString() === dayDate.toDateString(),
+                isCheckout: checkoutDate && checkoutDate.toDateString() === dayDate.toDateString(),
+                isStayDay: isBetween,
             });
         }
-
+        
         return daysArray;
     };
+    
 
     useEffect(() => {
         setLeftDays(renderMonthDays(currYear, currMonth));
@@ -38,7 +47,7 @@ export default function Calendar() {
         const nextMonth = (currMonth + 1) % 12;
         const nextYear = nextMonth === 0 ? currYear + 1 : currYear;
         setRightDays(renderMonthDays(nextYear, nextMonth));
-    }, [currYear, currMonth, checkinDate]);
+    }, [currYear, currMonth, checkinDate, checkoutDate]);
 
     const leftCurrentDate = `${months[currMonth]} ${currYear}`;
     const rightCurrentDate = `${months[(currMonth + 1) % 12]} ${currMonth + 1 > 11 ? currYear + 1 : currYear}`;
@@ -59,10 +68,14 @@ export default function Calendar() {
 
     const handleDayClick = (day, month, year) => {
         const selectedDate = new Date(year, month, day);
-        setCheckinDate(selectedDate);
+
+        if (!checkinDate || (checkoutDate && selectedDate <= checkinDate)) {
+            setCheckinDate(selectedDate);
+            setCheckoutDate(null);
+        } else if (!checkoutDate || selectedDate >= checkinDate) {
+            setCheckoutDate(selectedDate);
+        }
     };
-    
-    
 
     return (
         <div className="cal-body">
@@ -91,8 +104,8 @@ export default function Calendar() {
                         {leftDays.map((dayObj) => (
                             <li
                                 key={dayObj.day}
-                                className={`${dayObj.inactive ? "inactive" : ""} ${dayObj.isCheckin ? "checkin" : ""}`}
-                                onClick={() => !dayObj.inactive && handleDayClick(dayObj.day, currMonth, currYear)}
+                                className={`${dayObj.inactive ? "inactive" : ""} ${dayObj.isCheckin ? "checkin" : ""} ${dayObj.isCheckout ? "checkout-date" : ""} ${dayObj.isStayDay ? "stay-days" : ""}`}
+                                onClick={() => handleDayClick(dayObj.day, currMonth, currYear)}
                             >
                                 {dayObj.day}
                             </li>
@@ -122,8 +135,8 @@ export default function Calendar() {
                         {rightDays.map((dayObj) => (
                             <li
                                 key={dayObj.day}
-                                className={`${dayObj.inactive ? "inactive" : ""} ${dayObj.isCheckin ? "checkin" : ""}`}
-                                onClick={() => !dayObj.inactive && handleDayClick(dayObj.day, (currMonth + 1) % 12, currMonth + 1 > 11 ? currYear + 1 : currYear)}
+                                className={`${dayObj.inactive ? "inactive" : ""} ${dayObj.isCheckin ? "checkin" : ""} ${dayObj.isCheckout ? "checkout-date" : ""} ${dayObj.isStayDay ? "stay-days" : ""}`}
+                                onClick={() => handleDayClick(dayObj.day, (currMonth + 1) % 12, currMonth + 1 > 11 ? currYear + 1 : currYear)}
                             >
                                 {dayObj.day}
                             </li>
