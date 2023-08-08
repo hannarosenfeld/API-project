@@ -59,10 +59,10 @@ export default function Calendar() {
 
     const handleDayClick = (day, month, year) => {
         const selectedDate = new Date(year, month, day);
-        if (selectedDate >= currentDate) {
-            setCheckinDate(selectedDate);
-        }
+        setCheckinDate(selectedDate);
     };
+    
+    
 
     return (
         <div className="cal-body">
