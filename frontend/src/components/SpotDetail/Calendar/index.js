@@ -9,6 +9,7 @@ export default function Calendar() {
     const [currMonth, setCurrMonth] = useState(currentDate.getMonth());
     const [leftDays, setLeftDays] = useState([]);
     const [rightDays, setRightDays] = useState([]);
+    const [checkinDate, setCheckinDate] = useState(null);
 
     const renderMonthDays = (year, month) => {
         const firstDayOfMonth = new Date(year, month, 1).getDay();
@@ -18,10 +19,13 @@ export default function Calendar() {
 
         for (let i = 1; i <= lastDateOfMonth; i++) {
             const isToday = i === currentDate.getDate() && month === currentDate.getMonth() && year === currentDate.getFullYear() ? "active" : "";
+            const isInactive = new Date(year, month, i) < currentDate && !isToday;
+
             daysArray.push({
                 day: i,
-                inactive: false,
+                inactive: isInactive,
                 istoday: isToday,
+                isCheckin: checkinDate && checkinDate.getDate() === i && checkinDate.getMonth() === month && checkinDate.getFullYear() === year,
             });
         }
 
@@ -34,7 +38,7 @@ export default function Calendar() {
         const nextMonth = (currMonth + 1) % 12;
         const nextYear = nextMonth === 0 ? currYear + 1 : currYear;
         setRightDays(renderMonthDays(nextYear, nextMonth));
-    }, [currYear, currMonth]);
+    }, [currYear, currMonth, checkinDate]);
 
     const leftCurrentDate = `${months[currMonth]} ${currYear}`;
     const rightCurrentDate = `${months[(currMonth + 1) % 12]} ${currMonth + 1 > 11 ? currYear + 1 : currYear}`;
@@ -53,16 +57,23 @@ export default function Calendar() {
         }
     };
 
+    const handleDayClick = (day, month, year) => {
+        const selectedDate = new Date(year, month, day);
+        if (selectedDate >= currentDate) {
+            setCheckinDate(selectedDate);
+        }
+    };
+
     return (
         <div className="cal-body">
             <div className="wrapper">
                 <header>
                     <div className="icons">
-                    {currYear === currentDate.getFullYear() && currMonth === currentDate.getMonth() ? (
-                        <i className="fa-solid fa-chevron-left inactive"></i>
-                    ) : (
-                        <i onClick={() => handleClick("prev")} className="fa-solid fa-chevron-left"></i>
-                    )}
+                        {currYear === currentDate.getFullYear() && currMonth === currentDate.getMonth() ? (
+                            <i className="fa-solid fa-chevron-left inactive"></i>
+                        ) : (
+                            <i onClick={() => handleClick("prev")} className="fa-solid fa-chevron-left"></i>
+                        )}
                     </div>
                     <p className="current-date">{leftCurrentDate}</p>
                 </header>
@@ -78,7 +89,11 @@ export default function Calendar() {
                     </ul>
                     <ul className="days">
                         {leftDays.map((dayObj) => (
-                            <li key={dayObj.day} className={dayObj.inactive ? "inactive" : ""}>
+                            <li
+                                key={dayObj.day}
+                                className={`${dayObj.inactive ? "inactive" : ""} ${dayObj.isCheckin ? "checkin" : ""}`}
+                                onClick={() => !dayObj.inactive && handleDayClick(dayObj.day, currMonth, currYear)}
+                            >
                                 {dayObj.day}
                             </li>
                         ))}
@@ -105,7 +120,11 @@ export default function Calendar() {
                     </ul>
                     <ul className="days">
                         {rightDays.map((dayObj) => (
-                            <li key={dayObj.day} className={dayObj.inactive ? "inactive" : ""}>
+                            <li
+                                key={dayObj.day}
+                                className={`${dayObj.inactive ? "inactive" : ""} ${dayObj.isCheckin ? "checkin" : ""}`}
+                                onClick={() => !dayObj.inactive && handleDayClick(dayObj.day, (currMonth + 1) % 12, currMonth + 1 > 11 ? currYear + 1 : currYear)}
+                            >
                                 {dayObj.day}
                             </li>
                         ))}

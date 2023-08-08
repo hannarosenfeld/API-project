@@ -103,3 +103,36 @@ header .icons i:last-child {
     background-color: transparent;
     cursor:not-allowed;
 }
+
+/* ... (Your existing CSS rules) ... */
+
+.calendar .days li {
+    position: relative;
+    width: calc(100% / 7);
+    margin-left: 0;
+}
+
+.calendar .days li::before {
+    position: absolute;
+    content: "";
+    height: 40px;
+    width: 40px;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent; /* Set the initial background color to transparent */
+    opacity: 0; /* Hide the pseudo-element by default */
+    transition: background 0.3s ease-in-out; /* Add transition effect */
+}
+
+.calendar .days li.checkin::before {
+    background: black; /* Change the background color for the selected day */
+    opacity: 1; /* Show the pseudo-element */
+}
+.calendar .days li.checkin {
+    color: #FFFFFF!important; /* Set the text color to white for the selected day */
+}
+
+/* ... (Your existing CSS rules) ... */
