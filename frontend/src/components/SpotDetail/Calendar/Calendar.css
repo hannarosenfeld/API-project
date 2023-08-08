@@ -3,24 +3,26 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    height: 320px;
 }
 
 .wrapper {
     width: 100%;
-    border: 2px solid red;
     border-radius: 8px;
+    margin: 10px;
 }
 
 .wrapper header {
     display: flex;
     align-items: center;
-    padding: 25px 30px 10px;
+    /* padding: 25px 30px 10px; */
     justify-content: space-between;
 }
 
 header .current-date {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bolder;
+    margin: 0 auto;
 }
 
 header .icons i {
@@ -42,7 +44,8 @@ header .icons i:last-child {
 }
 
 .calendar {
-    padding: 20px;
+    /* padding: 20px; */
+    font-size: 13px;
 }
 
 .calendar ul {
@@ -53,10 +56,14 @@ header .icons i:last-child {
 
 .calendar .days {
     margin-bottom: 20px;
+    font-size: 13px;
+    height: 200px;
 }
 
 .calendar .weeks li {
     font-weight: bolder;
+    font-size: 11px;
+    margin-bottom: -30px;
 }
 
 .calendar .days li {

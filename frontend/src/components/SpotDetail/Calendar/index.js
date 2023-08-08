@@ -65,33 +65,61 @@ export default function Calendar() {
 
     return(
         <div className="cal-body">
-        <div className="wrapper">
-            <header>
-                <p className="current-date">{currentDate}</p>
-                <div className="icons">
-                    {currMonth !== date.getMonth() && (<i onClick={() => handleClick("prev")} className="fa-solid fa-chevron-left"></i>)}
-                    <i onClick={() => handleClick("next")} className="fa-solid fa-chevron-right"></i>
+            <div className="wrapper">
+                <header>
+                    <div className="icons">
+                        {currMonth === date.getMonth() && (<i onClick={() => handleClick("prev")} className="fa-solid fa-chevron-left inactive"></i>)}
+                        {currMonth !== date.getMonth() && (<i onClick={() => handleClick("prev")} className="fa-solid fa-chevron-left"></i>)}
+
+                    </div>
+                    <p className="current-date">{currentDate}</p>
+                </header>
+                <div className="calendar">
+                    <ul className="weeks">
+                        <li>Sun</li>
+                        <li>Mon</li>
+                        <li>Tue</li>
+                        <li>Wed</li>
+                        <li>Thu</li>
+                        <li>Fri</li>
+                        <li>Sat</li>
+                    </ul>
+                    <ul className="days">
+                        {days?.map(dayObj => (
+                            <li key={dayObj.day} className={dayObj.inactive ? "inactive" : ""}>
+                                {dayObj.day}
+                            </li>
+                        ))}
+                    </ul>
                 </div>
-            </header>
-            <div className="calendar">
-                <ul className="weeks">
-                    <li>Sun</li>
-                    <li>Mon</li>
-                    <li>Tue</li>
-                    <li>Wed</li>
-                    <li>Thu</li>
-                    <li>Fri</li>
-                    <li>Sat</li>
-                </ul>
-                <ul className="days">
-                    {days?.map(dayObj => (
-                        <li key={dayObj.day} className={dayObj.inactive ? "inactive" : ""}>
-                            {dayObj.day}
-                        </li>
-                    ))}
-                </ul>
+            </div>
+            <div className="wrapper">
+                <header>
+                    <p className="current-date">{currentDate}</p>
+                    <div className="icons">
+                        <i onClick={() => handleClick("next")} className="fa-solid fa-chevron-right"></i>
+                    </div>
+                </header>
+                <div className="calendar">
+                    <ul className="weeks">
+                        <li>Sun</li>
+                        <li>Mon</li>
+                        <li>Tue</li>
+                        <li>Wed</li>
+                        <li>Thu</li>
+                        <li>Fri</li>
+                        <li>Sat</li>
+                    </ul>
+                    <ul className="days">
+                        {days?.map(dayObj => (
+                            <li key={dayObj.day} className={dayObj.inactive ? "inactive" : ""}>
+                                {dayObj.day}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
         </div>
-        </div>
     )
+
 }

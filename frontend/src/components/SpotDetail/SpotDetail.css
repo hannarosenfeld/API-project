@@ -2,7 +2,18 @@ body {
     width: 67.1vw;
 }
 
+.spot-info {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid rgb(168, 168, 168);
+        width: 30%;
+        border-radius: 1em;
+        align-self: center;
+        padding: 1em;
+}
+
 .spot-detail-wrapper {
+    position: relative; 
     width: 70em;
     max-width: 1000px;
 }
@@ -52,15 +63,72 @@ body {
     text-align: left !important;
     margin-bottom: 15px;
     cursor: pointer;
+    height: 56px !important
+
 }
 
 .check-in, .checkout {
     text-align: left !important;
     float: left !important;
-    padding: 5px;
+    padding: 10px;
+    width: 149px;
+    font-size: 13px;
 }
 
 .checkout {
     border-left: 1px solid rgb(168, 168, 168);
     width: 49%;
 }
+
+.booking-modal {
+    position: absolute; /* Set the modal to absolute position */
+    width: 661px;
+    height: 468px;
+    top: 72.4%; /* Center the modal vertically within the parent container */
+    left: 68%; /* Center the modal horizontally within the parent container */
+    transform: translate(-50%, -50%); /* Center the modal perfectly */
+    z-index: 1001;
+    background-color: white;
+    padding: 1em;
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px;
+}
+
+.booking-modal-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    /* padding: 10px; */
+}
+
+.booking-modal-content .booking-section {
+    float: right;
+    align-self: flex-end;
+    width: 300px;
+}
+
+.booking-modal-content button {
+    width: 69px;
+    height: 34px;
+    background: #222222;
+    color: #FFFFFF;
+    border-radius: 8px;
+    float: right;
+    margin: 0 10px;
+}
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000; /* Ensure the overlay is on top of everything */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+

@@ -1,15 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch, useSelector } from "react-redux";
+
 import { getOneSpot } from "../../store/spots";
-import ReviewModal from "../ReviewModal";
-import OpenModalButton from "../OpenModalButton";
-import { getReviews,  deleteReview } from "../../store/reviews";
-import "./SpotDetail.css"
-import { getOneUser } from "../../store/user";
+import { getReviews } from "../../store/reviews";
+
 import DeleteReviewModal from "../DeleteReviewModal";
 import UpdateReviewModal from "../UpdateReviewModal";
-import Calendar from "../Calendar";
+import ReviewModal from "../ReviewModal";
+import OpenModalButton from "../OpenModalButton";
+
+import BookingModal from "./BookingModal";
+
+import "./SpotDetail.css"
+
 
 export default function SpotDetail() {
     const dispatch = useDispatch();
@@ -18,14 +22,17 @@ export default function SpotDetail() {
     const spot = useSelector(state => state.spots[spotId])
     const user = useSelector(state => state.session.user)
     const reviewsObj =  useSelector(state => state.reviews)
-
     const reviews = Object.values(reviewsObj)
+    const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
+    const toggleBookingModal = () => {
+        setIsBookingModalOpen(!isBookingModalOpen);
+    };
+    
     useEffect(() => {
         dispatch(getOneSpot(spotId))
         dispatch(getReviews(spotId))
     }, [])
-
 
     if (!spot || !spot.Owner || !spot.spotImages) {
         return(
@@ -78,15 +85,7 @@ export default function SpotDetail() {
                     <h3>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h3>
                     <p  style={{width: "90%"}}>{spot.description}</p>
                 </div>
-                 <div style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    border: "1px solid rgb(168, 168, 168)",
-                    width: "30%",
-                    borderRadius: "1em",
-                    alignSelf: "center",
-                    padding: "1em"
-                    }}>
+                 <div className="spot-info">
 
                     <div style={{
                         display: "flex",
@@ -96,17 +95,22 @@ export default function SpotDetail() {
                         <h2>${spot.price} night</h2>
                         <span><i class="fa-solid fa-star"></i>{spot.avgStarRating ? `  ${spot.avgStarRating.toFixed(2)} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} ${spot.numReviews === 1 ? "review" : "reviews"}`}</span>
                     </div>
+
                     {/* Booking Section */}
-                    <div className="booking-section">
+                    <div className="booking-section" onClick={toggleBookingModal}>
                       <div className="check-in">
-                        <div style={{fontWeight: "bold", fontSize: "12px"}}>CHECK-IN</div>
+                        <div style={{fontSize: "10px", fontWeight: "bold"}}>CHECK-IN</div>
                         <div>9/17/2023</div>
                       </div>
                       <div className="checkout">
-                        <div style={{fontWeight: "bold", fontSize: "12px"}}>CHECKOUT</div>
+                        <div style={{fontSize: "10px", fontWeight: "bold"}}>CHECKOUT</div>
                         <div>9/23/2023</div>
                       </div>
                     </div>
+
+                    {isBookingModalOpen && (
+                        <BookingModal onClose={toggleBookingModal} />
+                    )}
 
                     <button
                     style={{
@@ -130,47 +134,46 @@ export default function SpotDetail() {
             <div className="spot-reviews-container" style={{margin: "2em 0",display: "flex", flexDirection: "column-reverse",gap: "3em"}}>
             {user && user?.id !== spot.ownerId && !reviews.length ? "Be the first to post a review!" : ''}
             {reviews.map((review) => (
-  <div style={{ display: "flex", flexDirection: "column" }}>
-    <div>{review?.User?.username}</div>
-    <div>
-      {review?.createdAt?.slice(5, 7)} {review.createdAt.slice(0, 4)}
-    </div>
-    <div>{review?.review}</div>
-    <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
-      <div>
-        {user?.id === review?.User?.id ? (
-          <OpenModalButton
-            style={{ width: "5em", height: "2em" }}
-            buttonText="Delete"
-            modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} />}
-          >
-            Delete
-          </OpenModalButton>
-        ) : (
-          ""
-        )}
-      </div>
-      <div>
-        {user?.id === review?.User?.id ? (
-          <OpenModalButton
-            style={{ width: "5em", height: "2em" }}
-            buttonText="Update"
-            modalComponent={
-              <UpdateReviewModal reviewToEdit={review} reviewId={review.id} user={user} spot={spot} />
-            }
-          >
-            Update
-          </OpenModalButton>
-        ) : (
-          ""
-        )}
-      </div>
-    </div>
-  </div>
-))}
-
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div>{review?.User?.username}</div>
+              <div>
+                {review?.createdAt?.slice(5, 7)} {review.createdAt.slice(0, 4)}
+              </div>
+              <div>{review?.review}</div>
+              <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
+                <div>
+                  {user?.id === review?.User?.id ? (
+                    <OpenModalButton
+                      style={{ width: "5em", height: "2em" }}
+                      buttonText="Delete"
+                      modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} />}
+                    >
+                      Delete
+                    </OpenModalButton>
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <div>
+                  {user?.id === review?.User?.id ? (
+                    <OpenModalButton
+                      style={{ width: "5em", height: "2em" }}
+                      buttonText="Update"
+                      modalComponent={
+                        <UpdateReviewModal reviewToEdit={review} reviewId={review.id} user={user} spot={spot} />
+                      }
+                    >
+                      Update
+                    </OpenModalButton>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
             </div>
-            </div>
+          ))}
+          </div>
+          </div>
         </div>
     )
 }
