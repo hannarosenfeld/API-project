@@ -1,78 +1,71 @@
 import { useEffect, useState } from "react";
-import "./Calendar.css"
-
+import "./Calendar.css";
 
 export default function Calendar() {
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    let date = new Date();
-    let [currYear, setCurrYear] = useState(date.getFullYear());
-    let [currMonth, setCurrMonth] = useState(date.getMonth());
-    const [days, setDays] = useState([]);
-    
-    const renderCalendar = () => {
-        let daysArray = [];
-        let firstDayOfMonth = new Date(currYear, currMonth, 1).getDay(),
-        lastDateOfMonth = new Date(currYear, currMonth + 1, 0).getDate(),
-        lastDayOfMonth = new Date(currYear, currMonth, lastDateOfMonth).getDay(),
-        lastDateOfLastMonth = new Date(currYear, currMonth, 0).getDate();
 
-        if (currMonth < 0 || currMonth > 11) {
-            date = new Date(currYear, currMonth);
-            setCurrYear(date.getFullYear());
-            setCurrMonth(currMonth = date.getMonth());
-        } else {
-            date = new Date();
-        }
+    const currentDate = new Date();
+    const [currYear, setCurrYear] = useState(currentDate.getFullYear());
+    const [currMonth, setCurrMonth] = useState(currentDate.getMonth());
+    const [leftDays, setLeftDays] = useState([]);
+    const [rightDays, setRightDays] = useState([]);
 
-        for (let i = firstDayOfMonth; i > 0; i--) {
-            daysArray.push({
-                day: lastDateOfLastMonth - i + 1,
-                inactive: true
-            });
-        }
-        
+    const renderMonthDays = (year, month) => {
+        const firstDayOfMonth = new Date(year, month, 1).getDay();
+        const lastDateOfMonth = new Date(year, month + 1, 0).getDate();
+
+        const daysArray = [];
+
         for (let i = 1; i <= lastDateOfMonth; i++) {
-            let isToday = i === date.getDate() && currMonth === new Date().getMonth()
-                          && currYear === new Date().getFullYear() ? "active" : "";                          
+            const isToday = i === currentDate.getDate() && month === currentDate.getMonth() && year === currentDate.getFullYear() ? "active" : "";
             daysArray.push({
                 day: i,
                 inactive: false,
-                istoday: isToday
+                istoday: isToday,
             });
         }
 
-        for (let i = lastDayOfMonth; i < 6; i++) {
-            daysArray.push({
-                day: i - lastDayOfMonth + 1,
-                inactive: true 
-            });
-        }
-        
-        setDays(daysArray);
-    }
+        return daysArray;
+    };
 
     useEffect(() => {
-        renderCalendar();
+        setLeftDays(renderMonthDays(currYear, currMonth));
+
+        const nextMonth = (currMonth + 1) % 12;
+        const nextYear = nextMonth === 0 ? currYear + 1 : currYear;
+        setRightDays(renderMonthDays(nextYear, nextMonth));
     }, [currYear, currMonth]);
 
-    const currentDate = `${months[currMonth]} ${currYear}`;
+    const leftCurrentDate = `${months[currMonth]} ${currYear}`;
+    const rightCurrentDate = `${months[(currMonth + 1) % 12]} ${currMonth + 1 > 11 ? currYear + 1 : currYear}`;
 
     const handleClick = (iconId) => {
-            iconId === "prev" ? setCurrMonth(currMonth - 1) : setCurrMonth(currMonth + 1);
+        if (iconId === "prev") {
+            const newMonth = currMonth === 0 ? 11 : currMonth - 1;
+            const newYear = currMonth === 0 ? currYear - 1 : currYear;
+            setCurrMonth(newMonth);
+            setCurrYear(newYear);
+        } else if (iconId === "next") {
+            const newMonth = (currMonth + 1) % 12;
+            const newYear = newMonth === 0 ? currYear + 1 : currYear;
+            setCurrMonth(newMonth);
+            setCurrYear(newYear);
+        }
+    };
 
-            setDays(renderCalendar())
-    }
-
-    return(
+    return (
         <div className="cal-body">
             <div className="wrapper">
                 <header>
                     <div className="icons">
-                        {currMonth === date.getMonth() && (<i onClick={() => handleClick("prev")} className="fa-solid fa-chevron-left inactive"></i>)}
-                        {currMonth !== date.getMonth() && (<i onClick={() => handleClick("prev")} className="fa-solid fa-chevron-left"></i>)}
-
+                        {currMonth === currentDate.getMonth() && (
+                            <i onClick={() => handleClick("prev")} className="fa-solid fa-chevron-left inactive"></i>
+                        )}
+                        {currMonth !== currentDate.getMonth() && (
+                            <i onClick={() => handleClick("prev")} className="fa-solid fa-chevron-left"></i>
+                        )}
                     </div>
-                    <p className="current-date">{currentDate}</p>
+                    <p className="current-date">{leftCurrentDate}</p>
                 </header>
                 <div className="calendar">
                     <ul className="weeks">
@@ -85,7 +78,7 @@ export default function Calendar() {
                         <li>Sat</li>
                     </ul>
                     <ul className="days">
-                        {days?.map(dayObj => (
+                        {leftDays.map((dayObj) => (
                             <li key={dayObj.day} className={dayObj.inactive ? "inactive" : ""}>
                                 {dayObj.day}
                             </li>
@@ -93,9 +86,10 @@ export default function Calendar() {
                     </ul>
                 </div>
             </div>
+
             <div className="wrapper">
                 <header>
-                    <p className="current-date">{currentDate}</p>
+                    <p className="current-date">{rightCurrentDate}</p>
                     <div className="icons">
                         <i onClick={() => handleClick("next")} className="fa-solid fa-chevron-right"></i>
                     </div>
@@ -111,7 +105,7 @@ export default function Calendar() {
                         <li>Sat</li>
                     </ul>
                     <ul className="days">
-                        {days?.map(dayObj => (
+                        {rightDays.map((dayObj) => (
                             <li key={dayObj.day} className={dayObj.inactive ? "inactive" : ""}>
                                 {dayObj.day}
                             </li>
@@ -120,6 +114,5 @@ export default function Calendar() {
                 </div>
             </div>
         </div>
-    )
-
+    );
 }
