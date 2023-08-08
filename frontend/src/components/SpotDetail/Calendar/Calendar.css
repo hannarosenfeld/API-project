@@ -97,3 +97,9 @@ header .icons i:last-child {
 .days li.inactive {
     color: #aaa;
 }
+
+.icons .inactive, .icons .inactive:hover {
+    color: #aaa;
+    background-color: transparent;
+    cursor:not-allowed;
+}

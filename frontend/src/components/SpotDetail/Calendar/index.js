@@ -58,12 +58,11 @@ export default function Calendar() {
             <div className="wrapper">
                 <header>
                     <div className="icons">
-                        {currMonth === currentDate.getMonth() && (
-                            <i onClick={() => handleClick("prev")} className="fa-solid fa-chevron-left inactive"></i>
-                        )}
-                        {currMonth !== currentDate.getMonth() && (
-                            <i onClick={() => handleClick("prev")} className="fa-solid fa-chevron-left"></i>
-                        )}
+                    {currYear === currentDate.getFullYear() && currMonth === currentDate.getMonth() ? (
+                        <i className="fa-solid fa-chevron-left inactive"></i>
+                    ) : (
+                        <i onClick={() => handleClick("prev")} className="fa-solid fa-chevron-left"></i>
+                    )}
                     </div>
                     <p className="current-date">{leftCurrentDate}</p>
                 </header>
