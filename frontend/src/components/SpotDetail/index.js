@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import { getOneSpot } from "../../store/spots";
 import { getReviews } from "../../store/reviews";
-import { createBooking } from "../../store/bookings"; // Import the createBooking action
+import { createBooking } from "../../store/bookings";
 
 import DeleteReviewModal from "../DeleteReviewModal";
 import UpdateReviewModal from "../UpdateReviewModal";
@@ -15,6 +16,7 @@ import "./SpotDetail.css"
 
 
 export default function SpotDetail() {
+    const history = useHistory();
     const dispatch = useDispatch();
     let { spotId } = useParams();
     spotId = parseInt(spotId)
@@ -47,7 +49,9 @@ export default function SpotDetail() {
           const booking = await dispatch(
             createBooking(spotId, checkinDate, checkoutDate, user.id)
           );
-    
+
+          history.push("/bookings/current")
+
           // Handle successful booking creation here (e.g. show success message)
           console.log("Booking created:", booking);
     
