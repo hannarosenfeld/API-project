@@ -12,7 +12,6 @@ const { User, Spot, SpotImage, Review, Booking } = require('../../db/models')
 
 
 router.get('/current', requireAuth, async (req, res, next) => {
-    console.log("🌎 in route")
     const { user } = req
 
     const userObj = await User.findByPk(user.id)
@@ -22,9 +21,51 @@ router.get('/current', requireAuth, async (req, res, next) => {
             userId: userObj.id
         }
     })
-    console.log("⛅️ bookings", bookings)
     res.json(bookings)
 })
+
+router.post('/current', requireAuth, async (req, res, next) => {
+    const { user } = req;
+    const { spotId, startDate, endDate } = req.body;
+
+    try {
+        // Check if the spot exists
+        const spot = await Spot.findByPk(spotId);
+
+        if (!spot) {
+            res.status(404).json({ message: "Spot not found" });
+            return;
+        }
+
+        // Validate startDate and endDate
+        const parsedStartDate = new Date(startDate);
+        const parsedEndDate = new Date(endDate);
+
+        if (parsedStartDate >= parsedEndDate) {
+            res.status(400).json({ message: "endDate cannot be on or before startDate" });
+            return;
+        }
+
+        if (parsedStartDate <= new Date()) {
+            res.status(400).json({ message: "Past dates are not allowed for booking" });
+            return;
+        }
+
+        // Create the booking
+        const booking = await Booking.create({
+            spotId,
+            userId: user.id,
+            startDate: parsedStartDate,
+            endDate: parsedEndDate,
+        });
+
+        res.status(201).json(booking);
+    } catch (error) {
+        console.error("Error creating booking:", error);
+        res.status(500).json({ message: "An error occurred while creating the booking" });
+    }
+});
+
 
 // Edit a Booking
 router.put('/:bookingId', requireAuth, async (req, res, next) => {
