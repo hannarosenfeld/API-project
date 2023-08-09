@@ -1,7 +1,30 @@
 import { csrfFetch } from "./csrf";
 
 const LOAD_BOOKINGS = "bookings/LOAD_BOOKINGS";
+const CREATE_BOOKING = "bookings/CREATE_BOOKING";
 
+const createBookingAction = (booking) => ({
+  type: CREATE_BOOKING,
+  booking,
+});
+
+export const createBooking = (spotId, startDate, endDate, userId) => async (dispatch) => {
+  const response = await csrfFetch("/api/bookings/current", {
+    method: "POST",
+    body: JSON.stringify({ spotId, startDate, endDate, userId }),
+  });
+
+  if (response.ok) {
+    const booking = await response.json();
+    dispatch(createBookingAction(booking));
+    return booking; // Return the created booking data
+  } else {
+    // Handle error cases here
+    // You can dispatch an error action or throw an error
+    console.error("Failed to create booking");
+    throw new Error("Failed to create booking");
+  }
+};
 
 const loadBookings = (bookings) => ({
   type: LOAD_BOOKINGS,
@@ -32,6 +55,11 @@ const bookingsReducer = (state = initialState, action) => {
         bookingsState[booking.id] = booking;
       });
       return bookingsState;
+    case CREATE_BOOKING:
+      return {
+        ...state,
+        [action.booking.id]: action.booking,
+      };
     default:
       return state;
   }

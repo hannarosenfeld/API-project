@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getOneSpot } from "../../store/spots";
 import { getReviews } from "../../store/reviews";
+import { createBooking } from "../../store/bookings"; // Import the createBooking action
 
 import DeleteReviewModal from "../DeleteReviewModal";
 import UpdateReviewModal from "../UpdateReviewModal";
@@ -35,6 +36,28 @@ export default function SpotDetail() {
 
     console.log("🪺 checkin: ", checkinDate)
     console.log("🪹 checkout: ", checkoutDate)
+
+    const handleReserve = async () => {
+        if (!checkinDate || !checkoutDate) {
+          alert("Please select check-in and checkout dates");
+          return;
+        }
+    
+        try {
+          const booking = await dispatch(
+            createBooking(spotId, checkinDate, checkoutDate, user.id)
+          );
+    
+          // Handle successful booking creation here (e.g. show success message)
+          console.log("Booking created:", booking);
+    
+          // Close the booking modal
+          setIsBookingModalOpen(false);
+        } catch (error) {
+          // Handle error cases here (e.g. show error message)
+          console.error("Error creating booking:", error.message);
+        }
+      };
 
     const renderMonthDays = (year, month) => {
         const firstDayOfMonth = new Date(year, month, 1).getDay();
@@ -279,7 +302,7 @@ export default function SpotDetail() {
                         backgroundColor: "var(--airbnb)",
                         color: "var(--white)"
                     }}
-                    onClick={() => alert("Feature coming soon!")}
+                    onClick={handleReserve}
                         >Reserve</button>
                 </div>
             </div>
