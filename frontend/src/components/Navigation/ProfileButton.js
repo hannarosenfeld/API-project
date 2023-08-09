@@ -38,7 +38,7 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
-    <div>
+    <div style={{zIndex: "1000"}}>
       <button onClick={openMenu} className="profile-button">
         <i className="fa-solid fa-bars"></i>
         <img src="https://a0.muscache.com/defaults/user_pic-50x50.png?v=3&im_w=240"/>
@@ -48,6 +48,7 @@ function ProfileButton({ user }) {
         <li>{user.email }</li>
         <li className="navlinks" style={{display: "flex", flexDirection: "column"}}>
         <NavLink to="/spots/current">Manage Spots</NavLink>
+        <NavLink to="/bookings/current">Bookings</NavLink>
         {/* <NavLink to="/reviews/current">Manage Reviews</NavLink> */}
         </li>
         <li style={{alignSelf: "center", cursor: "pointer"}}>

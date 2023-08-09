@@ -2,7 +2,18 @@ body {
     width: 67.1vw;
 }
 
+.spot-info {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid rgb(168, 168, 168);
+        width: 30%;
+        border-radius: 1em;
+        align-self: center;
+        padding: 1em;
+}
+
 .spot-detail-wrapper {
+    position: relative; 
     width: 70em;
     max-width: 1000px;
 }
@@ -43,3 +54,235 @@ body {
     margin: 1em 0;
     padding: 0.5em;
 }
+
+.booking-section {
+    border: 1px solid rgb(168, 168, 168) !important;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 8px;
+    text-align: left !important;
+    margin-bottom: 15px;
+    cursor: pointer;
+    height: 56px !important
+
+}
+
+.check-in, .checkout {
+    text-align: left !important;
+    float: left !important;
+    padding: 10px;
+    width: 149px;
+    font-size: 13px;
+}
+
+.checkout {
+    border-left: 1px solid rgb(168, 168, 168);
+    width: 49%;
+}
+
+.booking-modal {
+    position: absolute; /* Set the modal to absolute position */
+    width: 661px;
+    height: 468px;
+    top: 72.4%; /* Center the modal vertically within the parent container */
+    left: 68%; /* Center the modal horizontally within the parent container */
+    transform: translate(-50%, -50%); /* Center the modal perfectly */
+    z-index: 1001;
+    background-color: white;
+    padding: 1em;
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px;
+}
+
+.booking-modal-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    /* padding: 10px; */
+}
+
+.booking-modal-content .booking-section {
+    float: right;
+    align-self: flex-end;
+    width: 300px;
+}
+
+.booking-modal-content button {
+    width: 69px;
+    height: 34px;
+    background: #222222;
+    color: #FFFFFF;
+    border-radius: 8px;
+    float: right;
+    margin: 0 10px;
+}
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000; /* Ensure the overlay is on top of everything */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+.cal-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 320px;
+}
+
+.wrapper {
+    width: 100%;
+    border-radius: 8px;
+    margin: 10px;
+}
+
+.wrapper header {
+    display: flex;
+    align-items: center;
+    /* padding: 25px 30px 10px; */
+    justify-content: space-between;
+}
+
+header .current-date {
+    font-size: 15px;
+    font-weight: bolder;
+    margin: 0 auto;
+}
+
+header .icons i {
+    height: 38px;
+    width: 38px;
+    margin: 0 1px;
+    text-align: center;
+    line-height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+header .icons i:hover {
+    background: #f2f2f2;
+}
+
+header .icons i:last-child {
+    margin-right: -10px;
+}
+
+.calendar {
+    /* padding: 20px; */
+    font-size: 13px;
+}
+
+.calendar ul {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+.calendar .days {
+    margin-bottom: 20px;
+    font-size: 13px;
+    height: 200px;
+}
+
+.calendar .weeks li {
+    font-weight: bolder;
+    font-size: 11px;
+    margin-bottom: -30px;
+}
+
+.calendar .days li {
+    z-index: 1;
+    cursor: pointer;
+    margin-top: 15px;
+    padding: 10px 0;
+}
+
+.calendar ul li {
+    position: relative;
+    width: calc(100% / 7);
+    margin-left: 0;
+}
+
+.calendar .days li::before {
+    position: absolute;
+    content: "";
+    height: 40px;
+    width: 40px;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.days li:hover::before {
+    background: #f2f2f2;
+}
+
+.days li.inactive {
+    color: #aaa;
+    cursor: auto;
+}
+
+.icons .inactive, .icons .inactive:hover {
+    color: #aaa;
+    background-color: transparent;
+    cursor:not-allowed;
+}
+
+/* ... (Your existing CSS rules) ... */
+
+.calendar .days li {
+    position: relative;
+    width: calc(100% / 7);
+    margin-left: 0;
+}
+
+.calendar .days li::before {
+    position: absolute;
+    content: "";
+    height: 40px;
+    width: 40px;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent; /* Set the initial background color to transparent */
+    opacity: 0; /* Hide the pseudo-element by default */
+    transition: background 0.3s ease-in-out; /* Add transition effect */
+}
+
+.calendar .days li.checkin::before, .days li.checkout-date::before{
+    background: black; /* Change the background color for the selected day */
+    opacity: 1; /* Show the pseudo-element */
+}
+.calendar .days li.checkin, .days li.checkout-date {
+    color: #FFFFFF!important; /* Set the text color to white for the selected day */
+    background-color: #e7e3e3d5 !important
+}
+.calendar .days li.checkin {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+
+.days li.checkout-date {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+.days li.stay-days {
+    background-color: #e7e3e3d5;
+}
+

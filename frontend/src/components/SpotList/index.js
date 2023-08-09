@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SpotListItem from "../SpotListItem"
+import SpotListItem from "./SpotListItem"
 import { getAllSpots } from "../../store/spots.js"
 
 

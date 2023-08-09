@@ -1,14 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch, useSelector } from "react-redux";
+
 import { getOneSpot } from "../../store/spots";
-import ReviewModal from "../ReviewModal";
-import OpenModalButton from "../OpenModalButton";
-import { getReviews,  deleteReview } from "../../store/reviews";
-import "./SpotDetail.css"
-import { getOneUser } from "../../store/user";
+import { getReviews } from "../../store/reviews";
+
 import DeleteReviewModal from "../DeleteReviewModal";
 import UpdateReviewModal from "../UpdateReviewModal";
+import ReviewModal from "../ReviewModal";
+import OpenModalButton from "../OpenModalButton";
+
+import "./SpotDetail.css"
+
 
 export default function SpotDetail() {
     const dispatch = useDispatch();
@@ -16,15 +19,94 @@ export default function SpotDetail() {
     spotId = parseInt(spotId)
     const spot = useSelector(state => state.spots[spotId])
     const user = useSelector(state => state.session.user)
+
     const reviewsObj =  useSelector(state => state.reviews)
-
     const reviews = Object.values(reviewsObj)
+    const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+    const currentDate = new Date();
+    const [currYear, setCurrYear] = useState(currentDate.getFullYear());
+    const [currMonth, setCurrMonth] = useState(currentDate.getMonth());
+    const [leftDays, setLeftDays] = useState([]);
+    const [rightDays, setRightDays] = useState([]);
+    const [checkinDate, setCheckinDate] = useState(null);
+    const [checkoutDate, setCheckoutDate] = useState(null);
+
+    console.log("🪺 checkin: ", checkinDate)
+    console.log("🪹 checkout: ", checkoutDate)
+
+    const renderMonthDays = (year, month) => {
+        const firstDayOfMonth = new Date(year, month, 1).getDay();
+        const lastDateOfMonth = new Date(year, month + 1, 0).getDate();
+        
+        const daysArray = [];
+        
+        for (let i = 1; i <= lastDateOfMonth; i++) {
+            const dayDate = new Date(year, month, i);
+            const isToday = dayDate.toDateString() === currentDate.toDateString();
+            const isActive = dayDate >= currentDate || dayDate.toDateString() === currentDate.toDateString();
+            const isBetween = checkinDate && checkoutDate && dayDate > checkinDate && dayDate < checkoutDate;
+        
+            daysArray.push({
+                day: i,
+                inactive: !isActive,
+                istoday: isToday,
+                isCheckin: checkinDate && checkinDate.toDateString() === dayDate.toDateString(),
+                isCheckout: checkoutDate && checkoutDate.toDateString() === dayDate.toDateString(),
+                isStayDay: isBetween,
+            });
+        }
+        
+        return daysArray;
+    };
+    
+
+    useEffect(() => {
+        setLeftDays(renderMonthDays(currYear, currMonth));
+
+        const nextMonth = (currMonth + 1) % 12;
+        const nextYear = nextMonth === 0 ? currYear + 1 : currYear;
+        setRightDays(renderMonthDays(nextYear, nextMonth));
+    }, [currYear, currMonth, checkinDate, checkoutDate]);
+
+    const leftCurrentDate = `${months[currMonth]} ${currYear}`;
+    const rightCurrentDate = `${months[(currMonth + 1) % 12]} ${currMonth + 1 > 11 ? currYear + 1 : currYear}`;
+
+    const handleClick = (iconId) => {
+        if (iconId === "prev") {
+            const newMonth = currMonth === 0 ? 11 : currMonth - 1;
+            const newYear = currMonth === 0 ? currYear - 1 : currYear;
+            setCurrMonth(newMonth);
+            setCurrYear(newYear);
+        } else if (iconId === "next") {
+            const newMonth = (currMonth + 1) % 12;
+            const newYear = newMonth === 0 ? currYear + 1 : currYear;
+            setCurrMonth(newMonth);
+            setCurrYear(newYear);
+        }
+    };
+
+    const handleDayClick = (day, month, year) => {
+        const selectedDate = new Date(year, month, day);
+
+        if (!checkinDate || (checkoutDate && selectedDate <= checkinDate)) {
+            setCheckinDate(selectedDate);
+            setCheckoutDate(null);
+        } else if (!checkoutDate || selectedDate >= checkinDate) {
+            setCheckoutDate(selectedDate);
+        }
+    };
+
+
+    const toggleBookingModal = () => {
+        setIsBookingModalOpen(!isBookingModalOpen);
+    };
+    
     useEffect(() => {
         dispatch(getOneSpot(spotId))
         dispatch(getReviews(spotId))
     }, [])
-
 
     if (!spot || !spot.Owner || !spot.spotImages) {
         return(
@@ -77,15 +159,7 @@ export default function SpotDetail() {
                     <h3>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h3>
                     <p  style={{width: "90%"}}>{spot.description}</p>
                 </div>
-                 <div style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    border: "2px solid black",
-                    width: "30%",
-                    borderRadius: "1em",
-                    alignSelf: "center",
-                    padding: "1em"
-                    }}>
+                 <div className="spot-info">
 
                     <div style={{
                         display: "flex",
@@ -95,11 +169,113 @@ export default function SpotDetail() {
                         <h2>${spot.price} night</h2>
                         <span><i class="fa-solid fa-star"></i>{spot.avgStarRating ? `  ${spot.avgStarRating.toFixed(2)} · ` : ''} {!spot.numReviews ? 'New' : ` ${spot.numReviews} ${spot.numReviews === 1 ? "review" : "reviews"}`}</span>
                     </div>
+
+                    {/* Booking Section */}
+                    <div className="booking-section" onClick={toggleBookingModal}>
+                    <div className="check-in">
+                      <div style={{ fontSize: "10px", fontWeight: "bold" }}>CHECK-IN</div>
+                      <div>{checkinDate ? checkinDate.toLocaleDateString("en-US") : "Select date"}</div>
+                    </div>
+                    <div className="checkout">
+                      <div style={{ fontSize: "10px", fontWeight: "bold" }}>CHECKOUT</div>
+                      <div>{checkoutDate ? checkoutDate.toLocaleDateString("en-US") : "Select date"}</div>
+                    </div>
+                    </div>
+
+                    {isBookingModalOpen && (
+                              <div className="booking-modal">
+                              <div className="booking-modal-content">
+                                  <div className="booking-section">
+                                      <div className="check-in">
+                                        <div style={{ fontSize: "10px", fontWeight: "bold" }}>CHECK-IN</div>
+                                        <div>{checkinDate ? checkinDate.toLocaleDateString("en-US") : "Select date"}</div>
+                                      </div>
+                                      <div className="checkout">
+                                        <div style={{ fontSize: "10px", fontWeight: "bold" }}>CHECKOUT</div>
+                                        <div>{checkoutDate ? checkoutDate.toLocaleDateString("en-US") : "Select date"}</div>
+                                      </div>
+                                  </div>
+                                  {/* Calendar  Start*/}
+                                  <div className="cal-body">
+                                      <div className="wrapper">
+                                          <header>
+                                              <div className="icons">
+                                                  {currYear === currentDate.getFullYear() && currMonth === currentDate.getMonth() ? (
+                                                      <i className="fa-solid fa-chevron-left inactive"></i>
+                                                  ) : (
+                                                      <i onClick={() => handleClick("prev")} className="fa-solid fa-chevron-left"></i>
+                                                  )}
+                                              </div>
+                                              <p className="current-date">{leftCurrentDate}</p>
+                                          </header>
+                                          <div className="calendar">
+                                              <ul className="weeks">
+                                                  <li>Sun</li>
+                                                  <li>Mon</li>
+                                                  <li>Tue</li>
+                                                  <li>Wed</li>
+                                                  <li>Thu</li>
+                                                  <li>Fri</li>
+                                                  <li>Sat</li>
+                                              </ul>
+                                              <ul className="days">
+                                                  {leftDays.map((dayObj) => (
+                                                      <li
+                                                          key={dayObj.day}
+                                                          className={`${dayObj.inactive ? "inactive" : ""} ${dayObj.isCheckin ? "checkin" : ""} ${dayObj.isCheckout ? "checkout-date" : ""} ${dayObj.isStayDay ? "stay-days" : ""}`}
+                                                          onClick={() => handleDayClick(dayObj.day, currMonth, currYear)}
+                                                      >
+                                                          {dayObj.day}
+                                                      </li>
+                                                  ))}
+                                              </ul>
+                                          </div>
+                                      </div>
+                  
+                                      <div className="wrapper">
+                                          <header>
+                                              <p className="current-date">{rightCurrentDate}</p>
+                                              <div className="icons">
+                                                  <i onClick={() => handleClick("next")} className="fa-solid fa-chevron-right"></i>
+                                              </div>
+                                          </header>
+                                          <div className="calendar">
+                                              <ul className="weeks">
+                                                  <li>Sun</li>
+                                                  <li>Mon</li>
+                                                  <li>Tue</li>
+                                                  <li>Wed</li>
+                                                  <li>Thu</li>
+                                                  <li>Fri</li>
+                                                  <li>Sat</li>
+                                              </ul>
+                                              <ul className="days">
+                                                  {rightDays.map((dayObj) => (
+                                                      <li
+                                                          key={dayObj.day}
+                                                          className={`${dayObj.inactive ? "inactive" : ""} ${dayObj.isCheckin ? "checkin" : ""} ${dayObj.isCheckout ? "checkout-date" : ""} ${dayObj.isStayDay ? "stay-days" : ""}`}
+                                                          onClick={() => handleDayClick(dayObj.day, (currMonth + 1) % 12, currMonth + 1 > 11 ? currYear + 1 : currYear)}
+                                                      >
+                                                          {dayObj.day}
+                                                      </li>
+                                                  ))}
+                                              </ul>
+                                          </div>
+                                      </div>
+                              </div>
+                          {/* Calendar End */}
+                                  <div style={{width: "100%", marginTop: "30px"}}>
+                                      <button onClick={toggleBookingModal}>Close</button>
+                                  </div>
+                              </div>
+                          </div>
+                    )}
+
                     <button
                     style={{
                         width: "100%",
                         height: "3em",
-                        borderRadius: "1em",
+                        borderRadius: "8px",
                         backgroundColor: "var(--airbnb)",
                         color: "var(--white)"
                     }}
@@ -117,47 +293,46 @@ export default function SpotDetail() {
             <div className="spot-reviews-container" style={{margin: "2em 0",display: "flex", flexDirection: "column-reverse",gap: "3em"}}>
             {user && user?.id !== spot.ownerId && !reviews.length ? "Be the first to post a review!" : ''}
             {reviews.map((review) => (
-  <div style={{ display: "flex", flexDirection: "column" }}>
-    <div>{review?.User?.username}</div>
-    <div>
-      {review?.createdAt?.slice(5, 7)} {review.createdAt.slice(0, 4)}
-    </div>
-    <div>{review?.review}</div>
-    <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
-      <div>
-        {user?.id === review?.User?.id ? (
-          <OpenModalButton
-            style={{ width: "5em", height: "2em" }}
-            buttonText="Delete"
-            modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} />}
-          >
-            Delete
-          </OpenModalButton>
-        ) : (
-          ""
-        )}
-      </div>
-      <div>
-        {user?.id === review?.User?.id ? (
-          <OpenModalButton
-            style={{ width: "5em", height: "2em" }}
-            buttonText="Update"
-            modalComponent={
-              <UpdateReviewModal reviewToEdit={review} reviewId={review.id} user={user} spot={spot} />
-            }
-          >
-            Update
-          </OpenModalButton>
-        ) : (
-          ""
-        )}
-      </div>
-    </div>
-  </div>
-))}
-
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div>{review?.User?.username}</div>
+              <div>
+                {review?.createdAt?.slice(5, 7)} {review.createdAt.slice(0, 4)}
+              </div>
+              <div>{review?.review}</div>
+              <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
+                <div>
+                  {user?.id === review?.User?.id ? (
+                    <OpenModalButton
+                      style={{ width: "5em", height: "2em" }}
+                      buttonText="Delete"
+                      modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} />}
+                    >
+                      Delete
+                    </OpenModalButton>
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <div>
+                  {user?.id === review?.User?.id ? (
+                    <OpenModalButton
+                      style={{ width: "5em", height: "2em" }}
+                      buttonText="Update"
+                      modalComponent={
+                        <UpdateReviewModal reviewToEdit={review} reviewId={review.id} user={user} spot={spot} />
+                      }
+                    >
+                      Update
+                    </OpenModalButton>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
             </div>
-            </div>
+          ))}
+          </div>
+          </div>
         </div>
     )
 }
