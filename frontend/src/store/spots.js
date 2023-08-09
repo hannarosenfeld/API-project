@@ -79,10 +79,12 @@ export const getAllSpots = () => async dispatch => {
   };
 
   export const getOneSpot = (spotId) => async dispatch => {
+    console.log("🍋 in reducer")
     const response = await csrfFetch(`/api/spots/${spotId}`)
 
     if (response.ok) {
       const spot = await response.json();
+      console.log("🍙 response ok: ", spot)
       dispatch(receiveSpot(spot))
     }
   }
@@ -143,15 +145,6 @@ export const createSpotImage = (spotId, spot) => async (dispatch) => {
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(image)
     })
-    // if (res.ok) {
-    //   const newSpotImage = await res.json();
-    //   // dispatch(addSpotImage(newSpotImage))
-    //   return newSpotImage;
-    // } else {
-    //   const err = res.json();
-    //   console.log("WE ARE HITTING AN ERROR", err)
-    //   return err;
-    // }
   }
 }
 
@@ -169,38 +162,38 @@ const spotsReducer = (state = initialState, action) => {
 
     case RECEIVE_SPOT:
       return { ...state, [action.spot.id]: action.spot };
-      case ADD_ONE:
-        if (!state[action.spot.id]) {
-          const newState = {
-            ...state,
-            [action.spot.id]: action.spot
-          };
-          return newState;
-        }
-        return {
+    case ADD_ONE:
+      if (!state[action.spot.id]) {
+        const newState = {
           ...state,
-
-          [action.spot.id]: {
-            ...state[action.spot.id],
-            ...action.spot
-          }
+          [action.spot.id]: action.spot
         };
-        case ADD_REVIEW: {
-          return {
-            ...state,
-            [action.review.id]: action.review
-          };
+        return newState;
+      }
+      return {
+        ...state,
+
+        [action.spot.id]: {
+          ...state[action.spot.id],
+          ...action.spot
         }
-        case UPDATE_SPOT:
-          console.log("action",action)
-          return {
-            ...state,
-            [action.spot.id]: action.spot
-          };
-          case DELETE_SPOT:
-            const newState = { ...state };
-            delete newState[action.spotId];
-            return newState;
+      };
+    case ADD_REVIEW: {
+      return {
+        ...state,
+        [action.review.id]: action.review
+      };
+    }
+    case UPDATE_SPOT:
+      console.log("action",action)
+      return {
+        ...state,
+        [action.spot.id]: action.spot
+      };
+      case DELETE_SPOT:
+        const newState = { ...state };
+        delete newState[action.spotId];
+        return newState;
     default:
       return state;
   }
