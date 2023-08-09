@@ -1,0 +1,11 @@
+.bookings-wrapper {
+    width: 1000px;
+}
+
+.booking-item {
+    width: 350px;
+}
+
+.booking-item img {
+    width: 100%;
+}

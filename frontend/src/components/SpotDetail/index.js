@@ -19,6 +19,7 @@ export default function SpotDetail() {
     spotId = parseInt(spotId)
     const spot = useSelector(state => state.spots[spotId])
     const user = useSelector(state => state.session.user)
+
     const reviewsObj =  useSelector(state => state.reviews)
     const reviews = Object.values(reviewsObj)
     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);

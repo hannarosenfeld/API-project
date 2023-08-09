@@ -13,9 +13,6 @@ export default function BookingModal({ onClose }) {
     const [checkinDate, setCheckinDate] = useState(null);
     const [checkoutDate, setCheckoutDate] = useState(null);
 
-    console.log("🪺 checkin: ", checkinDate)
-    console.log("🪹 checkout: ", checkoutDate)
-
     const renderMonthDays = (year, month) => {
         const firstDayOfMonth = new Date(year, month, 1).getDay();
         const lastDateOfMonth = new Date(year, month + 1, 0).getDate();

@@ -48,6 +48,7 @@ function ProfileButton({ user }) {
         <li>{user.email }</li>
         <li className="navlinks" style={{display: "flex", flexDirection: "column"}}>
         <NavLink to="/spots/current">Manage Spots</NavLink>
+        <NavLink to="/bookings/current">Bookings</NavLink>
         {/* <NavLink to="/reviews/current">Manage Reviews</NavLink> */}
         </li>
         <li style={{alignSelf: "center", cursor: "pointer"}}>

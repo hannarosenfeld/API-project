@@ -12,6 +12,7 @@ const { User, Spot, SpotImage, Review, Booking } = require('../../db/models')
 
 
 router.get('/current', requireAuth, async (req, res, next) => {
+    console.log("🌎 in route")
     const { user } = req
 
     const userObj = await User.findByPk(user.id)
@@ -21,7 +22,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
             userId: userObj.id
         }
     })
-
+    console.log("⛅️ bookings", bookings)
     res.json(bookings)
 })
 
