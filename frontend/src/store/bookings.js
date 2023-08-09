@@ -26,6 +26,7 @@ const initialState = {};
 const bookingsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_BOOKINGS:
+      console.log("LOAD_BOOKINGS action dispatched");
       const bookingsState = {};
       action.bookings.forEach(booking => {
         bookingsState[booking.id] = booking;
@@ -35,5 +36,6 @@ const bookingsReducer = (state = initialState, action) => {
       return state;
   }
 };
+
 
 export default bookingsReducer;
