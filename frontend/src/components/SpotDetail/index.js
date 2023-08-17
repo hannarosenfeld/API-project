@@ -36,10 +36,11 @@ export default function SpotDetail() {
     const [checkinDate, setCheckinDate] = useState(null);
     const [checkoutDate, setCheckoutDate] = useState(null);
 
-    console.log("🪺 checkin: ", checkinDate)
-    console.log("🪹 checkout: ", checkoutDate)
-
     const handleReserve = async () => {
+        if (!user) {
+            alert("You must be logged in to book this spot!")
+            return
+        }
         if (!checkinDate || !checkoutDate) {
           alert("Please select check-in and checkout dates");
           return;
