@@ -170,10 +170,10 @@ export default function SpotDetail() {
                     />
                 </div>
                 <div className="four-squares">
-                    <div>{spot.spotImages[1].url !== undefined ? <img src={spot.spotImages[1].url}/> : ""}</div>
-                    <div>{spot.spotImages[2].url !== undefined ? <img src={spot.spotImages[2].url}/> : ""}</div>
-                    <div>{spot.spotImages[3].url !== undefined ? <img src={spot.spotImages[3].url}/> : ""}</div>
-                    <div>{spot.spotImages[4].url !== undefined ? <img src={spot.spotImages[4].url}/> : ""}</div>
+                    <div>{spot.spotImages[1].url ? <img src={spot.spotImages[1].url}/> : ""}</div>
+                    <div>{spot.spotImages[2].url ? <img src={spot.spotImages[2].url}/> : ""}</div>
+                    <div>{spot.spotImages[3].url ? <img src={spot.spotImages[3].url}/> : ""}</div>
+                    <div>{spot.spotImages[4].url ? <img src={spot.spotImages[4].url}/> : ""}</div>
                 </div>
             </div>
             <div

@@ -67,18 +67,18 @@ export default function NewSpotForm() {
         if (!previewImage.endsWith(".png") || !previewImage.endsWith(".jpg") || !previewImage.endsWith(".jpeg")) {
 			errors.previewImage = "Image URL must end in .png, .jpg, or .jpeg"
 		}
-        if (!photoOne.endsWith(".png") || !photoOne.endsWith(".jpg") || !photoOne.endsWith(".jpeg")) {
-			errors.photoOne = "Image URL must end in .png, .jpg, or .jpeg"
-		}
-        if (!photoTwo.endsWith(".png") || !photoTwo.endsWith(".jpg") || !photoTwo.endsWith(".jpeg")) {
-			errors.photoTwo = "Image URL must end in .png, .jpg, or .jpeg"
-		}
-        if (!photoThree.endsWith(".png") || !photoThree.endsWith(".jpg") || !photoThree.endsWith(".jpeg")) {
-			errors.photoThree = "Image URL must end in .png, .jpg, or .jpeg"
-		}
-        if (!photoFour.endsWith(".png") || !photoFour.endsWith(".jpg") || !photoFour.endsWith(".jpeg")) {
-			errors.photoFour = "Image URL must end in .png, .jpg, or .jpeg"
-		}
+        // if (!photoOne.endsWith(".png") || !photoOne.endsWith(".jpg") || !photoOne.endsWith(".jpeg")) {
+		// 	errors.photoOne = "Image URL must end in .png, .jpg, or .jpeg"
+		// }
+        // if (!photoTwo.endsWith(".png") || !photoTwo.endsWith(".jpg") || !photoTwo.endsWith(".jpeg")) {
+		// 	errors.photoTwo = "Image URL must end in .png, .jpg, or .jpeg"
+		// }
+        // if (!photoThree.endsWith(".png") || !photoThree.endsWith(".jpg") || !photoThree.endsWith(".jpeg")) {
+		// 	errors.photoThree = "Image URL must end in .png, .jpg, or .jpeg"
+		// }
+        // if (!photoFour.endsWith(".png") || !photoFour.endsWith(".jpg") || !photoFour.endsWith(".jpeg")) {
+		// 	errors.photoFour = "Image URL must end in .png, .jpg, or .jpeg"
+		// }
 		setErrors(errors);
     }
 	}, [
@@ -90,10 +90,10 @@ export default function NewSpotForm() {
         description,
         price,
         previewImage,
-        photoOne,
-        photoTwo,
-        photoThree,
-        photoFour
+        photoOne ? photoOne : null,
+        photoTwo ? photoTwo : null,
+        photoThree ? photoThree : null,
+        photoFour ? photoFour : null
     ]);
 
     const handleSubmit = async (e) => {
@@ -114,7 +114,10 @@ export default function NewSpotForm() {
             lng: 5
         }
 
+        console.log("🍙")
         if (errors.previewImage || errors.photoOne || errors.photoTwo || errors.photoThree || errors.photoFour) return;
+
+        console.log("🍣")
         
         const newSpotImages = {
             url: previewImage,
@@ -300,7 +303,6 @@ in search results.</p>
                                 value={photoOne}
                                 onChange={(e) => setPhotoOne(e.target.value)}
                                 accept="image/png, image/jpg, image/jpeg"
-                                required
                             ></input>
                             <span className="error">{errors.photoOne ? errors.photoOne : ""}</span>
                             <input
@@ -309,7 +311,6 @@ in search results.</p>
                                 value={photoTwo}
                                 onChange={(e) => setPhotoTwo(e.target.value)}
                                 accept="image/png, image/jpg, image/jpeg"
-                                required
                             ></input>
                             <span className="error">{errors.photoTwo ? errors.photoTwo : ""}</span>
                             <input
@@ -318,7 +319,6 @@ in search results.</p>
                                 value={photoThree}
                                 onChange={(e) => setPhotoThree(e.target.value)}
                                 accept="image/png, image/jpg, image/jpeg"
-                                required
                             ></input>
                             <span className="error">{errors.photoThree ? errors.photoThree : ""}</span>
                             <input
@@ -327,7 +327,6 @@ in search results.</p>
                                 value={photoFour}
                                 onChange={(e) => setPhotoFour(e.target.value)}
                                 accept="image/png, image/jpg, image/jpeg"
-                                required
                             ></input>
                             <span className="error">{errors.photoFour ? errors.photoFour : ""}</span>
                         </div>
