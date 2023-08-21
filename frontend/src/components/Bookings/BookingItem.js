@@ -31,16 +31,15 @@ export default function BookingItem({ booking }) {
 
   return (
     <div className="booking-item">
-      { spot && spot[0] && spot[0].spotImages && (
-        <img src={spot?.spotImages[0].url} alt="Spot" />
-      )}
+      { spot && spot?.spotImages && (
       <Link to={`/spots/${spot?.id}`}>
-        <img src={spot.spotImages[0].url}></img>
-        <h3>{spot.name}</h3>
+        <img src={spot?.spotImages[0]?.url}></img>
+        <h3>{spot?.name}</h3>
         <p>
           {start} - {end}
         </p>
       </Link>
+      )}
     </div>
   );
 }
