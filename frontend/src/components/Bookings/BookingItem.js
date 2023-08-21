@@ -1,10 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOneSpot } from "../../store/spots";
+import { Link } from "react-router-dom";
+
 
 export default function BookingItem({ booking }) {
   const dispatch = useDispatch();
   const spot = useSelector(state => state.spots[booking.spotId]); // Access spot directly by ID
+
+  console.log("🫙", spot)
 
   useEffect(() => {
     dispatch(getOneSpot(booking.spotId));
@@ -30,12 +34,13 @@ export default function BookingItem({ booking }) {
       { spot && spot[0] && spot[0].spotImages && (
         <img src={spot?.spotImages[0].url} alt="Spot" />
       )}
-      <div>
+      <Link to={`/spots/${spot?.id}`}>
+        <img src={spot.spotImages[0].url}></img>
         <h3>{spot.name}</h3>
         <p>
           {start} - {end}
         </p>
-      </div>
+      </Link>
     </div>
   );
 }
