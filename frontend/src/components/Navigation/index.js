@@ -8,6 +8,7 @@ import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
+import DeleteReviewModal from "../DeleteReviewModal";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -87,6 +88,7 @@ function Navigation({ isLoaded }) {
         <NavLink exact to="/">
           <span style={{marginLeft: "1.2em"}}><i class="fa-regular fa-heart"></i> oibnb</span>
         </NavLink>
+
       </li>
       {isLoaded && sessionLinks}
     </ul>

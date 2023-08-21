@@ -42,7 +42,7 @@ export default function SpotListItem({ spots }) {
                             {spot.city}, {spot.state} <span><i class="fa-solid fa-star"></i>
                             {spot.avgRating ? ` ${spot.avgRating.toFixed(2)}` : ' New'}
                             </span></span>
-                        <span>{spot.price}</span>
+                        <span>${spot.price}</span>
                     </div>
                 </Link>
                 </div>

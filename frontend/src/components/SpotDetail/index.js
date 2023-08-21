@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import { getOneSpot } from "../../store/spots";
 import { getReviews } from "../../store/reviews";
-import { createBooking } from "../../store/bookings"; // Import the createBooking action
+import { createBooking } from "../../store/bookings";
 
 import DeleteReviewModal from "../DeleteReviewModal";
 import UpdateReviewModal from "../UpdateReviewModal";
@@ -12,9 +13,11 @@ import ReviewModal from "../ReviewModal";
 import OpenModalButton from "../OpenModalButton";
 
 import "./SpotDetail.css"
+import "./RevisedCss.css"
 
 
 export default function SpotDetail() {
+    const history = useHistory();
     const dispatch = useDispatch();
     let { spotId } = useParams();
     spotId = parseInt(spotId)
@@ -34,10 +37,11 @@ export default function SpotDetail() {
     const [checkinDate, setCheckinDate] = useState(null);
     const [checkoutDate, setCheckoutDate] = useState(null);
 
-    console.log("🪺 checkin: ", checkinDate)
-    console.log("🪹 checkout: ", checkoutDate)
-
     const handleReserve = async () => {
+        if (!user) {
+            alert("You must be logged in to book this spot!")
+            return
+        }
         if (!checkinDate || !checkoutDate) {
           alert("Please select check-in and checkout dates");
           return;
@@ -47,7 +51,9 @@ export default function SpotDetail() {
           const booking = await dispatch(
             createBooking(spotId, checkinDate, checkoutDate, user.id)
           );
-    
+
+          history.push("/bookings/current")
+
           // Handle successful booking creation here (e.g. show success message)
           console.log("Booking created:", booking);
     
@@ -139,8 +145,8 @@ export default function SpotDetail() {
     }
 
     return (
-        <div className="spot-detail-wrapper">
-            <h2>{spot.name}</h2>
+        <div className="spot-detail">
+    <h2>{spot.name}</h2>
             <h4>{spot.city}, {spot.state}, {spot.country}</h4>
             <div className="spot-images"
                 style={{
@@ -164,10 +170,10 @@ export default function SpotDetail() {
                     />
                 </div>
                 <div className="four-squares">
-                    <div>{spot.spotImages[1].url !== undefined ? <img src={spot.spotImages[1].url}/> : ""}</div>
-                    <div>{spot.spotImages[2].url !== undefined ? <img src={spot.spotImages[2].url}/> : ""}</div>
-                    <div>{spot.spotImages[3].url !== undefined ? <img src={spot.spotImages[3].url}/> : ""}</div>
-                    <div>{spot.spotImages[4].url !== undefined ? <img src={spot.spotImages[4].url}/> : ""}</div>
+                    <div>{spot.spotImages[1].url ? <img src={spot.spotImages[1].url}/> : ""}</div>
+                    <div>{spot.spotImages[2].url ? <img src={spot.spotImages[2].url}/> : ""}</div>
+                    <div>{spot.spotImages[3].url ? <img src={spot.spotImages[3].url}/> : ""}</div>
+                    <div>{spot.spotImages[4].url ? <img src={spot.spotImages[4].url}/> : ""}</div>
                 </div>
             </div>
             <div
@@ -357,5 +363,8 @@ export default function SpotDetail() {
           </div>
           </div>
         </div>
+        // <div className="spot-detail-wrapper">
+        
+        // </div>
     )
 }

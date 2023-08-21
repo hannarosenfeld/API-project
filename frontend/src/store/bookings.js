@@ -31,7 +31,6 @@ const loadBookings = (bookings) => ({
   bookings
 });
 
-
 export const getAllBookings = (userId) => async dispatch => {
   const response = await csrfFetch(`/api/bookings/current`);
 
