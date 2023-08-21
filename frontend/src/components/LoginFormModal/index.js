@@ -49,6 +49,7 @@ function LoginFormModal() {
           marginBottom: "1em"
         }}>
           <input
+            style={{paddingLeft: "10px"}}
             type="text"
             value={credential}
             placeholder="Username or Email"
@@ -56,6 +57,7 @@ function LoginFormModal() {
             required
           />
           <input
+            style={{paddingLeft: "10px"}}
             type="password"
             value={password}
             placeholder="Password"
