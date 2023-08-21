@@ -13,6 +13,7 @@ import ReviewModal from "../ReviewModal";
 import OpenModalButton from "../OpenModalButton";
 
 import "./SpotDetail.css"
+import "./RevisedCss.css"
 
 
 export default function SpotDetail() {
@@ -144,8 +145,8 @@ export default function SpotDetail() {
     }
 
     return (
-        <div className="spot-detail-wrapper">
-            <h2>{spot.name}</h2>
+        <div className="spot-detail">
+    <h2>{spot.name}</h2>
             <h4>{spot.city}, {spot.state}, {spot.country}</h4>
             <div className="spot-images"
                 style={{
@@ -362,5 +363,8 @@ export default function SpotDetail() {
           </div>
           </div>
         </div>
+        // <div className="spot-detail-wrapper">
+        
+        // </div>
     )
 }

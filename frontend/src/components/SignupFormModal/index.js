@@ -5,6 +5,7 @@ import * as sessionActions from "../../store/session";
 import "./SignupForm.css";
 
 function SignupFormModal() {
+  console.log("🍛")
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");

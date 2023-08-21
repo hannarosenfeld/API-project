@@ -12,11 +12,11 @@ body {
         padding: 1em;
 }
 
-.spot-detail-wrapper {
+/* .spot-detail-wrapper {
     position: relative; 
     width: 70em;
     max-width: 1000px;
-}
+} */
 
 .spot-images {
     justify-content: space-between;
