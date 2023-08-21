@@ -1,5 +1,7 @@
 .bookings-wrapper {
-    width: 800px;
+    min-width: 850px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .booking-item {
