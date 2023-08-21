@@ -46,6 +46,30 @@ const NewSpotForm = () => {
         if (hasSubmitted) {
             const newErrors = {};
 
+            if (!formData.previewImage) {
+                newErrors.previewImageLength = "Preview image is required.";
+            }
+            if (
+                !formData.previewImage.endsWith(".png") &&
+                !formData.previewImage.endsWith(".jpg") &&
+                !formData.previewImage.endsWith(".jpeg")
+            ) {
+                newErrors.previewImage = "Image URL must end in .png, .jpg, or .jpeg";
+            }
+    
+            if (!formData.photoOne) {
+                newErrors.photoOne = "Image is required.";
+            }
+            if (!formData.photoTwo) {
+                newErrors.photoTwo = "Image is required.";
+            }
+            if (!formData.photoThree) {
+                newErrors.photoThree = "Image is required.";
+            }
+            if (!formData.photoFour) {
+                newErrors.photoFour = "Image is required.";
+            }
+    
             if (!formData.country) {
                 newErrors.country = "Country is required";
             }
@@ -99,13 +123,17 @@ const NewSpotForm = () => {
             newErrors.previewImage = "Preview image URL must end in .png, .jpg, or .jpeg";
         }
     
-        if (
-            (formData.photoOne && !isImageValid(formData.photoOne)) ||
-            (formData.photoTwo && !isImageValid(formData.photoTwo)) ||
-            (formData.photoThree && !isImageValid(formData.photoThree)) ||
-            (formData.photoFour && !isImageValid(formData.photoFour))
-        ) {
-            newErrors.images = "Image URLs must end in .png, .jpg, or .jpeg";
+        if (!formData.photoOne) {
+            newErrors.photoOne = "Image is required.";
+        }
+        if (!formData.photoTwo) {
+            newErrors.photoTwo = "Image is required.";
+        }
+        if (!formData.photoThree) {
+            newErrors.photoThree = "Image is required.";
+        }
+        if (!formData.photoFour) {
+            newErrors.photoFour = "Image is required.";
         }
     
         if (Object.keys(newErrors).length > 0) {
@@ -113,9 +141,7 @@ const NewSpotForm = () => {
             return; // Don't proceed if there are errors
         }
     
-        // Rest of your handleSubmit logic
 
-    
         const payload = {
             name: formData.title,
             country: formData.country,
